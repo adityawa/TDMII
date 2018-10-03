@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Model\BaseModel.cs" />
+    <Compile Include="Model\MyEnums.cs" />
     <Compile Include="Model\SPKHeaderModel.cs" />
     <Compile Include="Model\UserAppsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

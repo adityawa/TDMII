@@ -55,7 +55,12 @@ namespace TDM.DAL.DAPPERDA
 
         public int InsertOrUpdate<T>(string sSql, T entity) where T : class, new()
         {
-            throw new NotImplementedException();
+            int row_affected = 0;
+            using (sqlcon)
+            {
+                row_affected = sqlcon.Execute(sSql, entity);
+            }
+            return row_affected;
         }
     }
 }

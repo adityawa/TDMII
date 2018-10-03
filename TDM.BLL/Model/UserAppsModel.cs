@@ -12,6 +12,8 @@ namespace TDM.BLL.Model
         public string Password { get; set; }
         public bool IsExpired { get; set; }
         public int EmployeeId { get; set; }
+        //misc
         public string EmployeeName { get; set; }
+        public int Role { get; set; }
     }
 }

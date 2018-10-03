@@ -13,7 +13,7 @@ namespace TDM.DAL
     {
         public static SqlConnection GetSqlConn()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings[""].ConnectionString.ToString());
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["TDMConnStr"].ConnectionString.ToString());
             if (conn.State == ConnectionState.Closed)
                 conn.Open();
             return conn;

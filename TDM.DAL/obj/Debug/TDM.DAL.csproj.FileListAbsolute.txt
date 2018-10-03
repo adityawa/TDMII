@@ -9,3 +9,14 @@ C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\obj\Debug\TDM.DA
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\obj\Debug\TDM.DAL.pdb
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\Dapper.dll
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\Dapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\TDM.DAL.dll.config
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\TDM.DAL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\TDM.DAL.pdb
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\Dapper.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\EntityFramework.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\Dapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\EntityFramework.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\obj\Debug\TDM.DAL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.DAL\obj\Debug\TDM.DAL.pdb

@@ -46,3 +46,4 @@
 /// <reference path="DataTables/responsive.foundation.js" />
 /// <reference path="DataTables/responsive.jqueryui.js" />
 /// <reference path="main.js" />
+/// <reference path="layout/main.js" />

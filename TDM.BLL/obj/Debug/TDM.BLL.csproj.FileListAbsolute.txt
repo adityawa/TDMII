@@ -13,3 +13,18 @@ C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Dapper
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Dapper.xml
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\TDM.BLL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\TDM.BLL.pdb
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\EntityFramework.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\Newtonsoft.Json.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\TDM.DAL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\Dapper.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\TDM.DAL.pdb
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\EntityFramework.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\Newtonsoft.Json.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\Dapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.pdb

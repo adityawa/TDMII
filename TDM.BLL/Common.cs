@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using TDM.DAL;
+using TDM.DAL.DAPPERDA;
+using TDM.BLL.Model;
 namespace TDM.BLL
 {
     public class Common
@@ -48,6 +51,16 @@ namespace TDM.BLL
         {
             var encryptedBytes = Convert.FromBase64String(encryptedText);
             return Encoding.UTF8.GetString(Decrypt(encryptedBytes, GetRijndaelManaged(key)));
+        }
+
+        public static string GetRoleAppsName(int id)
+        {
+            string roleName = string.Empty;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                roleName = context.tb_Master.SingleOrDefault(x => x.Id == id && x.Category==MyEnums.enumMaster.RoleApps.ToString()).Value;
+            }
+            return roleName;
         }
     }
 }
