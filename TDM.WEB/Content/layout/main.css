@@ -13230,7 +13230,7 @@ a.fc-more {
 }
 
 .main-header .navbar {
-    background-color: #673AB7;
+    background-color: #b01c1c;
 }
 
     .main-header .navbar .top-nav > li > a {
@@ -13267,7 +13267,7 @@ a.fc-more {
         }
 
 .main-header .logo {
-    background-color: #5c34a4;
+    background-color: #b01c1c;
     color: #fff;
     border-bottom: 0 solid transparent;
 }
@@ -13636,11 +13636,11 @@ a.fc-more {
         display: block;
         width: 230px;
         height: 50px;
-        font-family: 'Niconne';
-        font-size: 26px;
-        font-weight: 400;
+        font-family: Arial;
+        font-size: 20px;
+        font-weight: 200;
         line-height: 50px;
-        text-align: center;
+        text-align: left;
         padding: 0 15px;
         float: left;
         overflow: hidden;

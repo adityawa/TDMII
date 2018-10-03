@@ -15,7 +15,7 @@
 
 
     <script src="~/Scripts/layout/main.js"></script>
-  
+
     <title>::TRI DAYA MITRA:</title>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
     <!--if lt IE 9
@@ -31,7 +31,8 @@
     <div class="wrapper">
         <!-- Navbar-->
         <header class="main-header hidden-print">
-            <a class="logo" href="index.html">TDM</a>
+            <a href="#" class="logo pull-left"><img class="img-thumbnail" style="height:40px; width:40px; " src="~/Content/images/mitsubishi_rev1.png">&nbsp; Tri Daya Mitra</a>
+            @*<a class="logo" href="index.html">TDM</a>*@
             <nav class="navbar navbar-static-top">
                 <!-- Sidebar toggle button--><a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
                 <!-- Navbar Right Menu-->
@@ -80,55 +81,45 @@
             <section class="sidebar">
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img class="img-circle" src="/Content/images/user.png" >
+                        <img class="img-circle" src="/Content/images/user.png">
                     </div>
                     <div class="pull-left info">
                         @{
                             if (Session["UserLogOn"] != null && Session["UserProps"] != null)
                             {
                                 var temp = Session["UserProps"];
-                                
+
                                 string[] userProperties = temp.ToString().Split(';').ToArray();
                                 <p>@userProperties[0].ToString()</p>
                                 <p class="designation">@userProperties[1].ToString()</p>
                             }
                         }
-                       
+
                     </div>
                 </div>
                 <!-- Sidebar Menu-->
                 <ul class="sidebar-menu">
                     <li class="active"><a href="/Home/Index"><i class="fa fa-home"></i><span>Home</span></a></li>
                     <li class="treeview">
-                        <a href="#"><i class="fa fa-money"></i><span>FPP</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#"><i class="fa fa-database"></i><span>Master Data</span><i class="fa fa-angle-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="/FPP/Index"><i class="fa fa-circle-o"></i> Create Document</a></li>
-                            <li><a href="/FPP/ListOutstandingDocument"><i class="fa fa-circle-o"></i> List Document</a></li>
-                            <li><a href="/FPP/ListCompleteFPPDocument"><i class="fa fa-circle-o"></i> Print Document</a></li>
+                            <li><a href="/FPP/Index"><i class="fa fa-circle-o"></i>Employee</a></li>
+                            <li><a href="/FPP/ListOutstandingDocument"><i class="fa fa-circle-o"></i>Role</a></li>
+                            <li><a href="/FPP/ListOutstandingDocument"><i class="fa fa-circle-o"></i>User Apps</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#"><i class="fa fa-clone"></i><span>NREA</span><i class="fa fa-angle-right"></i></a>
+                        <a href="#"><i class="fa fa-wrench"></i><span>Setting</span><i class="fa fa-angle-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("Create","NREA")"><i class="fa fa-circle-o"></i> Create Document</a></li>
-                            <li><a href="@Url.Action("ListDocument","NREA")"><i class="fa fa-circle-o"></i> List Document</a></li>
-                            <li><a href="@Url.Action("ListCompleteDocument","NREA")"><i class="fa fa-circle-o"></i> Print Document</a></li>
-                            <li><a href="@Url.Action("DocumentHistory", "NREA")"><i class="fa fa-history"></i> Document History</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-file"></i><span>Canvass Sheet</span><i class="fa fa-angle-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="/CS/Create"><i class="fa fa-circle-o"></i><span>Create</span></a></li>
-                            <li><a href="/CS/Draft"><i class="fa fa-circle-o"></i>Outstanding CS</a></li>
+                            <li><a href="@Url.Action("Create","NREA")"><i class="fa fa-circle-o"></i> Workflow Setting</a></li>
                         </ul>
                     </li>
 
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-book"></i><span>Report</span><i class="fa fa-angle-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="/Report/ViewAllApprovedDocument"><i class="fa fa-circle-o"></i><span>Approved Docs</span></a></li>
 
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-file-archive-o"></i><span>SPK</span><i class="fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Create","NREA")"><i class="fa fa-circle-o"></i> Create SPK</a></li>
                         </ul>
                     </li>
 
