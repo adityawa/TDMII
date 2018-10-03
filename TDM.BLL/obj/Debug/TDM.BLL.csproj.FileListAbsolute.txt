@@ -1,0 +1,15 @@
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\TDM.BLL.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\TDM.BLL.pdb
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\TDM.DAL.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\TDM.DAL.pdb
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.xml
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\obj\Debug\TDM.BLL.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\obj\Debug\TDM.BLL.pdb
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Dapper.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\Dapper.xml
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml

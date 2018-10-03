@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="957aab2e547e4ea5bb0ecc7de153a705" Name="Diagram1">
+        <EntityTypeShape EntityType="TDMDBModel.tb_Attachment" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_Master" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_PerlengkapanTambahan" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_role" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_spkHdr" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_userApps" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSetting" Width="2" PointX="5.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_Worklist" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_userRole" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_Attachment_tb_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_spkHdr_tb_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" ManuallyRouted="false" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_userRole_tb_role" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_employee" Width="1.5" PointX="0.75" PointY="4.25" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_userApps_tb_employee" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_userRole_tb_employee" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

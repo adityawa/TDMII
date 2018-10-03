@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TDMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tb_Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocId" Type="int" Nullable="false" />
+    <Property Name="AttachmentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Attachment" Type="varbinary(max)" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DocType" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_employee">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReportTo" Type="int" />
+    <Property Name="Dept" Type="varchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="RoleApps" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_Master">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_PerlengkapanTambahan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SPKId" Type="int" Nullable="false" />
+    <Property Name="AdditionalItem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModofiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_spkHdr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SPKDate" Type="datetime" Nullable="false" />
+    <Property Name="JanjiPenyerahan" Type="datetime" />
+    <Property Name="LOTNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Buyer" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="BuyerAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="KTP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="STNKName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="STNKAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+    <Property Name="Merk" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Warna" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Karoseri" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MachineNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RangkaNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Pembiayaan" Type="int" Nullable="false" />
+    <Property Name="Via" Type="nvarchar" MaxLength="50" />
+    <Property Name="PercentageBunga" Type="float" />
+    <Property Name="OTRPrice" Type="float" />
+    <Property Name="KaroseriPrice" Type="float" />
+    <Property Name="Year" Type="int" />
+    <Property Name="TotalPrice" Type="float" />
+    <Property Name="DP" Type="float" />
+    <Property Name="TandaJadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pembayaran" Type="nvarchar" MaxLength="50" />
+    <Property Name="TransverVia" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="AlamatKirim" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="int" />
+    <Property Name="IsKaroseri" Type="bit" />
+    <Property Name="KaroseriDesc" Type="varchar" MaxLength="50" />
+    <Property Name="IsOnTR" Type="bit" />
+    <Property Name="IsOffTR" Type="bit" />
+    <Property Name="IsChooseNo" Type="bit" />
+    <Property Name="ChooseNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_userApps">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsExpired" Type="bit" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="20" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tb_userRole">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="RoleId" />
+      <PropertyRef Name="EmployeeId" />
+      <PropertyRef Name="CreatedBy" />
+      <PropertyRef Name="CreatedDate" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_workflowSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="ApprovalLevel" Type="int" Nullable="false" />
+    <Property Name="Actor" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="ActorID" Type="nvarchar" MaxLength="250" />
+    <Property Name="Action" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_Worklist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocType" Type="int" Nullable="false" />
+    <Property Name="DocId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="RespondDate" Type="datetime" />
+    <Property Name="NextApprover" Type="int" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Actioner" Type="int" />
+    <Property Name="CurrLevel" Type="int" />
+  </EntityType>
+  <Association Name="FK_tb_Attachment_tb_Master">
+    <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
+    <End Role="tb_Attachment" Type="Self.tb_Attachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Attachment">
+        <PropertyRef Name="DocType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_PerlengkapanTambahan_tb_spkHdr">
+    <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="1" />
+    <End Role="tb_PerlengkapanTambahan" Type="Self.tb_PerlengkapanTambahan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_spkHdr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_PerlengkapanTambahan">
+        <PropertyRef Name="SPKId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_spkHdr_tb_Master">
+    <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
+    <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_spkHdr">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_userApps_tb_employee">
+    <End Role="tb_employee" Type="Self.tb_employee" Multiplicity="1" />
+    <End Role="tb_userApps" Type="Self.tb_userApps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_employee">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="tb_userApps">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_userRole_tb_employee">
+    <End Role="tb_employee" Type="Self.tb_employee" Multiplicity="1" />
+    <End Role="tb_userRole" Type="Self.tb_userRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_employee">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="tb_userRole">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_userRole_tb_role">
+    <End Role="tb_role" Type="Self.tb_role" Multiplicity="1" />
+    <End Role="tb_userRole" Type="Self.tb_userRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_userRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TDMDBModelStoreContainer">
+    <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Master" EntityType="Self.tb_Master" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_PerlengkapanTambahan" EntityType="Self.tb_PerlengkapanTambahan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_role" EntityType="Self.tb_role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_Worklist" EntityType="Self.tb_Worklist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_userRole" EntityType="Self.tb_userRole" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tb_userRole].[Id] AS [Id], 
+    [tb_userRole].[RoleId] AS [RoleId], 
+    [tb_userRole].[EmployeeId] AS [EmployeeId], 
+    [tb_userRole].[CreatedBy] AS [CreatedBy], 
+    [tb_userRole].[CreatedDate] AS [CreatedDate], 
+    [tb_userRole].[ModifiedBy] AS [ModifiedBy], 
+    [tb_userRole].[ModifiedDate] AS [ModifiedDate]
+    FROM [dbo].[tb_userRole] AS [tb_userRole]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
+      <End Role="tb_Master" EntitySet="tb_Master" />
+      <End Role="tb_Attachment" EntitySet="tb_Attachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="Self.FK_tb_PerlengkapanTambahan_tb_spkHdr">
+      <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
+      <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_spkHdr_tb_Master" Association="Self.FK_tb_spkHdr_tb_Master">
+      <End Role="tb_Master" EntitySet="tb_Master" />
+      <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_userApps_tb_employee" Association="Self.FK_tb_userApps_tb_employee">
+      <End Role="tb_employee" EntitySet="tb_employee" />
+      <End Role="tb_userApps" EntitySet="tb_userApps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_userRole_tb_employee" Association="Self.FK_tb_userRole_tb_employee">
+      <End Role="tb_employee" EntitySet="tb_employee" />
+      <End Role="tb_userRole" EntitySet="tb_userRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_userRole_tb_role" Association="Self.FK_tb_userRole_tb_role">
+      <End Role="tb_role" EntitySet="tb_role" />
+      <End Role="tb_userRole" EntitySet="tb_userRole" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

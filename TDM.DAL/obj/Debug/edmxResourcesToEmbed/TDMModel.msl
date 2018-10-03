@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TDMDBModelStoreContainer" CdmEntityContainer="TDMDBEntities">
+    <EntitySetMapping Name="tb_Attachment">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Attachment">
+        <MappingFragment StoreEntitySet="tb_Attachment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="AttachmentName" ColumnName="AttachmentName" />
+          <ScalarProperty Name="Attachment" ColumnName="Attachment" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Master">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Master">
+        <MappingFragment StoreEntitySet="tb_Master">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_PerlengkapanTambahan">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlengkapanTambahan">
+        <MappingFragment StoreEntitySet="tb_PerlengkapanTambahan">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
+          <ScalarProperty Name="AdditionalItem" ColumnName="AdditionalItem" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_role">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_role">
+        <MappingFragment StoreEntitySet="tb_role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_spkHdr">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
+        <MappingFragment StoreEntitySet="tb_spkHdr">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SPKDate" ColumnName="SPKDate" />
+          <ScalarProperty Name="JanjiPenyerahan" ColumnName="JanjiPenyerahan" />
+          <ScalarProperty Name="LOTNo" ColumnName="LOTNo" />
+          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
+          <ScalarProperty Name="KTP" ColumnName="KTP" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="STNKName" ColumnName="STNKName" />
+          <ScalarProperty Name="STNKAddress" ColumnName="STNKAddress" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Merk" ColumnName="Merk" />
+          <ScalarProperty Name="Warna" ColumnName="Warna" />
+          <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
+          <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
+          <ScalarProperty Name="RangkaNo" ColumnName="RangkaNo" />
+          <ScalarProperty Name="Pembiayaan" ColumnName="Pembiayaan" />
+          <ScalarProperty Name="Via" ColumnName="Via" />
+          <ScalarProperty Name="PercentageBunga" ColumnName="PercentageBunga" />
+          <ScalarProperty Name="OTRPrice" ColumnName="OTRPrice" />
+          <ScalarProperty Name="KaroseriPrice" ColumnName="KaroseriPrice" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="DP" ColumnName="DP" />
+          <ScalarProperty Name="TandaJadi" ColumnName="TandaJadi" />
+          <ScalarProperty Name="Pembayaran" ColumnName="Pembayaran" />
+          <ScalarProperty Name="TransverVia" ColumnName="TransverVia" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="AlamatKirim" ColumnName="AlamatKirim" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
+          <ScalarProperty Name="KaroseriDesc" ColumnName="KaroseriDesc" />
+          <ScalarProperty Name="IsOnTR" ColumnName="IsOnTR" />
+          <ScalarProperty Name="IsOffTR" ColumnName="IsOffTR" />
+          <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
+          <ScalarProperty Name="ChooseNo" ColumnName="ChooseNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_userApps">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_userApps">
+        <MappingFragment StoreEntitySet="tb_userApps">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_workflowSetting">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSetting">
+        <MappingFragment StoreEntitySet="tb_workflowSetting">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
+          <ScalarProperty Name="Actor" ColumnName="Actor" />
+          <ScalarProperty Name="ActorID" ColumnName="ActorID" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Worklist">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
+        <MappingFragment StoreEntitySet="tb_Worklist">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
+          <ScalarProperty Name="CurrLevel" ColumnName="CurrLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_userRole">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_userRole">
+        <MappingFragment StoreEntitySet="tb_userRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_employee">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_employee">
+        <MappingFragment StoreEntitySet="tb_employee">
+          <ScalarProperty Name="RoleApps" ColumnName="RoleApps" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

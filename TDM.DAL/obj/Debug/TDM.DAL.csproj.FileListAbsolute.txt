@@ -1,0 +1,11 @@
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\TDM.DAL.dll.config
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\TDM.DAL.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\TDM.DAL.pdb
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\obj\Debug\TDM.DAL.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\obj\Debug\TDM.DAL.pdb
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\Dapper.dll
+C:\Users\Adit\documents\visual studio 2013\Projects\TDM\TDM.DAL\bin\Debug\Dapper.xml
