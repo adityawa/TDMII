@@ -1,0 +1,43 @@
+﻿@model TDM.BLL.Model.EmployeeModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+
+<div class="page-title">
+
+    <div>
+        <h1><i class="fa fa-users"></i> Master Employee</h1>
+        <p>List Employee</p>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" id="tblEmployee">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Emp No</th>
+                                <th>Name</th>
+                                <th>Report To</th>
+                                <th>Dept</th>
+                                <th>Role</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

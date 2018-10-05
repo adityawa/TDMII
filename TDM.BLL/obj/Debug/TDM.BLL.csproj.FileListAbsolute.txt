@@ -28,3 +28,18 @@ D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\bin\Debug\Dapper.xml
 D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
 D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.dll
 D:\Adit\Outstanding Project 2018\TDM Repos\TDMII\TDM.BLL\obj\Debug\TDM.BLL.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\TDM.BLL.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\TDM.BLL.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\EntityFramework.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\TDM.DAL.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\Dapper.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\TDM.DAL.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\EntityFramework.xml
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\Dapper.xml
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.pdb
