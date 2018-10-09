@@ -6,6 +6,7 @@
 }
 <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
 
 <div class="page-title">
 
@@ -16,21 +17,21 @@
 </div>
 
 <div class="row">
-
     <div class="col-md-12">
         <div class="card">
+            <button id="btnAddEmployee" class="btn btn-link"><i class="fa fa-user"></i> Add Employee</button>
             <div class="row">
                 <div>
                     <table class="table table-responsive table-bordered" id="tblEmployee">
-                        <thead>
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
                             <tr>
-                                <th>Id</th>
-                                <th>Emp No</th>
-                                <th>Name</th>
-                                <th>Report To</th>
-                                <th>Dept</th>
-                                <th>Role</th>
-                                
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">Emp No</th>
+                                <th style="text-align:center">Name</th>
+                                <th style="text-align:center">Report To</th>
+                                <th style="text-align:center">Dept</th>
+                                <th style="text-align:center">Role</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -41,3 +42,133 @@
     </div>
 </div>
 
+
+<div class="modal fade bs-example-modal-lg" id="mdlAdd" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="myModalLabel">Add New Item & Product</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" style="margin-bottom:5px; padding-bottom:5px">
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbItemCd" class="col-sm-2 control-label">Item Code</label>
+                        <input type="text" class="form-control col-md-8" id="tbItemCd" readonly>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbCustomer" class="col-md-2 control-label">Customer</label>
+                        <select class="form-control" id="selCustomerAdd" name="selCustomerAdd" style="width:25%"></select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbType" class="col-md-2 control-label">Type</label>
+                        <select class="form-control" id="selTypeAdd" name="selTypeAdd">
+                            <option value="1">Treatment</option>
+                            <option value="2">Product</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbGroup" class="col-md-2 control-label">Group</label>
+                        <select class="form-control" id="selGroupAdd" name="selGroupAdd" style="width:25%"></select>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbItemName" class="col-md-2 control-label">Item Name</label>
+                        <input type="text" class="form-control col-md-8" id="tbItemNm">
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbUnitPrice" class="col-md-2 control-label">Unit Price</label>
+                        <input type="number" class="form-control col-md-8" id="tbUnitPrice">
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
+                        <label for="lbUom" class="col-md-2 control-label">Uom</label>
+                        <select class="form-control" id="selUomAdd" name="selUomAdd" style="width:25%"></select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var arr_Employee = [];
+    var tblWfOut;
+    var tbEmployee;
+    $(document).ready(function () {
+        BindGrid();
+        $('#btnAddEmployee').click(function (e) {
+            $('#mdlAdd').modal({
+                backdrop: 'static'
+            });
+        });
+    });
+
+    function BindGrid() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/Employee/ListEmployee")',
+            success: function (response) {
+
+                arr_Employee = response.Data;
+                tbEmployee = $('#tblEmployee').DataTable({
+                    data: arr_Employee,
+                    destroy: true,
+                    columns: [
+                        { data: "Id" },
+                        { data: "EmpNo" },
+                        { data: "EmpName" },
+                        { data: "ReportTo" },
+                        { data: "RoleAppsName" },
+                        { data: "Dept" },
+
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<a  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></a>" +
+                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                            'print', 'excel'
+                    ]
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+
+    function reposition() {
+        var modal = $(this),
+            dialog = modal.find('.modal-dialog');
+        modal.css('display', 'block');
+
+        // Dividing by two centers the modal exactly, but dividing by three
+        // or four works better for larger screens.
+        dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+    }
+    // Reposition when a modal is shown
+    $('.modal').on('show.bs.modal', reposition);
+    // Reposition when the window is resized
+    $(window).on('resize', function () {
+        $('.modal:visible').each(reposition);
+    });
+</script>

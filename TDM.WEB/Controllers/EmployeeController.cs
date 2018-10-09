@@ -7,13 +7,13 @@ using TDM.BLL;
 using TDM.BLL.Model;
 namespace TDM.WEB.Controllers
 {
-    public class EmployeeController : Controller
+    public class EmployeeController : BaseController
     {
         // GET: Employee
 
         public ActionResult Index()
         {
-            return View();
+            return CheckSession();
         }
 
         public JsonResult ListEmployee()

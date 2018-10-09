@@ -31,3 +31,4 @@ C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\bin\Debug\
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\obj\Debug\TDM.DAL.dll
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\obj\Debug\TDM.DAL.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\obj\Debug\TDM.DAL.csprojResolveAssemblyReference.cache
