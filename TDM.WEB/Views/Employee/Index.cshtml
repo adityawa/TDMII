@@ -5,9 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+
 <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
 <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
-
+<script src="~/Scripts/select2.js"></script>
 <div class="page-title">
 
     <div>
@@ -46,42 +48,52 @@
 <div class="modal fade bs-example-modal-lg" id="mdlAdd" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div id="notifSuccess" class="alert alert-success" style="display:none" role="alert">
+                <strong>Success!</strong> Your Data saved successfull.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="notifErr" class="alert alert-danger" style="display:none" role="alert">
+                <strong>Error!</strong> <label for="lblErr"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel">Add New Item & Product</h4>
+                <h4 class="modal-title" id="myModalLabel">Add New Employee</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" style="margin-bottom:5px; padding-bottom:5px">
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbItemCd" class="col-sm-2 control-label">Item Code</label>
-                        <input type="text" class="form-control col-md-8" id="tbItemCd" readonly>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Employee ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbEmpID" readonly>
+                        </div>
                     </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbCustomer" class="col-md-2 control-label">Customer</label>
-                        <select class="form-control" id="selCustomerAdd" name="selCustomerAdd" style="width:25%"></select>
+                    <div class="form-group">
+                        <label for="inputEmployeeNo" class="col-sm-2 control-label">Employee No</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbEmpNo" >
+                        </div>
                     </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbType" class="col-md-2 control-label">Type</label>
-                        <select class="form-control" id="selTypeAdd" name="selTypeAdd">
-                            <option value="1">Treatment</option>
-                            <option value="2">Product</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbEmpName">
+                        </div>
                     </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbGroup" class="col-md-2 control-label">Group</label>
-                        <select class="form-control" id="selGroupAdd" name="selGroupAdd" style="width:25%"></select>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Report To</label>
+                        <div class="col-sm-4">
+                            <select class="form-control col-md-7" id="selReportTo" style="width:60%" name="selReportTo"></select>
+                        </div>
                     </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbItemName" class="col-md-2 control-label">Item Name</label>
-                        <input type="text" class="form-control col-md-8" id="tbItemNm">
-                    </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbUnitPrice" class="col-md-2 control-label">Unit Price</label>
-                        <input type="number" class="form-control col-md-8" id="tbUnitPrice">
-                    </div>
-                    <div class="form-group" style="margin-bottom:5px; padding-bottom:5px">
-                        <label for="lbUom" class="col-md-2 control-label">Uom</label>
-                        <select class="form-control" id="selUomAdd" name="selUomAdd" style="width:25%"></select>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Role</label>
+                        <div class="col-sm-4">
+                            <select class="form-control col-md-7" id="selRole" style="width:60%" name="selRole"></select>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -95,16 +107,67 @@
 
 <script type="text/javascript">
     var arr_Employee = [];
-    var tblWfOut;
+    var arr_Role = [];
+    var arr_report_to=[];
     var tbEmployee;
     $(document).ready(function () {
         BindGrid();
+        BindReportTo();
+        BindRoleDdl();
         $('#btnAddEmployee').click(function (e) {
             $('#mdlAdd').modal({
                 backdrop: 'static'
             });
         });
     });
+
+    function BindReportTo() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetAllEmployee")',
+
+            success: function (response) {
+                arr_report_to = response.Data;
+
+                $('#selReportTo').select2({
+                    data: arr_report_to
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindRoleDdl() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetUserRole")',
+
+            success: function (response) {
+                arr_Role = response.Data;
+
+                $('#selRole').select2({
+                    data: arr_Role
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
 
     function BindGrid() {
         $.ajax({

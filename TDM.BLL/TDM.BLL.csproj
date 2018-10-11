@@ -56,8 +56,10 @@
     <Compile Include="Common.cs" />
     <Compile Include="EmployeeBLL.cs" />
     <Compile Include="IBLL.cs" />
+    <Compile Include="MasterBLL.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\EmployeeModel.cs" />
+    <Compile Include="Model\MasterModel.cs" />
     <Compile Include="Model\MyEnums.cs" />
     <Compile Include="Model\SPKHeaderModel.cs" />
     <Compile Include="Model\UserAppsModel.cs" />
