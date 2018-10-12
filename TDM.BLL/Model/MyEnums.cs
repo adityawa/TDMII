@@ -12,5 +12,11 @@ namespace TDM.BLL.Model
         {
             RoleApps
         }
+
+        public enum enumStatus
+        {
+            SUCCESS,
+            ERROR
+        }
     }
 }

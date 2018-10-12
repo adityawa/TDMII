@@ -13,7 +13,7 @@ namespace TDM.BLL
 
         public IEnumerable<MasterModel> List(string category)
         {
-            string sSql = "select Category, Value from tb_Master where Category='"+category+"'";
+            string sSql = "select Id, Category, Value from tb_Master where Category='"+category+"'";
             return GetDataByDapper<MasterModel>(sSql).ToList();
         }
 

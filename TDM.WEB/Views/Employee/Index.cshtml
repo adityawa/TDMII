@@ -80,7 +80,13 @@
                     <div class="form-group">
                         <label for="inputEmployeeName" class="col-sm-2 control-label">Name</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="tbEmpName">
+                            <input type="text" class="form-control" id="tbEmpName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Department</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbDept">
                         </div>
                     </div>
                     <div class="form-group">
@@ -119,6 +125,47 @@
                 backdrop: 'static'
             });
         });
+
+        $('#btnSave').click(function (e) {
+            var _empNo = $('#tbEmpNo').val();
+            var _empName = $('#tbEmpName').val();
+            var _reportTo = $('#selReportTo').val();
+            var _roleApps = $('#selRole').val();
+            var _id = $('#tbEmpID').val();
+            var _dept = $('#tbDept').val();
+            if (window.FormData != undefined) 
+            {
+                var form_data = new FormData();
+                form_data.append("EmpId", _id)
+                form_data.append("EmpNo", _empNo);
+                form_data.append("EmpName", _empName);
+                form_data.append("ReportTo", _reportTo);
+                form_data.append("Role", _roleApps);
+                form_data.append("Department", _dept);
+                $.ajax({
+                    url: '/Employee/AddOrUpdateEmployee',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    async: "true",
+                    success: function (result) {
+                        if (result.Status == "" || result.Status == "SUCCESS") {
+                            $('#notifSuccess').show();
+                        }
+                        else {
+                            $("label[for = lblErr]").text(result.Status);
+                            $('#notifErr').show();
+                        }
+                    }
+
+                });
+            }
+            else {
+                $("label[for = lblErr]").text("Your browser is not support Form Data, Please Update!");
+                $('#notifErr').show();
+            }
+        });
     });
 
     function BindReportTo() {
@@ -132,7 +179,6 @@
                 $('#selReportTo').select2({
                     data: arr_report_to
                 });
-
             },
             error: function (xhr, status, p3, p4) {
                 var err = "Error " + " " + status + " " + p3 + " " + p4;
@@ -180,7 +226,7 @@
                     data: arr_Employee,
                     destroy: true,
                     columns: [
-                        { data: "Id" },
+                        { data: "Id", "visible":false },
                         { data: "EmpNo" },
                         { data: "EmpName" },
                         { data: "ReportTo" },
@@ -217,6 +263,44 @@
 
 
         });
+    }
+
+    var Edit = function (ID) {
+        $.ajax({
+            url: '/ItemMasterTreatment/GetItemById?id=' + ID,
+            method: 'GET',
+            success: function (result) {
+                if (result.Status == "success") {
+                    $('#tbItemCd').val(result.Item_CD);
+                    $('#tbItemCd').disabled;
+                    $('#tbItemNm').val(result.Item_NM);
+                    $('#selTypeAdd').val(result.Type_CD);
+                    $('#selGroupAdd').val(result.Group).trigger('change');
+                    $('#selUomAdd').val(result.Uom).trigger('change');
+                    $('#selCustomerAdd').val(result.Customer).trigger('change');
+                    $('#tbUnitPrice').val(result.Harga);
+                    $("#mdlAdd").modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    }, 'show');
+                }
+            },
+            error: function (xml, message, text) {
+                toastr.error("Msg: " + message + ", Text: " + text);
+            }
+        });
+        return false;
+    }
+
+    var Delete = function (ID) {
+
+        $("label[for = item_cd_del]").text(ID);
+        $("#mdlRemove").modal({
+            backdrop: 'static',
+            keyboard: false
+        }, 'show');
+
+        return false;
     }
 
     function reposition() {

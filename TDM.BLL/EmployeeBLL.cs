@@ -64,7 +64,6 @@ namespace TDM.BLL
 
         public int Insert(EmployeeModel model, out string errMsg)
         {
-            
             errMsg = string.Empty;
             using (TDMDBEntities context = new TDMDBEntities())
             {
