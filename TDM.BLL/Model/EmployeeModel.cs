@@ -15,5 +15,6 @@ namespace TDM.BLL.Model
         public int RoleApps { get; set; }
         public string RoleAppsName { get; set; }
         public string Dept { get; set; }
+        public bool IsActive { get; set; }
     }
 }

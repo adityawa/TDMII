@@ -94,6 +94,7 @@ namespace TDM.BLL
                     exist.EmpName = model.EmpName;
                     exist.EmpNo = model.EmpNo;
                     exist.Dept = model.Dept;
+                    exist.IsActive = model.IsActive;
                     exist.RoleApps = model.RoleApps;
                     exist.ModifiedBy = model.ModifiedBy;
                     exist.ModifiedDate = model.ModifiedDate;
@@ -150,6 +151,7 @@ namespace TDM.BLL
             model.CreatedDate = fromEntity.CreatedDate;
             model.ModifiedBy = fromEntity.ModifiedBy;
             model.ModifiedDate = fromEntity.ModifiedDate;
+            model.IsActive = fromEntity.IsActive;
             return model;
         }
 
@@ -168,6 +170,7 @@ namespace TDM.BLL
             entity.ModifiedBy = fromModel.ModifiedBy;
             entity.ModifiedDate = fromModel.ModifiedDate;
             entity.Dept = fromModel.Dept;
+            entity.IsActive = fromModel.IsActive;
             return entity;
         }
     }

@@ -164,6 +164,7 @@
     <EntitySetMapping Name="tb_employee">
       <EntityTypeMapping TypeName="TDMDBModel.tb_employee">
         <MappingFragment StoreEntitySet="tb_employee">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="RoleApps" ColumnName="RoleApps" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />

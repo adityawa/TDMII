@@ -47,3 +47,4 @@
 /// <reference path="jquery-3.1.1.js" />
 /// <reference path="jquery-3.1.1.slim.js" />
 /// <reference path="select2.min.js" />
+/// <reference path="jquery-confirm.js" />

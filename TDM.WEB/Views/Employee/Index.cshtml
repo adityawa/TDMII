@@ -6,12 +6,28 @@
 }
 <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
 <link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
 
 <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
 <script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
 <script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
 <div class="page-title">
-
+    
     <div>
         <h1><i class="fa fa-users"></i> Master Employee</h1>
         <p>List Employee</p>
@@ -24,7 +40,7 @@
             <button id="btnAddEmployee" class="btn btn-link"><i class="fa fa-user"></i> Add Employee</button>
             <div class="row">
                 <div>
-                    <table class="table table-responsive table-bordered" id="tblEmployee">
+                    <table class="table table-responsive table-bordered" width="100%" id="tblEmployee">
                         <thead style="text-align:center; background-color:#000000; color:#ffffff">
                             <tr>
                                 <th style="text-align:center">Id</th>
@@ -74,7 +90,7 @@
                     <div class="form-group">
                         <label for="inputEmployeeNo" class="col-sm-2 control-label">Employee No</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="tbEmpNo" >
+                            <input type="text" class="form-control" id="tbEmpNo">
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,10 +117,16 @@
                             <select class="form-control col-md-7" id="selRole" style="width:60%" name="selRole"></select>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Active</label>
+                        <div class="col-sm-3">
+                            <input type="checkbox" id="chkIsActive" class="checkbox-inline" value="Active"><br />
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" id="btnSave" class="btn btn-primary">Save</button>
             </div>
         </div>
@@ -114,7 +136,7 @@
 <script type="text/javascript">
     var arr_Employee = [];
     var arr_Role = [];
-    var arr_report_to=[];
+    var arr_report_to = [];
     var tbEmployee;
     $(document).ready(function () {
         BindGrid();
@@ -126,6 +148,10 @@
             });
         });
 
+        $('#btnClose').click(function (e) {
+            location.reload();
+        });
+
         $('#btnSave').click(function (e) {
             var _empNo = $('#tbEmpNo').val();
             var _empName = $('#tbEmpName').val();
@@ -133,8 +159,7 @@
             var _roleApps = $('#selRole').val();
             var _id = $('#tbEmpID').val();
             var _dept = $('#tbDept').val();
-            if (window.FormData != undefined) 
-            {
+            if (window.FormData != undefined) {
                 var form_data = new FormData();
                 form_data.append("EmpId", _id)
                 form_data.append("EmpNo", _empNo);
@@ -142,6 +167,7 @@
                 form_data.append("ReportTo", _reportTo);
                 form_data.append("Role", _roleApps);
                 form_data.append("Department", _dept);
+                form_data.append("IsActive", $('#chkIsActive').is(':checked'));
                 $.ajax({
                     url: '/Employee/AddOrUpdateEmployee',
                     type: 'POST',
@@ -226,7 +252,7 @@
                     data: arr_Employee,
                     destroy: true,
                     columns: [
-                        { data: "Id", "visible":false },
+                        { data: "Id", "visible": false },
                         { data: "EmpNo" },
                         { data: "EmpName" },
                         { data: "ReportTo" },
@@ -265,20 +291,42 @@
         });
     }
 
+    function DeleteEmployee(Id) {
+        $.ajax({
+            url: '/Employee/RemoveEmployee?empid=' + Id,
+           
+            success: function (result) {
+                if (result.Status == "SUCCESS" || result.Status=="") {
+                    $("label[for = lblScs_outModal]").text("Data Deleted Successfull");
+                    $('#notifSuccess_outModal').show();
+                    location.reload();
+                }
+                else {
+                    $("label[for = lblErr_outModal]").text(result.Status);
+                    $('#notifErr_outModal').show();
+                }
+            }
+        });
+    }
+
     var Edit = function (ID) {
         $.ajax({
-            url: '/ItemMasterTreatment/GetItemById?id=' + ID,
+            url: '/Employee/GetEmployeeById?empid=' + ID,
             method: 'GET',
             success: function (result) {
-                if (result.Status == "success") {
-                    $('#tbItemCd').val(result.Item_CD);
-                    $('#tbItemCd').disabled;
-                    $('#tbItemNm').val(result.Item_NM);
-                    $('#selTypeAdd').val(result.Type_CD);
-                    $('#selGroupAdd').val(result.Group).trigger('change');
-                    $('#selUomAdd').val(result.Uom).trigger('change');
-                    $('#selCustomerAdd').val(result.Customer).trigger('change');
-                    $('#tbUnitPrice').val(result.Harga);
+                if (result.Status == "SUCCESS") {
+                    $('#tbEmpID').val(result.EmpId);
+                    $('#tbEmpNo').val(result.EmpNo);
+                    $('#tbEmpName').val(result.EmpName);
+                    $('#tbDept').val(result.EmpDept);
+                    $('#selReportTo').val(result.EmpReportTo).trigger('change');
+                    $('#selRole').val(result.EmpRole).trigger('change');
+                    if (result.EmpActive == true) {
+                        $('#chkIsActive').attr('checked', true);
+                    }
+                    else {
+                        $('#chkIsActive').attr('checked', false);
+                    }
                     $("#mdlAdd").modal({
                         backdrop: 'static',
                         keyboard: false
@@ -294,11 +342,19 @@
 
     var Delete = function (ID) {
 
-        $("label[for = item_cd_del]").text(ID);
-        $("#mdlRemove").modal({
-            backdrop: 'static',
-            keyboard: false
-        }, 'show');
+        $.confirm({
+            title: 'Delete Confirmation!',
+            theme:'MOdern',
+            content: 'Are You sure to delete this data ?',
+            buttons: {
+                confirm: function () {
+                    DeleteEmployee(ID);
+                },
+                cancel: function () {
+                    
+                },
+            }
+        });
 
         return false;
     }

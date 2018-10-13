@@ -263,6 +263,7 @@
     <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <Property Name="RoleApps" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tb_userApps" Relationship="TDMDBModel.FK_tb_userApps_tb_employee" FromRole="tb_employee" ToRole="tb_userApps" />
     <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_employee" ToRole="tb_userRole" />
   </EntityType>

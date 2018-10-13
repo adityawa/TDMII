@@ -26,6 +26,7 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="RoleApps" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="tb_Master">
     <Key>

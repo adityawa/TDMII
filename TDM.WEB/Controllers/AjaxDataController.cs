@@ -16,6 +16,11 @@ namespace TDM.WEB.Controllers
             IEnumerable<EmployeeModel> ls = new List<EmployeeModel>();
             List<Select2DropDownModel> empddl = new List<Select2DropDownModel>();
             ls = new EmployeeBLL().List();
+            empddl.Add(new Select2DropDownModel
+            {
+                id="0",
+                text="--choose--"
+            });
             foreach (var item in ls)
             {
                 empddl.Add(new Select2DropDownModel

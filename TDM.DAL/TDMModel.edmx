@@ -31,6 +31,7 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="RoleApps" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_Master">
           <Key>
@@ -547,7 +548,7 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
             <End Role="tb_employee" EntitySet="tb_employee" />
             <End Role="tb_userRole" EntitySet="tb_userRole" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="tb_employee">
           <Key>
             <PropertyRef Name="EmpID" />
@@ -562,6 +563,7 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="RoleApps" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tb_userApps" Relationship="TDMDBModel.FK_tb_userApps_tb_employee" FromRole="tb_employee" ToRole="tb_userApps" />
           <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_employee" ToRole="tb_userRole" />
         </EntityType>
@@ -589,7 +591,7 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -758,6 +760,7 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
           <EntitySetMapping Name="tb_employee">
             <EntityTypeMapping TypeName="TDMDBModel.tb_employee">
               <MappingFragment StoreEntitySet="tb_employee">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RoleApps" ColumnName="RoleApps" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
