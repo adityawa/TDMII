@@ -1,0 +1,332 @@
+﻿@model TDM.BLL.Model.UserAppsModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="page-title">
+
+    <div>
+        <h1><i class="fa fa-users"></i> Master User Management</h1>
+        <p>List User Apps</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <button id="btnAddUsrApps" class="btn btn-link"><i class="fa fa-user-circle"></i> Add User Apps</button>
+            <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" width="100%" id="tblUserApps">
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
+                            <tr>
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">User Name</th>
+                                <th style="text-align:center">EmployeeName</th>
+                                <th style="text-align:center">Is Active</th>
+                               
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" id="mdlAdd" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div id="notifSuccess" class="alert alert-success" style="display:none" role="alert">
+                <strong>Success!</strong> Your Data saved successfull.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="notifErr" class="alert alert-danger" style="display:none" role="alert">
+                <strong>Error!</strong> <label for="lblErr"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add New UserName</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbID" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeNo" class="col-sm-2 control-label">User Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbUserName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="tbPassword" required>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Employee</label>
+                        <div class="col-sm-4">
+                            <select class="form-control col-md-7" id="selEmployee" style="width:100%" name="selEmployee"></select>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">Expired</label>
+                        <div class="col-sm-3">
+                            <input type="checkbox" id="chkIsExpired" class="checkbox-inline" value="Expired"><br />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var arr_usermgmt = [];
+  
+    var arr_employee = [];
+    var tbUsrApps;
+    $(document).ready(function () {
+        BindGrid();
+        BindEmployee();
+       
+        $('#btnAddUsrApps').click(function (e) {
+            $('#mdlAdd').modal({
+                backdrop: 'static'
+            });
+        });
+
+        $('#btnClose').click(function (e) {
+            location.reload();
+        });
+
+        $('#btnSave').click(function (e) {
+           
+            if (window.FormData != undefined) {
+                var form_data = new FormData();
+                form_data.append("Id", $('#tbID').val());
+                form_data.append("UserName", $('#tbUserName').val());
+                form_data.append("Password", $('#tbPassword').val());
+                form_data.append("Employee", $('#selEmployee').val());
+                form_data.append("IsExpired", $('#chkIsExpired').is(':checked'));
+                $.ajax({
+                    url: '/Account/AddNewUserApps',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    async: "true",
+                    success: function (result) {
+                        if (result.Status == "" || result.Status == "SUCCESS") {
+                            $('#notifSuccess').show();
+                        }
+                        else {
+                            $("label[for = lblErr]").text(result.Status);
+                            $('#notifErr').show();
+                        }
+                    }
+
+                });
+            }
+            else {
+                $("label[for = lblErr]").text("Your browser is not support Form Data, Please Update!");
+                $('#notifErr').show();
+            }
+        });
+    });
+
+    function BindEmployee() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetAllEmployee")',
+
+            success: function (response) {
+                arr_employee = response.Data;
+
+                $('#selEmployee').select2({
+                    data: arr_employee
+                });
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindGrid() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/Account/ListActiveUser")',
+            success: function (response) {
+
+                arr_Employee = response.Data;
+                tbEmployee = $('#tblUserApps').DataTable({
+                    data: arr_Employee,
+                    destroy: true,
+                    columns: [
+                        { data: "Id", "visible": false },
+                        { data: "UserName" },
+                        { data: "EmployeeName" },
+                        { data: "IsExpired" },
+                        
+
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<a  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></a>" +
+                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                            'print', 'excel'
+                    ]
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+
+    function DeleteUserApps(Id) {
+        $.ajax({
+            url: '/Account/RemoveUserApps?id=' + Id,
+
+            success: function (result) {
+                if (result.Status == "SUCCESS" || result.Status == "") {
+                    $("label[for = lblScs_outModal]").text("Data Deleted Successfull");
+                    $('#notifSuccess_outModal').show();
+                    location.reload();
+                }
+                else {
+                    $("label[for = lblErr_outModal]").text(result.Status);
+                    $('#notifErr_outModal').show();
+                }
+            }
+        });
+    }
+
+    var Edit = function (ID) {
+        $.ajax({
+            url: '/Account/FindById?id=' + ID,
+            method: 'GET',
+            success: function (result) {
+              
+                $('#tbID').val(result.Id);
+                $('#tbUserName').val(result.UserName);
+                $('#selEmployee').val(result.EmployeeId).trigger('change');
+                $('#tbPassword').attr('disabled', 'disabled');
+                    if (result.IsExpired == true) {
+                        $('#chkIsExpired').attr('checked', true);
+                    }
+                    else {
+                        $('#chkIsExpired').attr('checked', false);
+                    }
+                    $("#mdlAdd").modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    }, 'show');
+                
+            },
+            error: function (xml, message, text) {
+                toastr.error("Msg: " + message + ", Text: " + text);
+            }
+        });
+        return false;
+    }
+
+    var Delete = function (ID) {
+
+        $.confirm({
+            title: 'Delete Confirmation!',
+            theme: 'modern',
+            content: 'Are You sure to delete this data ?',
+            buttons: {
+                confirm: function () {
+                    DeleteUserApps(ID);
+                },
+                cancel: function () {
+
+                },
+            }
+        });
+
+        return false;
+    }
+
+    function reposition() {
+        var modal = $(this),
+            dialog = modal.find('.modal-dialog');
+        modal.css('display', 'block');
+
+        // Dividing by two centers the modal exactly, but dividing by three
+        // or four works better for larger screens.
+        dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+    }
+    // Reposition when a modal is shown
+    $('.modal').on('show.bs.modal', reposition);
+    // Reposition when the window is resized
+    $(window).on('resize', function () {
+        $('.modal:visible').each(reposition);
+    });
+</script>

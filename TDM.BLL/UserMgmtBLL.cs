@@ -11,6 +11,7 @@ namespace TDM.BLL
     public class UserMgmtBLL:BaseDAWithDapper
     {
         protected const string TDM_KEY = "TDM2018";
+        private int result_affected = 0;
         public UserAppsModel Authenticate(string username, string password, out string mesg)
         {
             UserAppsModel model = new UserAppsModel();
@@ -21,7 +22,7 @@ namespace TDM.BLL
                 var _q = context.tb_userApps.SingleOrDefault(x => x.UserName == username);
                 if (_q != null)
                 {
-                    if (_q.Password == new Common().Decrypt(password, TDM_KEY))
+                    if (password == new Common().Decrypt(_q.Password, TDM_KEY))
                     {
                         var qry = context.tb_userApps.Join(context.tb_employee, u => u.EmployeeId, e => e.EmpID, (u, e) => new { u, e }).Select(s => new
                         {
@@ -55,7 +56,10 @@ namespace TDM.BLL
             List<UserAppsModel> ls = new List<UserAppsModel>();
             using (TDMDBEntities context = new TDMDBEntities())
             {
-                var qry = context.tb_userApps.Join(context.tb_employee, u => u.EmployeeId, e => e.EmpID, (u, e) => new { u, e }).Select(s => new
+                var qry = context.tb_userApps
+                    .Join(context.tb_employee, u => u.EmployeeId, e => e.EmpID, (u, e) => new { u, e })
+                    .Where(x=>x.u.IsExpired==false)
+                    .Select(s => new
                 {
                     s.u.Id,
                     s.u.UserName,
@@ -81,6 +85,24 @@ namespace TDM.BLL
             }
 
             return ls;
+        }
+
+        private bool ValidateBeforeUpdate(UserAppsModel usr, out string err)
+        {
+            bool isValid = true;
+            err = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            if (usr.UserName == string.Empty)
+            {
+                sb.Append("User Name tidak boleh kosong /n");
+                isValid = false;
+            }
+            if (usr.EmployeeId == 0)
+            {
+                sb.Append("Employee ID tidak boleh kosong /n");
+                isValid = false;
+            }
+            return isValid;
         }
         public int ValidateBeforSave(UserAppsModel usr, out string mesg)
         {
@@ -118,7 +140,80 @@ namespace TDM.BLL
           
             return result_affected;
         }
+        public int Update(UserAppsModel model, out string errMsg)
+        {
+            StringBuilder sb = new StringBuilder();
+            int errctr = 0;
+            errMsg = MyEnums.enumStatus.SUCCESS.ToString();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                try
+                {
+                    //cek is any same username
+                   
+                        var _u = context.tb_userApps.SingleOrDefault(x => x.UserName == model.UserName);
+                        if (_u != null)
+                        {
+                            if (model.Id != _u.Id)
+                            {
+                                sb.Append("User Name sudah terpakai, silahkan mengganti dengan yang lain");
+                                errctr += 1;
+                            }
+                            
+                        }
 
+                        if (errctr <= 0)
+                        {
+                            var detil = context.tb_userApps.FirstOrDefault(x => x.Id == model.Id);
+                            if (detil != null && ValidateBeforeUpdate(model, out errMsg))
+                            {
+                                detil.UserName = model.UserName;
+                                detil.EmployeeId = model.EmployeeId;
+                                detil.IsExpired = model.IsExpired;
+                                detil.ModifiedBy = model.ModifiedBy;
+                                detil.ModifiedDate = model.ModifiedDate;
+
+                                result_affected = context.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            errMsg = sb.ToString();
+                        }
+                   
+                }
+                catch (Exception ex)
+                {
+                    errMsg = ex.Message;
+                }
+
+            }
+            return result_affected;
+        }
+
+        public int Delete(int Id, out string errMsg)
+        {
+            errMsg = MyEnums.enumStatus.SUCCESS.ToString();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                try
+                {
+                    var delete = context.tb_userApps.FirstOrDefault(x => x.Id == Id);
+                    if (delete != null)
+                    {
+                        context.tb_userApps.Remove(delete);
+                        result_affected = context.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    errMsg = ex.Message;
+                }
+
+            }
+
+            return result_affected;
+        }
         public void map(tb_userApps ent, out UserAppsModel obj)
         {
             obj = new UserAppsModel();
@@ -129,6 +224,44 @@ namespace TDM.BLL
             obj.Password = ent.Password;
             obj.IsExpired = ent.IsExpired;
             obj.EmployeeId = ent.EmployeeId;
+        }
+        public UserAppsModel MapToModel(tb_userApps fromEntity)
+        {
+            if (fromEntity == null)
+                throw new Exception("Source Data cannot be null");
+            UserAppsModel model = new UserAppsModel();
+            model.Id = fromEntity.Id;
+            model.UserName = fromEntity.UserName;
+            model.Password = fromEntity.Password;
+            model.IsExpired = fromEntity.IsExpired;
+            model.EmployeeId = fromEntity.EmployeeId;
+            model.CreatedBy = fromEntity.CreatedBy;
+            model.CreatedDate = fromEntity.CreatedDate;
+            model.ModifiedBy = fromEntity.ModifiedBy;
+            model.ModifiedDate = fromEntity.ModifiedDate;
+
+            return model;
+        }
+        public UserAppsModel FindById(int Id)
+        {
+            UserAppsModel usr = new UserAppsModel();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                try
+                {
+                    var q = context.tb_userApps.SingleOrDefault(x => x.Id == Id);
+                    if (q != null)
+                    {
+                        usr = MapToModel(q);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
+            return usr;
         }
     }
 }

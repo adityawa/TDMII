@@ -116,6 +116,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\SPKController.cs" />
+    <Compile Include="Controllers\UserAppsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -530,12 +531,14 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\SPK\Index.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\vendor\" />
     <Folder Include="Views\AjaxData\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\UserApps\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

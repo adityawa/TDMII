@@ -43,3 +43,4 @@ D:\Adit\Outstanding Project 2018\TDM Repos\TDM.DAL\bin\Debug\EntityFramework.Sql
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.DAL\obj\Debug\TDM.DAL.dll
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.DAL\obj\Debug\TDM.DAL.pdb
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.DAL\obj\Debug\TDM.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.DAL\obj\Debug\TDM.DAL.csprojResolveAssemblyReference.cache
