@@ -340,18 +340,6 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tb_spkHdr" Relationship="Self.FK_tb_PerlengkapanTambahan_tb_spkHdr" FromRole="tb_PerlengkapanTambahan" ToRole="tb_spkHdr" />
         </EntityType>
-        <EntityType Name="tb_role">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModofiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tb_userRole" Relationship="Self.FK_tb_userRole_tb_role" FromRole="tb_role" ToRole="tb_userRole" />
-        </EntityType>
         <EntityType Name="tb_spkHdr">
           <Key>
             <PropertyRef Name="Id" />
@@ -462,8 +450,8 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tb_role" Relationship="Self.FK_tb_userRole_tb_role" FromRole="tb_userRole" ToRole="tb_role" />
           <NavigationProperty Name="tb_employee" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_userRole" ToRole="tb_employee" />
+          <NavigationProperty Name="tb_role" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_userRole" ToRole="tb_role" />
         </EntityType>
         <Association Name="FK_tb_Attachment_tb_Master">
           <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
@@ -501,23 +489,10 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_userRole_tb_role">
-          <End Role="tb_role" Type="Self.tb_role" Multiplicity="1" />
-          <End Role="tb_userRole" Type="Self.tb_userRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_role">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tb_userRole">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TDMDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" />
           <EntitySet Name="tb_Master" EntityType="Self.tb_Master" />
           <EntitySet Name="tb_PerlengkapanTambahan" EntityType="Self.tb_PerlengkapanTambahan" />
-          <EntitySet Name="tb_role" EntityType="Self.tb_role" />
           <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" />
           <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" />
           <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" />
@@ -535,10 +510,6 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
             <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
             <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
           </AssociationSet>
-          <AssociationSet Name="FK_tb_userRole_tb_role" Association="Self.FK_tb_userRole_tb_role">
-            <End Role="tb_role" EntitySet="tb_role" />
-            <End Role="tb_userRole" EntitySet="tb_userRole" />
-          </AssociationSet>
           <EntitySet Name="tb_employee" EntityType="TDMDBModel.tb_employee" />
           <AssociationSet Name="FK_tb_userApps_tb_employee" Association="TDMDBModel.FK_tb_userApps_tb_employee">
             <End Role="tb_employee" EntitySet="tb_employee" />
@@ -546,6 +517,11 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
           </AssociationSet>
           <AssociationSet Name="FK_tb_userRole_tb_employee" Association="TDMDBModel.FK_tb_userRole_tb_employee">
             <End Role="tb_employee" EntitySet="tb_employee" />
+            <End Role="tb_userRole" EntitySet="tb_userRole" />
+          </AssociationSet>
+          <EntitySet Name="tb_role" EntityType="TDMDBModel.tb_role" />
+          <AssociationSet Name="FK_tb_userRole_tb_role" Association="TDMDBModel.FK_tb_userRole_tb_role">
+            <End Role="tb_role" EntitySet="tb_role" />
             <End Role="tb_userRole" EntitySet="tb_userRole" />
           </AssociationSet>
           </EntityContainer>
@@ -591,6 +567,30 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModofiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_role" ToRole="tb_userRole" />
+        </EntityType>
+        <Association Name="FK_tb_userRole_tb_role">
+          <End Type="TDMDBModel.tb_role" Role="tb_role" Multiplicity="1" />
+          <End Type="TDMDBModel.tb_userRole" Role="tb_userRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tb_userRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -633,18 +633,6 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_role">
-            <EntityTypeMapping TypeName="TDMDBModel.tb_role">
-              <MappingFragment StoreEntitySet="tb_role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -771,6 +759,18 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_role">
+            <EntityTypeMapping TypeName="TDMDBModel.tb_role">
+              <MappingFragment StoreEntitySet="tb_role">
+                <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

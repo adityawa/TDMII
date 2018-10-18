@@ -22,7 +22,7 @@ namespace TDM.DAL
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual tb_role tb_role { get; set; }
         public virtual tb_employee tb_employee { get; set; }
+        public virtual tb_role tb_role { get; set; }
     }
 }

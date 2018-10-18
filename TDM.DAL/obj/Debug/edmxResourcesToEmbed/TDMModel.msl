@@ -40,18 +40,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_role">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_role">
-        <MappingFragment StoreEntitySet="tb_role">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_spkHdr">
       <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
         <MappingFragment StoreEntitySet="tb_spkHdr">
@@ -175,6 +163,18 @@
           <ScalarProperty Name="EmpName" ColumnName="EmpName" />
           <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
           <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_role">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_role">
+        <MappingFragment StoreEntitySet="tb_role">
+          <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

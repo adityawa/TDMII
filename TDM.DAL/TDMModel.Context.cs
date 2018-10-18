@@ -28,12 +28,12 @@ namespace TDM.DAL
         public virtual DbSet<tb_Attachment> tb_Attachment { get; set; }
         public virtual DbSet<tb_Master> tb_Master { get; set; }
         public virtual DbSet<tb_PerlengkapanTambahan> tb_PerlengkapanTambahan { get; set; }
-        public virtual DbSet<tb_role> tb_role { get; set; }
         public virtual DbSet<tb_spkHdr> tb_spkHdr { get; set; }
         public virtual DbSet<tb_userApps> tb_userApps { get; set; }
         public virtual DbSet<tb_workflowSetting> tb_workflowSetting { get; set; }
         public virtual DbSet<tb_Worklist> tb_Worklist { get; set; }
         public virtual DbSet<tb_userRole> tb_userRole { get; set; }
         public virtual DbSet<tb_employee> tb_employee { get; set; }
+        public virtual DbSet<tb_role> tb_role { get; set; }
     }
 }

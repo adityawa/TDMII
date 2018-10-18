@@ -115,6 +115,7 @@
     <Compile Include="Controllers\AjaxDataController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SPKController.cs" />
     <Compile Include="Controllers\UserAppsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -538,6 +539,7 @@
     <Folder Include="Content\vendor\" />
     <Folder Include="Views\AjaxData\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Role\" />
     <Folder Include="Views\UserApps\" />
   </ItemGroup>
   <ItemGroup>
