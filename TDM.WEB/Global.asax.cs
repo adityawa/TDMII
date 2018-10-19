@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-
+using TDM.BLL.Model;
+using AutoMapper;
 namespace TDM.WEB
 {
     public class MvcApplication : System.Web.HttpApplication

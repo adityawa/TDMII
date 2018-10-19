@@ -9,9 +9,25 @@ using TDM.BLL.Model;
 using AutoMapper;
 namespace TDM.BLL
 {
+    
     public class RoleBLL :IBLL<RoleModel, tb_role>
     {
+        private MapperConfiguration config = null;
+        private IMapper imap;
         private int result_affected = 0;
+        public RoleBLL()
+        {
+            if (config == null)
+            {
+                 config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<RoleModel, tb_role>();
+                    cfg.CreateMap<tb_role, RoleModel>();
+                });
+                
+                 
+            }
+        }
         public IEnumerable<RoleModel> List()
         {
             List<RoleModel> ls = new List<RoleModel>();
@@ -20,7 +36,8 @@ namespace TDM.BLL
                 var entity = context.tb_role;
                 foreach (var item in entity)
                 {
-                    var mapped = AutoMapper.Mapper.Map<tb_role, RoleModel>(item);
+                    IMapper imap = config.CreateMapper();
+                    var mapped = imap.Map<tb_role, RoleModel>(item);
                     ls.Add(mapped);
                 }
             }
@@ -32,8 +49,9 @@ namespace TDM.BLL
             RoleModel model = new RoleModel();
             using (TDMDBEntities context = new TDMDBEntities())
             {
+                IMapper imap = config.CreateMapper();
                 tb_role role = context.tb_role.FirstOrDefault(x => x.Id == Id);
-                model = AutoMapper.Mapper.Map<tb_role, RoleModel>(role);
+                model = imap.Map<tb_role, RoleModel>(role);
             }
 
             return model;
@@ -42,10 +60,11 @@ namespace TDM.BLL
         public int Insert(RoleModel model, out string errMsg)
         {
             errMsg = string.Empty;
-            tb_role role_entity = new tb_role();
+            tb_role role_entity = new tb_role();   
             try
             {
-                role_entity = AutoMapper.Mapper.Map<RoleModel, tb_role>(model);
+                IMapper imap = config.CreateMapper();
+                role_entity = imap.Map<RoleModel, tb_role>(model);
                 using (TDMDBEntities context = new TDMDBEntities())
                 {
                     context.tb_role.Add(role_entity);

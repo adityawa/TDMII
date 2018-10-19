@@ -126,3 +126,8 @@ D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\Dapper.xml
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\obj\Debug\TDM.WEB.csprojResolveAssemblyReference.cache
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\obj\Debug\TDM.WEB.dll
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\obj\Debug\TDM.WEB.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\AutoMapper.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\System.ValueTuple.dll
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\AutoMapper.pdb
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\AutoMapper.xml
+C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\System.ValueTuple.xml
