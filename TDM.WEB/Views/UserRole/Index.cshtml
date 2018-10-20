@@ -1,0 +1,115 @@
+﻿@model TDM.BLL.Model.UserRoleModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="page-title">
+    <div>
+        <h1><i class="fa fa-user-md"></i> Role : @ViewBag.RoleID </h1>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <button id="btnAddUsrRole" class="btn btn-link"><i class="fa fa-user-circle"></i> Add User To Role</button>
+            <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" width="50%" id="tblUserRole">
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
+                            <tr>
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">User</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var arr_usrRole = [];
+    var tbUsrRole;
+    $(document).ready(function () {
+
+    });
+
+    function BindGrid() {
+        
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/UserRole/GetUserByRole?id" + @ViewBag.RoleID)',
+            success: function (response) {
+
+                arr_usrRole = response.Data;
+                tbUsrRole = $('#tblUserRole').DataTable({
+                    data: arr_usrRole,
+                    destroy: true,
+                    columns: [
+                        { data: "Id", "visible": false },
+                        { data: "RoleName" },
+
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<button  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></button>" +
+                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>" +
+                                " | <button onclick='View(" + full['Id'] + ")' ><i class='fa fa-eye'></i></button>";
+
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                            'print', 'excel'
+                    ]
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+</script>

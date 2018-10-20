@@ -42,7 +42,7 @@
             <button id="btnAddRole" class="btn btn-link"><i class="fa fa-plus-circle"></i> Add Role</button>
             <div class="row">
                 <div>
-                    <table class="table table-responsive table-bordered" width="100%" id="tblRole">
+                    <table class="table table-responsive table-bordered" width="50%" id="tblRole">
                         <thead style="text-align:center; background-color:#000000; color:#ffffff">
                             <tr>
                                 <th style="text-align:center">Id</th>
@@ -104,8 +104,6 @@
 
 <script type="text/javascript">
     var arr_Roles = [];
-
-  
     var tbRoles;
     $(document).ready(function () {
         BindGrid();
@@ -173,8 +171,10 @@
                             "data": null,
                             "targets": -1,
                             "render": function (data, type, full) {
-                                return "<a  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></a>" +
-                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
+                                return "<button  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></button>" +
+                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>" +
+                                " | <button onclick='View(" + full['Id'] + ")' ><i class='fa fa-eye'></i></button>";
+                                
                             },
                             "bSearchable": true,
                             "sortable": false
@@ -239,6 +239,10 @@
             }
         });
         return false;
+    }
+
+    var View = function (ID) {
+        window.location = '/UserRole/Index?RoleId='+ID;
     }
 
     var Delete = function (ID) {

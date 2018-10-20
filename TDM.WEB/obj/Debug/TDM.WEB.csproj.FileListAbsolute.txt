@@ -131,3 +131,8 @@ C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\System
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\AutoMapper.pdb
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\AutoMapper.xml
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.WEB\bin\System.ValueTuple.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\AutoMapper.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\System.ValueTuple.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\AutoMapper.pdb
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\AutoMapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.WEB\bin\System.ValueTuple.xml
