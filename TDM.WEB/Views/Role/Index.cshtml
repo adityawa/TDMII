@@ -163,6 +163,7 @@
                 tbRoles = $('#tblRole').DataTable({
                     data: arr_Roles,
                     destroy: true,
+                    dom: '<"top"f>rt<"bottom"p and i><"clear">',
                     columns: [
                         { data: "Id", "visible": false },
                         { data: "RoleName" },
@@ -183,7 +184,7 @@
 
                     ],
                     processing: true,
-                    dom: 'Bfrtip',
+                    
                     buttons: [
                             'print', 'excel'
                     ]

@@ -30,7 +30,7 @@ div.dataTables_wrapper div.dataTables_length select {
 }
 div.dataTables_wrapper div.dataTables_filter {
   text-align: right;
-  
+  float:left;
 }
 div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
@@ -47,9 +47,11 @@ div.dataTables_wrapper div.dataTables_info {
   white-space: nowrap;
 }
 div.dataTables_wrapper div.dataTables_paginate {
-  margin: 0;
+  margin: 0px;
+  margin-right:5px;
   white-space: nowrap;
   text-align: right;
+  float:left;
 }
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   margin: 2px 0;

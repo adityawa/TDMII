@@ -122,15 +122,9 @@
     <Property Name="ModifiedBy" Type="varchar" MaxLength="20" />
     <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tb_userRole">
     <Key>
       <PropertyRef Name="Id" />
-      <PropertyRef Name="RoleId" />
-      <PropertyRef Name="EmployeeId" />
-      <PropertyRef Name="CreatedBy" />
-      <PropertyRef Name="CreatedDate" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
@@ -172,6 +166,24 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="Actioner" Type="int" />
     <Property Name="CurrLevel" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_Worklist_Archive">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocType" Type="int" Nullable="false" />
+    <Property Name="DocId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="RespondDate" Type="datetime" />
+    <Property Name="LastActor" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Actioner" Type="int" />
+    <Property Name="LastLevel" Type="int" />
   </EntityType>
   <Association Name="FK_tb_Attachment_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
@@ -253,19 +265,10 @@ warning 6002: The table/view 'TDMDB.dbo.tb_userRole' does not have a primary key
     <EntitySet Name="tb_role" EntityType="Self.tb_role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_userRole" EntityType="Self.tb_userRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Worklist" EntityType="Self.tb_Worklist" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tb_userRole" EntityType="Self.tb_userRole" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tb_userRole].[Id] AS [Id], 
-    [tb_userRole].[RoleId] AS [RoleId], 
-    [tb_userRole].[EmployeeId] AS [EmployeeId], 
-    [tb_userRole].[CreatedBy] AS [CreatedBy], 
-    [tb_userRole].[CreatedDate] AS [CreatedDate], 
-    [tb_userRole].[ModifiedBy] AS [ModifiedBy], 
-    [tb_userRole].[ModifiedDate] AS [ModifiedDate]
-    FROM [dbo].[tb_userRole] AS [tb_userRole]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="tb_Worklist_Archive" EntityType="Self.tb_Worklist_Archive" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />
       <End Role="tb_Attachment" EntitySet="tb_Attachment" />

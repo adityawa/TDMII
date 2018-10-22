@@ -31,8 +31,8 @@ namespace TDM.BLL
         {
             IEnumerable<UserRoleModel> ls = new List<UserRoleModel>();
             string sSql = "SELECT ur.*, e.EmpName, r.RoleName FROM tb_userRole ur INNER JOIN tb_employee e"
-                + "ON ur.EmployeeID=e.EmpID"
-                + "INNER JOIN tb_role r ON ur.RoleId=r.Id WHERE ur.RoleId="+RoleID;
+                + " ON ur.EmployeeID=e.EmpID"
+                + " INNER JOIN tb_role r ON ur.RoleId=r.Id WHERE ur.RoleId="+RoleID;
             ls = GetDataByDapper<UserRoleModel>(sSql);
             return ls;
         }

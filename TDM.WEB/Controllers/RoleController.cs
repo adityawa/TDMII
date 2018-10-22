@@ -74,7 +74,7 @@ namespace TDM.WEB.Controllers
                     result_affected = new RoleBLL().Delete(Convert.ToInt32(id), out _status);
                     if (result_affected <= 0)
                     {
-                        _status = "An Error occured when delete user application";
+                        _status+= ", An Error occured when delete user application";
                     }
                 }
             }

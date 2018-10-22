@@ -135,24 +135,6 @@
     <Property Name="Actioner" Type="Int32" />
     <Property Name="CurrLevel" Type="Int32" />
   </EntityType>
-  <EntityType Name="tb_userRole">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="RoleId" />
-      <PropertyRef Name="EmployeeId" />
-      <PropertyRef Name="CreatedBy" />
-      <PropertyRef Name="CreatedDate" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RoleId" Type="Int32" Nullable="false" />
-    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="tb_employee" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_userRole" ToRole="tb_employee" />
-    <NavigationProperty Name="tb_role" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_userRole" ToRole="tb_role" />
-  </EntityType>
   <Association Name="FK_tb_Attachment_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
     <End Role="tb_Attachment" Type="Self.tb_Attachment" Multiplicity="*" />
@@ -197,7 +179,6 @@
     <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" />
     <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" />
     <EntitySet Name="tb_Worklist" EntityType="Self.tb_Worklist" />
-    <EntitySet Name="tb_userRole" EntityType="Self.tb_userRole" />
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />
       <End Role="tb_Attachment" EntitySet="tb_Attachment" />
@@ -215,15 +196,17 @@
       <End Role="tb_employee" EntitySet="tb_employee" />
       <End Role="tb_userApps" EntitySet="tb_userApps" />
     </AssociationSet>
+    <EntitySet Name="tb_role" EntityType="TDMDBModel.tb_role" />
+    <EntitySet Name="tb_userRole" EntityType="TDMDBModel.tb_userRole" />
     <AssociationSet Name="FK_tb_userRole_tb_employee" Association="TDMDBModel.FK_tb_userRole_tb_employee">
       <End Role="tb_employee" EntitySet="tb_employee" />
       <End Role="tb_userRole" EntitySet="tb_userRole" />
     </AssociationSet>
-    <EntitySet Name="tb_role" EntityType="TDMDBModel.tb_role" />
     <AssociationSet Name="FK_tb_userRole_tb_role" Association="TDMDBModel.FK_tb_userRole_tb_role">
       <End Role="tb_role" EntitySet="tb_role" />
       <End Role="tb_userRole" EntitySet="tb_userRole" />
     </AssociationSet>
+    <EntitySet Name="tb_Worklist_Archive" EntityType="TDMDBModel.tb_Worklist_Archive" />
   </EntityContainer>
   <EntityType Name="tb_employee">
     <Key>
@@ -255,18 +238,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tb_userRole_tb_employee">
-    <End Type="TDMDBModel.tb_employee" Role="tb_employee" Multiplicity="1" />
-    <End Type="TDMDBModel.tb_userRole" Role="tb_userRole" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_employee">
-        <PropertyRef Name="EmpID" />
-      </Principal>
-      <Dependent Role="tb_userRole">
-        <PropertyRef Name="EmployeeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="tb_role">
     <Key>
       <PropertyRef Name="Id" />
@@ -279,6 +250,32 @@
     <Property Name="ModofiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_role" ToRole="tb_userRole" />
   </EntityType>
+  <EntityType Name="tb_userRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tb_employee" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_userRole" ToRole="tb_employee" />
+    <NavigationProperty Name="tb_role" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_userRole" ToRole="tb_role" />
+  </EntityType>
+  <Association Name="FK_tb_userRole_tb_employee">
+    <End Type="TDMDBModel.tb_employee" Role="tb_employee" Multiplicity="1" />
+    <End Type="TDMDBModel.tb_userRole" Role="tb_userRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_employee">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="tb_userRole">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tb_userRole_tb_role">
     <End Type="TDMDBModel.tb_role" Role="tb_role" Multiplicity="1" />
     <End Type="TDMDBModel.tb_userRole" Role="tb_userRole" Multiplicity="*" />
@@ -291,4 +288,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tb_Worklist_Archive">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocType" Type="Int32" Nullable="false" />
+    <Property Name="DocId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RespondDate" Type="DateTime" Precision="3" />
+    <Property Name="LastActor" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Actioner" Type="Int32" />
+    <Property Name="LastLevel" Type="Int32" />
+  </EntityType>
 </Schema>

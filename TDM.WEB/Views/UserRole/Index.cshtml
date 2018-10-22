@@ -30,7 +30,7 @@
 </div>
 <div class="page-title">
     <div>
-        <h1><i class="fa fa-user-md"></i> Role : @ViewBag.RoleID </h1>
+        <h1><i class="fa fa-user-md"></i> Role : @ViewBag.Role </h1>
         
     </div>
 </div>
@@ -57,18 +57,142 @@
     </div>
 </div>
 
+<div class="modal fade bs-example-modal-lg" id="mdlAdd" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div id="notifSuccess" class="alert alert-success" style="display:none" role="alert">
+                <strong>Success!</strong> Your Data saved successfull.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="notifErr" class="alert alert-danger" style="display:none" role="alert">
+                <strong>Error!</strong> <label for="lblErr"></label>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add User</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="tbID" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeNo" class="col-sm-2 control-label">Role ID</label>
+                        <div class="col-sm-4">
+                            
+                            <input type="text" class="form-control" id="tbRoleID" value="@ViewBag.RoleID" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeNo" class="col-sm-2 control-label">Role</label>
+                        <div class="col-sm-4">
+                            
+                            <input type="text" class="form-control" id="tbRole" value="@ViewBag.Role" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmployeeName" class="col-sm-2 control-label">User</label>
+                        <div class="col-sm-4">
+                            <select class="form-control col-md-7" id="selUser" style="width:100%" name="selUser"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     var arr_usrRole = [];
+    var arr_employee = [];
     var tbUsrRole;
     $(document).ready(function () {
+        BindGrid();
+        BindEmployee();
+        $('[data-toggle="tooltip"]').tooltip()
+        $('#btnClose').click(function (e) {
+            location.reload();
+        });
 
+        $('#btnSave').click(function (e) {
+            if (window.FormData != undefined) {
+                var form_data = new FormData();
+                form_data.append("Id", $('#tbID').val());
+                form_data.append("RoleID", $('#tbRoleID').val());
+                form_data.append("EmployeeID", $('#selUser').val());
+                
+                $.ajax({
+                    url: '/UserRole/AddNewUserRole',
+                    type: 'POST',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    async: "true",
+                    success: function (result) {
+                        if (result.Status == "" || result.Status == "SUCCESS") {
+                            $('#notifSuccess').show();
+                        }
+                        else {
+                            $("label[for = lblErr]").text(result.Status);
+                            $('#notifErr').show();
+                        }
+                    }
+
+                });
+            }
+            else {
+                $("label[for = lblErr]").text("Your browser is not support Form Data, Please Update!");
+                $('#notifErr').show();
+            }
+        });
+    
+        
+
+        $('#btnAddUsrRole').click(function (e) {
+            $('#mdlAdd').modal({
+                backdrop: 'static'
+            });
+        });
     });
 
-    function BindGrid() {
-        
+    function BindEmployee() {
         $.ajax({
             type: 'GET',
-            url: '@Url.Content("/UserRole/GetUserByRole?id" + @ViewBag.RoleID)',
+            url: '@Url.Content("/AjaxData/GetAllEmployee")',
+
+            success: function (response) {
+                arr_employee = response.Data;
+
+                $('#selUser').select2({
+                    data: arr_employee
+                });
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindGrid() {
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/UserRole/GetUserByRole?id=" + @ViewBag.RoleID)',
             success: function (response) {
 
                 arr_usrRole = response.Data;
@@ -77,16 +201,13 @@
                     destroy: true,
                     columns: [
                         { data: "Id", "visible": false },
-                        { data: "RoleName" },
+                        { data: "EmpName" },
 
                         {
                             "data": null,
                             "targets": -1,
                             "render": function (data, type, full) {
-                                return "<button  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></button>" +
-                                  " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>" +
-                                " | <button onclick='View(" + full['Id'] + ")' ><i class='fa fa-eye'></i></button>";
-
+                                return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
                             },
                             "bSearchable": true,
                             "sortable": false
@@ -111,5 +232,40 @@
 
 
         });
+    }
+    function DeleteUserInRole(Id) {
+        $.ajax({
+            url: '/UserRole/RemoveUserInRole?id=' + Id,
+
+            success: function (result) {
+                if (result.Status == "SUCCESS" || result.Status == "") {
+                    $("label[for = lblScs_outModal]").text("Data Deleted Successfull");
+                    $('#notifSuccess_outModal').show();
+                    location.reload();
+                }
+                else {
+                    $("label[for = lblErr_outModal]").text(result.Status);
+                    $('#notifErr_outModal').show();
+                }
+            }
+        });
+    }
+    var Delete = function (ID) {
+
+        $.confirm({
+            title: 'Delete Confirmation!',
+            theme: 'modern',
+            content: 'Are You sure to delete this data ?',
+            buttons: {
+                confirm: function () {
+                    DeleteUserInRole(ID);
+                },
+                cancel: function () {
+
+                },
+            }
+        });
+
+        return false;
     }
 </script>

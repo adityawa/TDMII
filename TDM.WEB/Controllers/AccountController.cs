@@ -11,8 +11,6 @@ namespace TDM.WEB.Controllers
     public class AccountController : BaseController
     {
         // GET: Account
-
-
         public ActionResult Login()
         {
             return View();
