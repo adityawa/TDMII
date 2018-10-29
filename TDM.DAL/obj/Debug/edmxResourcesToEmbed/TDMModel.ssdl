@@ -27,6 +27,7 @@
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="RoleApps" Type="int" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_Master">
     <Key>
@@ -139,13 +140,26 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="HeaderID" Type="int" Nullable="false" />
     <Property Name="ApprovalLevel" Type="int" Nullable="false" />
     <Property Name="Actor" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="ActorID" Type="nvarchar" MaxLength="250" />
     <Property Name="Action" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tb_workflowSettingHdr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="ApprovalLevel" Type="int" Nullable="false" />
+    <Property Name="Version" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
@@ -257,6 +271,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tb_workflowSetting_tb_workflowSettingHdr">
+    <End Role="tb_workflowSettingHdr" Type="Self.tb_workflowSettingHdr" Multiplicity="1" />
+    <End Role="tb_workflowSetting" Type="Self.tb_workflowSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_workflowSettingHdr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_workflowSetting">
+        <PropertyRef Name="HeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TDMDBModelStoreContainer">
     <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="dbo" store:Type="Tables" />
@@ -267,6 +293,7 @@
     <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_userRole" EntityType="Self.tb_userRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_workflowSettingHdr" EntityType="Self.tb_workflowSettingHdr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Worklist" EntityType="Self.tb_Worklist" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Worklist_Archive" EntityType="Self.tb_Worklist_Archive" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
@@ -292,6 +319,10 @@
     <AssociationSet Name="FK_tb_userRole_tb_role" Association="Self.FK_tb_userRole_tb_role">
       <End Role="tb_role" EntitySet="tb_role" />
       <End Role="tb_userRole" EntitySet="tb_userRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="Self.FK_tb_workflowSetting_tb_workflowSettingHdr">
+      <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
+      <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

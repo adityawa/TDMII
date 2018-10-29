@@ -53,5 +53,61 @@ namespace TDM.WEB.Controllers
             JSONResult.MaxJsonLength = Int32.MaxValue;
             return JSONResult;
         }
+
+        public JsonResult GetDocumentType()
+        {
+            IEnumerable<MasterModel> ls = new List<MasterModel>();
+            List<Select2DropDownModel> empddl = new List<Select2DropDownModel>();
+            ls = new MasterBLL().List("DocumentType");
+            foreach (var item in ls)
+            {
+                empddl.Add(new Select2DropDownModel
+                {
+                    id = item.Id.ToString(),
+                    text = item.Value
+                });
+            }
+
+            var JSONResult = Json(new { Data = empddl }, JsonRequestBehavior.AllowGet);
+            JSONResult.MaxJsonLength = Int32.MaxValue;
+            return JSONResult;
+        }
+
+        public JsonResult GetAvailableAction()
+        {
+            IEnumerable<MasterModel> ls = new List<MasterModel>();
+            List<Select2DropDownModel> empddl = new List<Select2DropDownModel>();
+            ls = new MasterBLL().List("WFAction");
+            foreach (var item in ls)
+            {
+                empddl.Add(new Select2DropDownModel
+                {
+                    id = item.Id.ToString(),
+                    text = item.Value
+                });
+            }
+
+            var JSONResult = Json(new { Data = empddl }, JsonRequestBehavior.AllowGet);
+            JSONResult.MaxJsonLength = Int32.MaxValue;
+            return JSONResult;
+        }
+
+        public JsonResult GetRoleDdl()
+        {
+            IEnumerable<RoleModel> roles = new List<RoleModel>();
+            List<Select2DropDownModel> roleddl = new List<Select2DropDownModel>();
+            roles = new RoleBLL().List();
+            foreach (var item in roles)
+            {
+                roleddl.Add(new Select2DropDownModel
+                {
+                    id = item.Id.ToString(),
+                    text = item.RoleName
+                });
+            }
+            var JsonResult = Json(new { Data = roleddl }, JsonRequestBehavior.AllowGet);
+            JsonResult.MaxJsonLength = Int32.MaxValue;
+            return JsonResult;
+        }
     }
 }

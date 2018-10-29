@@ -12,31 +12,24 @@ namespace TDM.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_employee
+    public partial class tb_workflowSettingHdr
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_employee()
+        public tb_workflowSettingHdr()
         {
-            this.tb_userApps = new HashSet<tb_userApps>();
-            this.tb_userRole = new HashSet<tb_userRole>();
+            this.tb_workflowSetting = new HashSet<tb_workflowSetting>();
         }
     
-        public int EmpID { get; set; }
-        public string EmpNo { get; set; }
-        public string EmpName { get; set; }
-        public Nullable<int> ReportTo { get; set; }
-        public string Dept { get; set; }
+        public int Id { get; set; }
+        public int TypeID { get; set; }
+        public int ApprovalLevel { get; set; }
+        public int Version { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> RoleApps { get; set; }
-        public bool IsActive { get; set; }
-        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_userApps> tb_userApps { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_userRole> tb_userRole { get; set; }
+        public virtual ICollection<tb_workflowSetting> tb_workflowSetting { get; set; }
     }
 }

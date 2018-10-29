@@ -30,8 +30,10 @@ namespace TDM.BLL
                             s.u.Id,
                             s.u.EmployeeId,
                             s.e.EmpName,
-                            s.e.RoleApps
-                        }).SingleOrDefault();
+                            s.e.RoleApps,
+                            
+                        })
+                        .SingleOrDefault(x=>x.UserName==username);
 
                         model.Id = qry.Id;
                         model.UserName = qry.UserName;

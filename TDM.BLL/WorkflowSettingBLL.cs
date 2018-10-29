@@ -29,22 +29,32 @@ namespace TDM.BLL
        
       
 
-        public int Insert(List<WorkflowSettingModel> lsmodel, out string errMsg)
+        public int Insert(WorkflowSettingHeader wfhdr, List<WorkflowSettingModel> lsmodel, out string errMsg)
         {
             errMsg = string.Empty;
-            tb_workflowSetting wfentity = new tb_workflowSetting();
+            tb_workflowSetting wfdetil = new tb_workflowSetting();
             imap = config.CreateMapper();
-
+            int _hdrId=0;
             using (TDMDBEntities context = new TDMDBEntities())
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
+                        tb_workflowSettingHdr _entHdr = new tb_workflowSettingHdr();
+                        _entHdr.ApprovalLevel = wfhdr.ApprovalLevel;
+                        _entHdr.Version = wfhdr.Version;
+                        _entHdr.TypeID = wfhdr.TypeID;
+                        _entHdr.CreatedBy = wfhdr.CreatedBy;
+                        _entHdr.CreatedDate = DateTime.Now;
+                        context.tb_workflowSettingHdr.Add(_entHdr);
+                        result_affected += context.SaveChanges();
+                        _hdrId=_entHdr.Id;
                         foreach (var item in lsmodel)
                         {
-                            wfentity = imap.Map<WorkflowSettingModel, tb_workflowSetting>(item);
-                            context.tb_workflowSetting.Add(wfentity);
+                            wfdetil = imap.Map<WorkflowSettingModel, tb_workflowSetting>(item);
+                            wfdetil.HeaderID = _hdrId;
+                            context.tb_workflowSetting.Add(wfdetil);
                             result_affected += context.SaveChanges();
                         }
                         transaction.Commit();

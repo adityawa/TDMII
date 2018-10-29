@@ -101,22 +101,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_workflowSetting">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSetting">
-        <MappingFragment StoreEntitySet="tb_workflowSetting">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
-          <ScalarProperty Name="Actor" ColumnName="Actor" />
-          <ScalarProperty Name="ActorID" ColumnName="ActorID" />
-          <ScalarProperty Name="Action" ColumnName="Action" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_Worklist">
       <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
         <MappingFragment StoreEntitySet="tb_Worklist">
@@ -139,6 +123,7 @@
     <EntitySetMapping Name="tb_employee">
       <EntityTypeMapping TypeName="TDMDBModel.tb_employee">
         <MappingFragment StoreEntitySet="tb_employee">
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="RoleApps" ColumnName="RoleApps" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -193,6 +178,36 @@
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="DocId" ColumnName="DocId" />
           <ScalarProperty Name="DocType" ColumnName="DocType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_workflowSetting">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSetting">
+        <MappingFragment StoreEntitySet="tb_workflowSetting">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="ActorID" ColumnName="ActorID" />
+          <ScalarProperty Name="Actor" ColumnName="Actor" />
+          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
+          <ScalarProperty Name="HeaderID" ColumnName="HeaderID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_workflowSettingHdr">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
+        <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

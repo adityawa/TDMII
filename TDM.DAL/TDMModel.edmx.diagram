@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="TDMDBModel.tb_PerlengkapanTambahan" Width="1.5" PointX="5.25" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TDMDBModel.tb_spkHdr" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TDMDBModel.tb_userApps" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSetting" Width="2" PointX="5.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TDMDBModel.tb_Worklist" Width="1.5" PointX="8.75" PointY="8.375" IsExpanded="true" />
         <AssociationConnector Association="TDMDBModel.FK_tb_Attachment_tb_Master" ManuallyRouted="false" />
         <AssociationConnector Association="TDMDBModel.FK_tb_spkHdr_tb_Master" ManuallyRouted="false" />
@@ -22,6 +21,9 @@
         <AssociationConnector Association="TDMDBModel.FK_tb_userRole_tb_employee" />
         <AssociationConnector Association="TDMDBModel.FK_tb_userRole_tb_role" />
         <EntityTypeShape EntityType="TDMDBModel.tb_Worklist_Archive" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSetting" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSettingHdr" Width="1.5" PointX="10.375" PointY="1.125" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

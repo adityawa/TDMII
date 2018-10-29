@@ -84,6 +84,9 @@
     <Compile Include="tb_workflowSetting.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_workflowSettingHdr.cs">
+      <DependentUpon>TDMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_Worklist.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>

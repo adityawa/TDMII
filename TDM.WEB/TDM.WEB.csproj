@@ -128,6 +128,7 @@
     <Compile Include="Controllers\SPKController.cs" />
     <Compile Include="Controllers\UserAppsController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
+    <Compile Include="Controllers\WorkflowSettingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -545,6 +546,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\UserRole\Index.cshtml" />
+    <Content Include="Views\WorkflowSetting\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

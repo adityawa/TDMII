@@ -15,7 +15,7 @@ namespace TDM.DAL
     public partial class tb_workflowSetting
     {
         public long Id { get; set; }
-        public int TypeId { get; set; }
+        public int HeaderID { get; set; }
         public int ApprovalLevel { get; set; }
         public string Actor { get; set; }
         public string ActorID { get; set; }
@@ -24,5 +24,7 @@ namespace TDM.DAL
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+    
+        public virtual tb_workflowSettingHdr tb_workflowSettingHdr { get; set; }
     }
 }

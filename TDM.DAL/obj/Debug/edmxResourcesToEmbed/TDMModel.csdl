@@ -102,21 +102,6 @@
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tb_employee" Relationship="TDMDBModel.FK_tb_userApps_tb_employee" FromRole="tb_userApps" ToRole="tb_employee" />
   </EntityType>
-  <EntityType Name="tb_workflowSetting">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TypeId" Type="Int32" Nullable="false" />
-    <Property Name="ApprovalLevel" Type="Int32" Nullable="false" />
-    <Property Name="Actor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ActorID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Action" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="tb_Worklist">
     <Key>
       <PropertyRef Name="Id" />
@@ -177,7 +162,6 @@
     <EntitySet Name="tb_PerlengkapanTambahan" EntityType="Self.tb_PerlengkapanTambahan" />
     <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" />
     <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" />
-    <EntitySet Name="tb_workflowSetting" EntityType="Self.tb_workflowSetting" />
     <EntitySet Name="tb_Worklist" EntityType="Self.tb_Worklist" />
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />
@@ -207,6 +191,12 @@
       <End Role="tb_userRole" EntitySet="tb_userRole" />
     </AssociationSet>
     <EntitySet Name="tb_Worklist_Archive" EntityType="TDMDBModel.tb_Worklist_Archive" />
+    <EntitySet Name="tb_workflowSetting" EntityType="TDMDBModel.tb_workflowSetting" />
+    <EntitySet Name="tb_workflowSettingHdr" EntityType="TDMDBModel.tb_workflowSettingHdr" />
+    <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr">
+      <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
+      <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tb_employee">
     <Key>
@@ -225,6 +215,7 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tb_userApps" Relationship="TDMDBModel.FK_tb_userApps_tb_employee" FromRole="tb_employee" ToRole="tb_userApps" />
     <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_employee" FromRole="tb_employee" ToRole="tb_userRole" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_tb_userApps_tb_employee">
     <End Type="TDMDBModel.tb_employee" Role="tb_employee" Multiplicity="1" />
@@ -306,4 +297,46 @@
     <Property Name="Actioner" Type="Int32" />
     <Property Name="LastLevel" Type="Int32" />
   </EntityType>
+  <EntityType Name="tb_workflowSetting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HeaderID" Type="Int32" Nullable="false" />
+    <Property Name="ApprovalLevel" Type="Int32" Nullable="false" />
+    <Property Name="Actor" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ActorID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tb_workflowSettingHdr" Relationship="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" FromRole="tb_workflowSetting" ToRole="tb_workflowSettingHdr" />
+  </EntityType>
+  <EntityType Name="tb_workflowSettingHdr">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeID" Type="Int32" Nullable="false" />
+    <Property Name="ApprovalLevel" Type="Int32" Nullable="false" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tb_workflowSetting" Relationship="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" FromRole="tb_workflowSettingHdr" ToRole="tb_workflowSetting" />
+  </EntityType>
+  <Association Name="FK_tb_workflowSetting_tb_workflowSettingHdr">
+    <End Type="TDMDBModel.tb_workflowSettingHdr" Role="tb_workflowSettingHdr" Multiplicity="1" />
+    <End Type="TDMDBModel.tb_workflowSetting" Role="tb_workflowSetting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_workflowSettingHdr">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_workflowSetting">
+        <PropertyRef Name="HeaderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
