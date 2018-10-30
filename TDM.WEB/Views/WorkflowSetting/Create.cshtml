@@ -131,11 +131,29 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <button id="btnAddWFSetting" class="btn btn-link"><i class="fa fa-plus-circle"></i>Create New Setting</button>
+            <button id="btnAddWFSetting" class="btn btn-link float-l"><i class="fa fa-plus-circle"></i>Create New Setting</button>
+           <br />
+             <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" width="100%" id="tblwfHdr">
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
+                            <tr>
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">Document Type</th>
+                                <th style="text-align:center">Approval Level</th>
+                                <th style="text-align:center">Version</th>
+                                <th style="text-align:center">Active</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+   
 </div>
-
 <div class="modal fade bs-example-modal-lg" id="mdlAdd" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -163,7 +181,6 @@
                         <li>
                             <a href="#2" data-toggle="tab">Detail</a>
                         </li>
-
                     </ul>
 
                     <div class="tab-content">
@@ -256,10 +273,12 @@
     var arr_action = [];
     var arr_role = [];
     var arr_approval = [];
-
+    var arr_wf = [];
     var tbAppr;
+    var tbWfHdr;
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
+        BindGridHdr();
         BindDocTypeDdl();
         BindActionDdl();
         BindRoleDdl();
@@ -268,7 +287,9 @@
                 backdrop: 'static'
             });
         });
-
+        $('#btnClose').click(function (e) {
+            location.reload();
+        });
         $('#btnAddApprover').click(function (e) {
 
             var appr = new Object();
@@ -302,7 +323,7 @@
                 else {
                     alert('Order was exist, please choose another');
                 }
-                
+
             }
             else {
                 alert('Please fill all data fields');
@@ -393,6 +414,53 @@
 
     }
 
+    function BindGridHdr() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/WorkflowSetting/ListWFSetting")',
+            success: function (response) {
+
+                arr_wf = response.Data;
+                tbWfHdr = $('#tblwfHdr').DataTable({
+                    data: arr_wf,
+                    destroy: true,
+                    columns: [
+                        { data: "Id", "visible": false },
+                        { data: "TypeName" },
+                        { data: "ApprovalLevel" },
+                         { data: "Version" },
+                        { data: "IsActive" },
+                       
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<a  onclick='Edit(" + full['Id'] + ")' id='btnEdit" + full['Id'] + "'><i class='fa fa-edit'></i></a>" +
+                                  " | <button onclick='DeleteHdr(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: '<"top"f>rt<"bottom"p and i><"clear">'
+
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+
     function BindRoleDdl() {
         $.ajax({
             type: 'GET',
@@ -452,39 +520,83 @@
 
     function AddWFSetting() {
         if (window.FormData != undefined) {
-            var form_data = new FormData();
-            form_data.append("ID", $('#tbID').val());
-            form_data.append("DocType", $('#selDocument').val());
-            form_data.append("Version", $('#tbVersion').val());
-            form_data.append("WFApproval", JSON.stringify(arr_approval));
+            if (arr_approval.length <= 0) {
+                alert('please specify the approval flow');
+            }
+            else {
+                var form_data = new FormData();
+                form_data.append("ID", $('#tbID').val());
+                form_data.append("DocType", $('#selDocument').val());
+                form_data.append("Version", $('#tbVersion').val());
+                form_data.append("WFApproval", JSON.stringify(arr_approval));
 
-            $.ajax({
-                type: 'POST',
-                url: '/WorkflowSetting/AddNewSetting',
-                contentType: false,
-                processData: false,
-                data: form_data,
-                async: "true",
-                success: function (result) {
-                    if (result.Status == "success") {
-                        $('#notifSuccess').show();
-                    }
-                    else {
-                        $("label[for = lblErr]").text(result.Status);
-                        $('#notifErr').show();
+                $.ajax({
+                    type: 'POST',
+                    url: '/WorkflowSetting/AddNewSetting',
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    async: "true",
+                    success: function (result) {
+                        if (result.Status == "SUCCESS") {
+                            $('#notifSuccess').show();
+                        }
+                        else {
+                            $("label[for = lblErr]").text(result.Mesg);
+                            $('#notifErr').show();
 
+                        }
+                    },
+                    error: function (xhr, status, p3, p4) {
+                        var err = "Error " + " " + status + " " + p3 + " " + p4;
+                        if (xhr.responseText && xhr.responseText[0] == "{")
+                            err = JSON.parse(xhr.responseText).Message;
+                        console.log(err);
                     }
-                },
-                error: function (xhr, status, p3, p4) {
-                    var err = "Error " + " " + status + " " + p3 + " " + p4;
-                    if (xhr.responseText && xhr.responseText[0] == "{")
-                        err = JSON.parse(xhr.responseText).Message;
-                    console.log(err);
-                }
-            });
+                });
+            }
+          
         }
         else {
             alert('Your Browser is not support Form Data');
         }
+    }
+
+    var DeleteHdr = function (ID) {
+
+        $.confirm({
+            title: 'Delete Confirmation!',
+            theme: 'modern',
+            content: 'Are You sure to delete this data ?',
+            buttons: {
+                confirm: function () {
+                    DeleteWfSetHdr(ID);
+                },
+                cancel: function () {
+
+                },
+            }
+        });
+
+        return false;
+    }
+
+    function DeleteWfSetHdr(Id) {
+        $.ajax({
+            url: '/WorkflowSetting/RemoveSetting?id=' + Id,
+
+            success: function (result) {
+                if (result.Status == "SUCCESS" || result.Status == "") {
+                   
+                    location.reload();
+                    $("label[for = lblScs_outModal]").text("Data Deleted Successfull");
+                    $('#notifSuccess_outModal').show();
+                }
+                else {
+                    $("label[for = lblErr_outModal]").text(result.Mesg);
+                    $('#notifErr_outModal').show();
+                }
+            }
+        });
     }
 </script>

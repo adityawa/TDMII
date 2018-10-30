@@ -201,6 +201,7 @@
     <EntitySetMapping Name="tb_workflowSettingHdr">
       <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
         <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

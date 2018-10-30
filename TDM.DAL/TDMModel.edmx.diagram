@@ -22,7 +22,7 @@
         <AssociationConnector Association="TDMDBModel.FK_tb_userRole_tb_role" />
         <EntityTypeShape EntityType="TDMDBModel.tb_Worklist_Archive" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="TDMDBModel.tb_workflowSetting" Width="1.5" PointX="12.625" PointY="1" />
-        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSettingHdr" Width="1.5" PointX="10.375" PointY="1.125" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_workflowSettingHdr" Width="1.5" PointX="10.375" PointY="13.125" />
         <AssociationConnector Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" />
         </Diagram>
     </edmx:Diagrams>

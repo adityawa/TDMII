@@ -10,7 +10,7 @@ using AutoMapper;
 namespace TDM.BLL
 {
 
-    public class WorkflowSettingBLL :BaseDAWithDapper
+    public class WorkflowSettingBLL : BaseDAWithDapper
     {
         private MapperConfiguration config = null;
         private IMapper imap;
@@ -26,38 +26,91 @@ namespace TDM.BLL
                 });
             }
         }
-       
-      
+
+        public IEnumerable<WorkflowSettingHeader> GetHeader()
+        {
+            List<WorkflowSettingHeader> ls = new List<WorkflowSettingHeader>();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var qry = context.tb_workflowSettingHdr
+                    .Join(context.tb_Master, w => w.TypeID, m => m.Id, (w, m) => new { w, m })
+                    .Where(x => x.w.IsActive == true && x.m.Category == MyEnums.enumMaster.DocumentType.ToString())
+                    .Select(n => new
+                    {
+                        n.w.Id,
+                        n.w.TypeID,
+                        n.w.Version,
+                        n.w.IsActive,
+                        n.m.Value,
+                        n.w.ApprovalLevel
+                    });
+
+                foreach (var item in qry)
+                {
+                    ls.Add(new WorkflowSettingHeader
+                    {
+                        Id = item.Id,
+                        TypeID = item.TypeID,
+                        TypeName = item.Value,
+                        Version = item.Version,
+                        IsActive = (bool)item.IsActive,
+                        ApprovalLevel = item.ApprovalLevel
+                    });
+                }
+            }
+            return ls;
+        }
 
         public int Insert(WorkflowSettingHeader wfhdr, List<WorkflowSettingModel> lsmodel, out string errMsg)
         {
             errMsg = string.Empty;
             tb_workflowSetting wfdetil = new tb_workflowSetting();
             imap = config.CreateMapper();
-            int _hdrId=0;
+            int _hdrId = 0;
             using (TDMDBEntities context = new TDMDBEntities())
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
+                        var _cekstillEmpty = context.tb_workflowSettingHdr.Count();
+
                         tb_workflowSettingHdr _entHdr = new tb_workflowSettingHdr();
                         _entHdr.ApprovalLevel = wfhdr.ApprovalLevel;
                         _entHdr.Version = wfhdr.Version;
                         _entHdr.TypeID = wfhdr.TypeID;
                         _entHdr.CreatedBy = wfhdr.CreatedBy;
                         _entHdr.CreatedDate = DateTime.Now;
+                        _entHdr.IsActive = true;
                         context.tb_workflowSettingHdr.Add(_entHdr);
                         result_affected += context.SaveChanges();
-                        _hdrId=_entHdr.Id;
+                        _hdrId = _entHdr.Id;
                         foreach (var item in lsmodel)
                         {
                             wfdetil = imap.Map<WorkflowSettingModel, tb_workflowSetting>(item);
                             wfdetil.HeaderID = _hdrId;
+                            wfdetil.CreatedBy = "SYSTEM";
+                            wfdetil.CreatedDate = DateTime.Now;
                             context.tb_workflowSetting.Add(wfdetil);
                             result_affected += context.SaveChanges();
                         }
-                        transaction.Commit();
+
+                        if (_cekstillEmpty > 0)
+                        {
+                            if (NonActivateSetting(_entHdr, _hdrId) > 0)
+                            {
+                                transaction.Commit();
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                            }
+                        }
+                        else
+                        {
+                            transaction.Commit();
+                        }
+                            
                     }
                     catch (Exception ex)
                     {
@@ -66,11 +119,71 @@ namespace TDM.BLL
                     }
 
                 }
-                
+
             }
             return result_affected;
         }
 
-        
+        public int Delete(int _id, out string errMsg)
+        {
+            errMsg = string.Empty;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var _remove = context.tb_workflowSetting.Where(x => x.HeaderID == _id);
+                        if (_remove != null)
+                        {
+                            context.tb_workflowSetting.RemoveRange(_remove);
+                            result_affected = context.SaveChanges();
+
+                            if (result_affected > 0)
+                            {
+                                var _header = context.tb_workflowSettingHdr.SingleOrDefault(x => x.Id == _id);
+                                if (_header != null)
+                                {
+                                    context.tb_workflowSettingHdr.Remove(_header);
+                                    result_affected += context.SaveChanges();
+                                }
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        errMsg = ex.Message;
+                    }
+                }
+            }
+            return result_affected;
+        }
+
+        private int NonActivateSetting(tb_workflowSettingHdr entiti, int exceptId)
+        {
+            int result = 0;
+            entiti.Id = exceptId;
+            string sSql = "UPDATE tb_workflowSettingHdr SET IsActive=false where TypeID=@TypeID AND ID <> @Id";
+            result = InsertOrUpdate<tb_workflowSettingHdr>(sSql, entiti);
+            return result;
+        }
+
+        public WorkflowSettingHeader Detail(int id)
+        {
+            WorkflowSettingHeader detil = new WorkflowSettingHeader();
+            try
+            {
+               
+            }
+            catch (Exception exc)
+            {
+
+            }
+            return detil;
+        }
+
     }
 }

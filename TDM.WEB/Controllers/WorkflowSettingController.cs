@@ -21,6 +21,24 @@ namespace TDM.WEB.Controllers
             return CheckSession();
         }
 
+        public JsonResult RemoveSetting(string id)
+        {
+            string _status = MyEnums.enumStatus.SUCCESS.ToString();
+            string _errMsg = string.Empty;
+            int result = new WorkflowSettingBLL().Delete(Convert.ToInt32(id), out _errMsg);
+            if (result <= 0 || _errMsg != string.Empty)
+                _status = MyEnums.enumStatus.ERROR.ToString();
+            return Json(new { Status = _status, Mesg = _errMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ListWFSetting()
+        {
+            IEnumerable<WorkflowSettingHeader> lists = new List<WorkflowSettingHeader>();
+            lists = new WorkflowSettingBLL().GetHeader();
+            var JsonResult = Json(new { Data = lists }, JsonRequestBehavior.AllowGet);
+            JsonResult.MaxJsonLength = Int32.MaxValue;
+            return JsonResult;
+        }
         public JsonResult AddNewSetting()
         {
             string _status = MyEnums.enumStatus.SUCCESS.ToString();
@@ -31,8 +49,8 @@ namespace TDM.WEB.Controllers
             if (Session["UserLogon"] != null)
             {
                 List<WorkflowSettingModel> details = new List<WorkflowSettingModel>();
-               // details = JsonConvert.DeserializeObject<List<WorkflowSettingModel>>(Request.Form["WFApproval"]);
-                var parsing = JsonConvert.DeserializeObject(Request.Form["WFApproval"]);
+                details = JsonConvert.DeserializeObject<List<WorkflowSettingModel>>(Request.Form["WFApproval"]);
+               
                 try
                 {
 

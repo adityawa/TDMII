@@ -167,6 +167,7 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="tb_Worklist">
           <Key>
@@ -659,6 +660,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="tb_workflowSetting" Relationship="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" FromRole="tb_workflowSettingHdr" ToRole="tb_workflowSetting" />
         </EntityType>
         <Association Name="FK_tb_workflowSetting_tb_workflowSettingHdr">
@@ -879,6 +881,7 @@
           <EntitySetMapping Name="tb_workflowSettingHdr">
             <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
               <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

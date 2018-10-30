@@ -11,6 +11,8 @@ namespace TDM.BLL.Model
         public enum enumMaster
         {
             RoleApps
+            , WFAction
+            , DocumentType
         }
 
         public enum enumStatus

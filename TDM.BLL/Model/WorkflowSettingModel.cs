@@ -18,7 +18,10 @@ namespace TDM.BLL.Model
     public class WorkflowSettingHeader :BaseModel
     {
         public int TypeID { get; set; }
+        public string TypeName { get; set; }
         public int ApprovalLevel { get; set; }
         public int Version { get; set; }
+        public bool IsActive { get; set; }
+        public List<WorkflowSettingModel> details;
     }
 }

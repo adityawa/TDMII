@@ -325,6 +325,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
     <NavigationProperty Name="tb_workflowSetting" Relationship="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" FromRole="tb_workflowSettingHdr" ToRole="tb_workflowSetting" />
   </EntityType>
   <Association Name="FK_tb_workflowSetting_tb_workflowSettingHdr">
