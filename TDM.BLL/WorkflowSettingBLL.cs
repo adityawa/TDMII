@@ -23,6 +23,8 @@ namespace TDM.BLL
                 {
                     cfg.CreateMap<WorkflowSettingModel, tb_workflowSetting>();
                     cfg.CreateMap<tb_workflowSetting, WorkflowSettingModel>();
+                    cfg.CreateMap<WorkflowSettingHeader, tb_workflowSettingHdr>();
+                    cfg.CreateMap<tb_workflowSettingHdr, WorkflowSettingHeader>();
                 });
             }
         }
@@ -174,15 +176,73 @@ namespace TDM.BLL
         public WorkflowSettingHeader Detail(int id)
         {
             WorkflowSettingHeader detil = new WorkflowSettingHeader();
+            IMapper imap = config.CreateMapper();
             try
             {
-               
+                using (TDMDBEntities context = new TDMDBEntities())
+                {
+                    var _details = context.tb_workflowSettingHdr.SingleOrDefault(x => x.Id == id);
+                    detil = imap.Map<tb_workflowSettingHdr, WorkflowSettingHeader>(_details);
+
+                    var qry_setting_detail = context.tb_workflowSetting.Where(x => x.HeaderID == id);
+                    foreach (var item in qry_setting_detail)
+                    {
+                        WorkflowSettingModel md=new WorkflowSettingModel();
+                        md=imap.Map<tb_workflowSetting, WorkflowSettingModel>(item);
+                        detil.ls_details.Add(md);
+                    }
+                }
             }
             catch (Exception exc)
             {
-
+                throw new Exception(exc.Message);
             }
             return detil;
+        }
+
+        public int Update(WorkflowSettingHeader wfHdr, List<WorkflowSettingModel> lsdetails, out string errMsg)
+        {
+            errMsg = string.Empty;
+            tb_workflowSetting wfdetil = new tb_workflowSetting();
+            imap = config.CreateMapper();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var _exist = context.tb_workflowSettingHdr.SingleOrDefault(x => x.Id == wfHdr.Id);
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        _exist.TypeID = wfHdr.TypeID;
+                        _exist.Version = wfHdr.Version;
+                        _exist.ApprovalLevel = wfHdr.ApprovalLevel;
+                        _exist.ModifiedBy = "SYSTEM";
+                        _exist.ModifiedDate = DateTime.Now;
+                        result_affected += context.SaveChanges();
+
+                        var toBeDelete = context.tb_workflowSetting.Where(x => x.HeaderID == wfHdr.Id);
+                        if (toBeDelete != null)
+                        {
+                           context.tb_workflowSetting.RemoveRange(toBeDelete);
+                           context.SaveChanges();
+                        }
+
+                        foreach (var item in lsdetails)
+                        {
+                            wfdetil = imap.Map<WorkflowSettingModel, tb_workflowSetting>(item);
+                            wfdetil.HeaderID = wfHdr.Id;
+                            wfdetil.CreatedBy = "SYSTEM";
+                            wfdetil.CreatedDate = DateTime.Now;
+                            context.tb_workflowSetting.Add(wfdetil);
+                            result_affected += context.SaveChanges();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+            return result_affected;
         }
 
     }

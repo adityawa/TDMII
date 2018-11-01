@@ -22,6 +22,6 @@ namespace TDM.BLL.Model
         public int ApprovalLevel { get; set; }
         public int Version { get; set; }
         public bool IsActive { get; set; }
-        public List<WorkflowSettingModel> details;
+        public List<WorkflowSettingModel> ls_details;
     }
 }
