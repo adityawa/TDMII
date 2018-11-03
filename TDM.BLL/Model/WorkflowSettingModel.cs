@@ -13,6 +13,10 @@ namespace TDM.BLL.Model
         public string Actor { get; set; }
         public string ActorID { get; set; }
         public string Action { get; set; }
+
+        public int Order { get; set; }
+        public string action_desc { get; set; }
+        public string RoleDesc { get; set; }
     }
 
     public class WorkflowSettingHeader :BaseModel

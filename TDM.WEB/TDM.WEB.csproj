@@ -547,6 +547,7 @@
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\UserRole\Index.cshtml" />
     <Content Include="Views\WorkflowSetting\Create.cshtml" />
+    <Content Include="Views\SPK\CreateSPK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

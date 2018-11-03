@@ -27,19 +27,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_PerlengkapanTambahan">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlengkapanTambahan">
-        <MappingFragment StoreEntitySet="tb_PerlengkapanTambahan">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
-          <ScalarProperty Name="AdditionalItem" ColumnName="AdditionalItem" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_spkHdr">
       <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
         <MappingFragment StoreEntitySet="tb_spkHdr">
@@ -182,9 +169,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tb_workflowSettingHdr">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
+        <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tb_workflowSetting">
       <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSetting">
         <MappingFragment StoreEntitySet="tb_workflowSetting">
+          <ScalarProperty Name="action_desc" ColumnName="action_desc" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -198,17 +201,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_workflowSettingHdr">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
-        <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+    <EntitySetMapping Name="tb_PerlengkapanTambahan">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlengkapanTambahan">
+        <MappingFragment StoreEntitySet="tb_PerlengkapanTambahan">
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="Version" ColumnName="Version" />
-          <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
-          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="PlatNo" ColumnName="PlatNo" />
+          <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
+          <ScalarProperty Name="IsOffTheRoad" ColumnName="IsOffTheRoad" />
+          <ScalarProperty Name="IsOnTheRoad" ColumnName="IsOnTheRoad" />
+          <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
+          <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
+          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -43,28 +43,28 @@ C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.dll
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\obj\Debug\TDM.BLL.pdb
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.BLL.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.BLL.pdb
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Newtonsoft.Json.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.DAL.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Dapper.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.DAL.pdb
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.xml
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Newtonsoft.Json.xml
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Dapper.xml
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.dll
-D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.pdb
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\AutoMapper.dll
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\System.ValueTuple.dll
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\AutoMapper.pdb
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\AutoMapper.xml
 C:\Users\Adit\Documents\Visual Studio 2013\Projects\TDM\TDMII\TDM.BLL\bin\Debug\System.ValueTuple.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.BLL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.BLL.pdb
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\AutoMapper.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Newtonsoft.Json.dll
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\System.ValueTuple.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.DAL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Dapper.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\TDM.DAL.pdb
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\AutoMapper.pdb
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\AutoMapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Newtonsoft.Json.xml
 D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\System.ValueTuple.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\bin\Debug\Dapper.xml
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.csprojResolveAssemblyReference.cache
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.dll
+D:\Adit\Outstanding Project 2018\TDM Repos\TDM.BLL\obj\Debug\TDM.BLL.pdb

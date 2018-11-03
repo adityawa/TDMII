@@ -16,7 +16,12 @@ namespace TDM.DAL
     {
         public int Id { get; set; }
         public int SPKId { get; set; }
-        public string AdditionalItem { get; set; }
+        public bool IsKaroseri { get; set; }
+        public string Karoseri { get; set; }
+        public bool IsOnTheRoad { get; set; }
+        public bool IsOffTheRoad { get; set; }
+        public bool IsChooseNo { get; set; }
+        public string PlatNo { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedDate { get; set; }

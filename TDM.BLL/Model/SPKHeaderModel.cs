@@ -7,10 +7,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 namespace TDM.BLL.Model
 {
-    public class SPKHeaderModel
+    public class SPKHeaderModel : BaseModel
     {
-        [DisplayName("No.SPK")]
-        public int Id { get; set; }
+        
         [Required]
         [DisplayName("Tanggal SPK")]
         public DateTime SPKDate { get; set; }
@@ -84,17 +83,24 @@ namespace TDM.BLL.Model
         public string AlamatKirim { get; set; }
         [DisplayName("Kota")]
         public int City { get; set; }
+    }
 
+    public class SPKEquipment :BaseModel
+    {
+        public int SPKId{get;set;}
         public bool IsKaroseri { get; set; }
-        public string KaroseriDesc { get; set; }
-
-        public bool IsOnTR { get; set; }
-
-
-        public bool IsOffTR { get; set; }
-
-
+        public string Karoseri { get; set; }
+        public bool IsOnTheRoad { get; set; }
+        public bool IsOffTheRoad { get; set; }
         public bool IsChooseNo { get; set; }
-        public string ChooseNo { get; set; }
+        public string PlatNo { get; set; }
+    }
+
+    public class SPKAttachment :BaseModel
+    {
+        public int DocId { get; set; }
+        public string AttachmentName { get; set; }
+        public byte[] Attachment { get; set; }
+        public int DocType { get; set; }
     }
 }

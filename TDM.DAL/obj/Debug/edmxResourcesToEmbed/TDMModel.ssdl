@@ -47,7 +47,12 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SPKId" Type="int" Nullable="false" />
-    <Property Name="AdditionalItem" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsKaroseri" Type="bit" Nullable="false" />
+    <Property Name="Karoseri" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsOnTheRoad" Type="bit" Nullable="false" />
+    <Property Name="IsOffTheRoad" Type="bit" Nullable="false" />
+    <Property Name="IsChooseNo" Type="bit" Nullable="false" />
+    <Property Name="PlatNo" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
@@ -149,6 +154,7 @@
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="action_desc" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_workflowSettingHdr">
     <Key>

@@ -65,7 +65,13 @@ namespace TDM.WEB.Controllers
                      }
                      else
                      {
-
+                         wfHdr.Id = Convert.ToInt32(Request.Form["ID"].ToString());
+                         wfHdr.TypeID = Convert.ToInt32(Request.Form["DocType"].ToString());
+                         wfHdr.Version = Convert.ToInt32(Request.Form["Version"].ToString());
+                         wfHdr.ApprovalLevel = details.Count;
+                         wfHdr.ModifiedBy = "SYSTEM";
+                         wfHdr.ModifiedDate = DateTime.Now;
+                         _result = new WorkflowSettingBLL().Update(wfHdr, details, out _errMsg);
                      }
                 }
                 catch (Exception ex)
@@ -75,6 +81,14 @@ namespace TDM.WEB.Controllers
 
             }
             return Json(new { Status = _status, Mesg=_errMsg }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDetail(string id)
+        {
+            WorkflowSettingHeader objhdr = new WorkflowSettingHeader();
+            int _id =id==""?0: Convert.ToInt32(id);
+            objhdr = new WorkflowSettingBLL().Detail(_id);
+            return Json(new { Detail = objhdr.ls_details, Id = objhdr.Id, TypeID = objhdr.TypeID, Version = objhdr.Version, TotalLevel = objhdr.ApprovalLevel }, JsonRequestBehavior.AllowGet);
         }
     }
 }

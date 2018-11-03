@@ -13,5 +13,10 @@ namespace TDM.WEB.Controllers
         {
             return CheckSession();
         }
+
+        public ActionResult CreateSPK()
+        {
+            return CheckSession();
+        }
     }
 }

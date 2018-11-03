@@ -296,7 +296,7 @@
             appr.ApprovalLevel = $('#tbOrder').val();
             appr.Actor = 'ROLE';
             appr.ActorID = $('#selRole').val();
-            //appr.Action = $('#selAction').val();
+           
             var ActionData = $('#selAction').select2('data');
             var RoleData = $('#selRole').select2('data');
             appr.RoleDesc = RoleData[0].text;
@@ -359,6 +359,8 @@
         $('#btnSave').click(function (e) {
             AddWFSetting();
         });
+
+      
     });
 
     function BindDocTypeDdl() {
@@ -484,6 +486,57 @@
 
         });
 
+    }
+
+    var Edit = function (ID) {
+        $.ajax({
+            url: '/WorkflowSetting/GetDetail?id=' + ID,
+            method: 'GET',
+            success: function (result) {
+
+                $('#tbID').val(result.Id);
+                $('#selDocument').val(result.TypeID).trigger('change');
+                $('#tbVersion').val(result.Version);
+               
+                arr_approval = [];
+                arr_approval = result.Detail;
+
+                tbAppr = $('#tblApprover').DataTable({
+                    data: arr_approval,
+                    destroy: true,
+                    columns: [
+
+                        { data: "ApprovalLevel" },
+                        { data: "RoleDesc" },
+                        { data: "action_desc" },
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='Delete(" + full['ApprovalLevel'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+                        }
+
+                    ],
+                    processing: true,
+                    searching: false,
+                    lengthChange: false,
+                    paging: false,
+                });
+
+                $("#mdlAdd").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                }, 'show');
+
+            },
+            error: function (xml, message, text) {
+                toastr.error("Msg: " + message + ", Text: " + text);
+            }
+        });
+        return false;
     }
 
     var Delete = function (ID) {

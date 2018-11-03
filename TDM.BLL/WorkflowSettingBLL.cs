@@ -185,10 +185,24 @@ namespace TDM.BLL
                     detil = imap.Map<tb_workflowSettingHdr, WorkflowSettingHeader>(_details);
 
                     var qry_setting_detail = context.tb_workflowSetting.Where(x => x.HeaderID == id);
+                    if (qry_setting_detail.Count() > 0)
+                        detil.ls_details = new List<WorkflowSettingModel>();
                     foreach (var item in qry_setting_detail)
                     {
                         WorkflowSettingModel md=new WorkflowSettingModel();
-                        md=imap.Map<tb_workflowSetting, WorkflowSettingModel>(item);
+                       
+                        md.HeaderID = item.HeaderID;
+                        md.ApprovalLevel=md.Order = item.ApprovalLevel;
+                        md.Actor = item.Actor;
+                        md.ActorID = item.ActorID;
+                        md.Action = item.ActorID;
+                        md.action_desc = item.action_desc;
+                        if (item.Actor == "ROLE")
+                        {
+                            int _actorid=Convert.ToInt32( item.ActorID);
+                            md.RoleDesc = context.tb_role.SingleOrDefault(x => x.Id == _actorid).RoleName;
+                        }
+                      
                         detil.ls_details.Add(md);
                     }
                 }
@@ -235,11 +249,16 @@ namespace TDM.BLL
                             context.tb_workflowSetting.Add(wfdetil);
                             result_affected += context.SaveChanges();
                         }
+
+                        transaction.Commit();
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(ex.Message);
+                        transaction.Rollback();
+                        errMsg = ex.Message;
                     }
+
+
                 }
             }
             return result_affected;

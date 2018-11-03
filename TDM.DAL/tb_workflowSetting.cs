@@ -24,6 +24,7 @@ namespace TDM.DAL
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string action_desc { get; set; }
     
         public virtual tb_workflowSettingHdr tb_workflowSettingHdr { get; set; }
     }
