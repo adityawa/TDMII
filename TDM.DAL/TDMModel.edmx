@@ -46,23 +46,6 @@
           <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="tb_PerlengkapanTambahan">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SPKId" Type="int" Nullable="false" />
-          <Property Name="IsKaroseri" Type="bit" Nullable="false" />
-          <Property Name="Karoseri" Type="nvarchar" MaxLength="50" />
-          <Property Name="IsOnTheRoad" Type="bit" Nullable="false" />
-          <Property Name="IsOffTheRoad" Type="bit" Nullable="false" />
-          <Property Name="IsChooseNo" Type="bit" Nullable="false" />
-          <Property Name="PlatNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="tb_role">
           <Key>
             <PropertyRef Name="Id" />
@@ -223,18 +206,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_PerlengkapanTambahan_tb_spkHdr">
-          <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="1" />
-          <End Role="tb_PerlengkapanTambahan" Type="Self.tb_PerlengkapanTambahan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_spkHdr">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tb_PerlengkapanTambahan">
-              <PropertyRef Name="SPKId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tb_spkHdr_tb_Master">
           <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
           <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="*" />
@@ -299,7 +270,6 @@
           <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_Master" EntityType="Self.tb_Master" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_PerlengkapanTambahan" EntityType="Self.tb_PerlengkapanTambahan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_role" EntityType="Self.tb_role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" Schema="dbo" store:Type="Tables" />
@@ -311,10 +281,6 @@
           <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
             <End Role="tb_Master" EntitySet="tb_Master" />
             <End Role="tb_Attachment" EntitySet="tb_Attachment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="Self.FK_tb_PerlengkapanTambahan_tb_spkHdr">
-            <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
-            <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_spkHdr_tb_Master" Association="Self.FK_tb_spkHdr_tb_Master">
             <End Role="tb_Master" EntitySet="tb_Master" />
@@ -413,7 +379,6 @@
           <Property Name="IsChooseNo" Type="Boolean" />
           <Property Name="ChooseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_Master" Relationship="Self.FK_tb_spkHdr_tb_Master" FromRole="tb_spkHdr" ToRole="tb_Master" />
-          <NavigationProperty Name="tb_PerlengkapanTambahan" Relationship="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" FromRole="tb_spkHdr" ToRole="tb_PerlengkapanTambahan" />
         </EntityType>
         <EntityType Name="tb_userApps">
           <Key>
@@ -507,11 +472,6 @@
           <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr">
             <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
             <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
-          </AssociationSet>
-          <EntitySet Name="tb_PerlengkapanTambahan" EntityType="TDMDBModel.tb_PerlengkapanTambahan" />
-          <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr">
-            <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
-            <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="tb_employee">
@@ -654,36 +614,6 @@
             </Principal>
             <Dependent Role="tb_workflowSetting">
               <PropertyRef Name="HeaderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="tb_PerlengkapanTambahan">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SPKId" Type="Int32" Nullable="false" />
-          <Property Name="IsKaroseri" Type="Boolean" Nullable="false" />
-          <Property Name="Karoseri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IsOnTheRoad" Type="Boolean" Nullable="false" />
-          <Property Name="IsOffTheRoad" Type="Boolean" Nullable="false" />
-          <Property Name="IsChooseNo" Type="Boolean" Nullable="false" />
-          <Property Name="PlatNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tb_spkHdr" Relationship="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" FromRole="tb_PerlengkapanTambahan" ToRole="tb_spkHdr" />
-        </EntityType>
-        <Association Name="FK_tb_PerlengkapanTambahan_tb_spkHdr">
-          <End Type="TDMDBModel.tb_spkHdr" Role="tb_spkHdr" Multiplicity="1" />
-          <End Type="TDMDBModel.tb_PerlengkapanTambahan" Role="tb_PerlengkapanTambahan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_spkHdr">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tb_PerlengkapanTambahan">
-              <PropertyRef Name="SPKId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -889,24 +819,6 @@
                 <ScalarProperty Name="Actor" ColumnName="Actor" />
                 <ScalarProperty Name="ApprovalLevel" ColumnName="ApprovalLevel" />
                 <ScalarProperty Name="HeaderID" ColumnName="HeaderID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_PerlengkapanTambahan">
-            <EntityTypeMapping TypeName="TDMDBModel.tb_PerlengkapanTambahan">
-              <MappingFragment StoreEntitySet="tb_PerlengkapanTambahan">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="PlatNo" ColumnName="PlatNo" />
-                <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
-                <ScalarProperty Name="IsOffTheRoad" ColumnName="IsOffTheRoad" />
-                <ScalarProperty Name="IsOnTheRoad" ColumnName="IsOnTheRoad" />
-                <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
-                <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
-                <ScalarProperty Name="SPKId" ColumnName="SPKId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

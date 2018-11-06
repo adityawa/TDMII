@@ -4,6 +4,14 @@
     ViewBag.Title = "CreateSPK";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
 
 <div style="margin-top:0px; width:100%">
     <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
@@ -221,6 +229,20 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-10 pull-right">
+                                                <table class="table table-hover table-bordered" id="tblAdditional">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Item</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -228,8 +250,334 @@
                     </div>
 
                 </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Rencana Pembelian & Pembiayaan</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFour" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <div style="margin-left:100px" class="col-sm-6">
+                                                <label class="radio-inline"><input type="radio" name="optradio" value="Kredit" checked>Kredit</label>
+                                                <label class="radio-inline"><input type="radio" name="optradio" value="Tunai">Tunai</label>
+                                            </div>
+                                           
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Via</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbVia" name="tbVia" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Bunga</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" id="tbBunga" name="tbBunga" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" >Harga On The Road</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" id="tbHargaOnTheRoad" name="tbKatbHargaOnTheRoadroseri" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Harga Karoseri</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" id="tbHargaKaroseri" name="tbHargaKaroseri" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Total</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" id="tbTotal" name="tbTotal" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">DP/Uang Muka</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" id="tbDP" name="tbDP" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Tanda Jadi</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbTandaJadi" name="tbTandaJadi" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Pembayaran</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbPembayaran" name="tbPembayaran" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Transfer Via</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbTransferVia" name="tbTransferVia" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Keterangan Tambahan</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFive" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div>
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        
+                                        <div class="form-group col-lg-12">
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsKaroseri" value="Karoseri">Karoseri <input type="text" id="tbKaroseriDesc" value=""></label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsOnTheRoad" value="On The Road"> On The Road</label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsOffTheRoad" value="Off The Road">Off The Road</label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsNoPilihan" value="No Pilihan">No.Pilihan <input type="text" id="tbNoPilihan" value=""></label>
+                                        </div>
+                                        
+                                       
+                                    </form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Alamat Kirim</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseSix" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Alamat</label>
+                                            <div class="col-sm-8">
+                                                <textarea id="taAlamatKirim" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Kota</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control col-md-7" id="selCity" style="width:50%" name="selCity"></select>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Document Attachment</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseSeven" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label" for="NoRef">Attachment</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" id="fuAttachment" type="file" multiple="multiple" placeholder="Attachment.." required>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary pull-left">Submit</button>
             </div>
             
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var tbPerl;
+    var arr_per = [];
+    var arr_city = [];
+    var arr_branch = [];
+    var ctr = '0';
+    $(document).ready(function (e) {
+        BindBranch();
+        BindCity();
+        $('#btnAddAdditional').click(function () {
+
+            var adds = new Object();
+            if (ctr != '0')
+            {
+                adds.No = parseInt(ctr) + 1;
+            }
+            else {
+                adds.No = parseInt(arr_per.length) + 1;
+            }
+            adds.additional = $('#tbAdditional').val();
+            if (adds.additional != '') {
+                arr_per.push(adds);
+                $('#tbAdditional').val('');
+                ctr = adds.No;
+                tbPerl = $('#tblAdditional').DataTable({
+                    data: arr_per,
+                    destroy: true,
+                    columns: [
+
+                        { data: "No" },
+                        { data: "additional" },
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='DeletePerl(" + full['No'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+                        }
+
+                    ],
+                    processing: true,
+                    searching: false,
+                    lengthChange: false,
+                    paging: false,
+                });
+            }
+            else {
+                alert('Data cannot be blank');
+            }
+
+        });
+
+    });
+
+    var DeletePerl = function (ID) {
+
+        var index = arr_per.map(function (x) { return x.No }).indexOf(ID);
+        arr_per.splice(index, 1);
+        tbPerl = $('#tblAdditional').DataTable({
+            data: arr_per,
+            destroy: true,
+            columns: [
+
+                { data: "No" },
+                { data: "additional" },
+                {
+                    "data": null,
+                    "targets": -1,
+                    "render": function (data, type, full) {
+                        return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='DeletePerl(" + full['No'] + ")' ><i class='fa fa-trash'></i></button>";
+                    },
+                    "bSearchable": true,
+                    "sortable": false
+                }
+
+            ],
+            processing: true,
+            searching: false,
+            lengthChange: false,
+            paging: false,
+        });
+        return false;
+    }
+
+    function BindBranch() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetBranch")',
+
+            success: function (response) {
+                arr_branch = response.Data;
+
+                $('#selBranch').select2({
+                    data: arr_branch,
+
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindCity() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetCity")',
+
+            success: function (response) {
+                arr_city = response.Data;
+
+                $('#selCity').select2({
+                    data: arr_city,
+
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+</script>

@@ -36,6 +36,5 @@ namespace TDM.DAL
         public virtual DbSet<tb_Worklist_Archive> tb_Worklist_Archive { get; set; }
         public virtual DbSet<tb_workflowSettingHdr> tb_workflowSettingHdr { get; set; }
         public virtual DbSet<tb_workflowSetting> tb_workflowSetting { get; set; }
-        public virtual DbSet<tb_PerlengkapanTambahan> tb_PerlengkapanTambahan { get; set; }
     }
 }

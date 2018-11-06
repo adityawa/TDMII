@@ -22,8 +22,6 @@
         <EntityTypeShape EntityType="TDMDBModel.tb_workflowSettingHdr" Width="1.5" PointX="10.375" PointY="13.125" />
         <EntityTypeShape EntityType="TDMDBModel.tb_workflowSetting" Width="1.5" PointX="12.625" PointY="12.875" />
         <AssociationConnector Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr" />
-        <EntityTypeShape EntityType="TDMDBModel.tb_PerlengkapanTambahan" Width="1.5" PointX="5.25" PointY="15.125" />
-        <AssociationConnector Association="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

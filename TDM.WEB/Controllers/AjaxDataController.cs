@@ -92,6 +92,44 @@ namespace TDM.WEB.Controllers
             return JSONResult;
         }
 
+        public JsonResult GetBranch()
+        {
+            IEnumerable<MasterModel> ls = new List<MasterModel>();
+            List<Select2DropDownModel> empddl = new List<Select2DropDownModel>();
+            ls = new MasterBLL().List("Branch");
+            foreach (var item in ls)
+            {
+                empddl.Add(new Select2DropDownModel
+                {
+                    id = item.Id.ToString(),
+                    text = item.Value
+                });
+            }
+
+            var JSONResult = Json(new { Data = empddl }, JsonRequestBehavior.AllowGet);
+            JSONResult.MaxJsonLength = Int32.MaxValue;
+            return JSONResult;
+        }
+
+        public JsonResult GetCity()
+        {
+            IEnumerable<MasterModel> ls = new List<MasterModel>();
+            List<Select2DropDownModel> cityddl = new List<Select2DropDownModel>();
+            ls = new MasterBLL().List("City");
+            foreach (var item in ls)
+            {
+                cityddl.Add(new Select2DropDownModel
+                {
+                    id = item.Id.ToString(),
+                    text = item.Value
+                });
+            }
+
+            var JSONResult = Json(new { Data = cityddl }, JsonRequestBehavior.AllowGet);
+            JSONResult.MaxJsonLength = Int32.MaxValue;
+            return JSONResult;
+        }
+
         public JsonResult GetRoleDdl()
         {
             IEnumerable<RoleModel> roles = new List<RoleModel>();

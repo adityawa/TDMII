@@ -72,7 +72,6 @@
     <Property Name="IsChooseNo" Type="Boolean" />
     <Property Name="ChooseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tb_Master" Relationship="Self.FK_tb_spkHdr_tb_Master" FromRole="tb_spkHdr" ToRole="tb_Master" />
-    <NavigationProperty Name="tb_PerlengkapanTambahan" Relationship="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" FromRole="tb_spkHdr" ToRole="tb_PerlengkapanTambahan" />
   </EntityType>
   <EntityType Name="tb_userApps">
     <Key>
@@ -166,11 +165,6 @@
     <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr">
       <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
       <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
-    </AssociationSet>
-    <EntitySet Name="tb_PerlengkapanTambahan" EntityType="TDMDBModel.tb_PerlengkapanTambahan" />
-    <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr">
-      <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
-      <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="tb_employee">
@@ -313,36 +307,6 @@
       </Principal>
       <Dependent Role="tb_workflowSetting">
         <PropertyRef Name="HeaderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="tb_PerlengkapanTambahan">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SPKId" Type="Int32" Nullable="false" />
-    <Property Name="IsKaroseri" Type="Boolean" Nullable="false" />
-    <Property Name="Karoseri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IsOnTheRoad" Type="Boolean" Nullable="false" />
-    <Property Name="IsOffTheRoad" Type="Boolean" Nullable="false" />
-    <Property Name="IsChooseNo" Type="Boolean" Nullable="false" />
-    <Property Name="PlatNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tb_spkHdr" Relationship="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr" FromRole="tb_PerlengkapanTambahan" ToRole="tb_spkHdr" />
-  </EntityType>
-  <Association Name="FK_tb_PerlengkapanTambahan_tb_spkHdr">
-    <End Type="TDMDBModel.tb_spkHdr" Role="tb_spkHdr" Multiplicity="1" />
-    <End Type="TDMDBModel.tb_PerlengkapanTambahan" Role="tb_PerlengkapanTambahan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_spkHdr">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tb_PerlengkapanTambahan">
-        <PropertyRef Name="SPKId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

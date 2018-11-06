@@ -41,23 +41,6 @@
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
   </EntityType>
-  <EntityType Name="tb_PerlengkapanTambahan">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SPKId" Type="int" Nullable="false" />
-    <Property Name="IsKaroseri" Type="bit" Nullable="false" />
-    <Property Name="Karoseri" Type="nvarchar" MaxLength="50" />
-    <Property Name="IsOnTheRoad" Type="bit" Nullable="false" />
-    <Property Name="IsOffTheRoad" Type="bit" Nullable="false" />
-    <Property Name="IsChooseNo" Type="bit" Nullable="false" />
-    <Property Name="PlatNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
-  </EntityType>
   <EntityType Name="tb_role">
     <Key>
       <PropertyRef Name="Id" />
@@ -218,18 +201,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tb_PerlengkapanTambahan_tb_spkHdr">
-    <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="1" />
-    <End Role="tb_PerlengkapanTambahan" Type="Self.tb_PerlengkapanTambahan" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_spkHdr">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tb_PerlengkapanTambahan">
-        <PropertyRef Name="SPKId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tb_spkHdr_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
     <End Role="tb_spkHdr" Type="Self.tb_spkHdr" Multiplicity="*" />
@@ -294,7 +265,6 @@
     <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_Master" EntityType="Self.tb_Master" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tb_PerlengkapanTambahan" EntityType="Self.tb_PerlengkapanTambahan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_role" EntityType="Self.tb_role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_spkHdr" EntityType="Self.tb_spkHdr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_userApps" EntityType="Self.tb_userApps" Schema="dbo" store:Type="Tables" />
@@ -306,10 +276,6 @@
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="Self.FK_tb_Attachment_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />
       <End Role="tb_Attachment" EntitySet="tb_Attachment" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="Self.FK_tb_PerlengkapanTambahan_tb_spkHdr">
-      <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
-      <End Role="tb_PerlengkapanTambahan" EntitySet="tb_PerlengkapanTambahan" />
     </AssociationSet>
     <AssociationSet Name="FK_tb_spkHdr_tb_Master" Association="Self.FK_tb_spkHdr_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />

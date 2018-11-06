@@ -66,9 +66,6 @@
     <Compile Include="tb_Master.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="tb_PerlengkapanTambahan.cs">
-      <DependentUpon>TDMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="tb_role.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>

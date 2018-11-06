@@ -103,4 +103,9 @@ namespace TDM.BLL.Model
         public byte[] Attachment { get; set; }
         public int DocType { get; set; }
     }
+
+    public class SPKAdditional : BaseModel
+    {
+
+    }
 }

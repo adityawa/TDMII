@@ -14,12 +14,6 @@ namespace TDM.DAL
     
     public partial class tb_spkHdr
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_spkHdr()
-        {
-            this.tb_PerlengkapanTambahan = new HashSet<tb_PerlengkapanTambahan>();
-        }
-    
         public int Id { get; set; }
         public System.DateTime SPKDate { get; set; }
         public Nullable<System.DateTime> JanjiPenyerahan { get; set; }
@@ -62,7 +56,5 @@ namespace TDM.DAL
         public string ChooseNo { get; set; }
     
         public virtual tb_Master tb_Master { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_PerlengkapanTambahan> tb_PerlengkapanTambahan { get; set; }
     }
 }
