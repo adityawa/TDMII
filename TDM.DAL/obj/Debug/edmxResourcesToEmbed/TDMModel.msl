@@ -201,5 +201,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tb_KetTambahan">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_KetTambahan">
+        <MappingFragment StoreEntitySet="tb_KetTambahan">
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="PlatNo" ColumnName="PlatNo" />
+          <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
+          <ScalarProperty Name="IsOffTheRoad" ColumnName="IsOffTheRoad" />
+          <ScalarProperty Name="IsOnTheRoad" ColumnName="IsOnTheRoad" />
+          <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
+          <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
+          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_PerlTambahan">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlTambahan">
+        <MappingFragment StoreEntitySet="tb_PerlTambahan">
+          <ScalarProperty Name="AdditionalItem" ColumnName="AdditionalItem" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

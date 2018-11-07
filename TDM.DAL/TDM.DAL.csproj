@@ -63,7 +63,13 @@
     <Compile Include="tb_employee.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tb_KetTambahan.cs">
+      <DependentUpon>TDMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tb_Master.cs">
+      <DependentUpon>TDMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tb_PerlTambahan.cs">
       <DependentUpon>TDMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="tb_role.cs">

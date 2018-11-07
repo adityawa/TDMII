@@ -85,7 +85,7 @@ namespace TDM.BLL.Model
         public int City { get; set; }
     }
 
-    public class SPKEquipment :BaseModel
+    public class SPKEquipmentModel :BaseModel
     {
         public int SPKId{get;set;}
         public bool IsKaroseri { get; set; }
@@ -96,7 +96,7 @@ namespace TDM.BLL.Model
         public string PlatNo { get; set; }
     }
 
-    public class SPKAttachment :BaseModel
+    public class SPKAttachmentModel :BaseModel
     {
         public int DocId { get; set; }
         public string AttachmentName { get; set; }
@@ -104,8 +104,10 @@ namespace TDM.BLL.Model
         public int DocType { get; set; }
     }
 
-    public class SPKAdditional : BaseModel
+    public class SPKAdditionalModel : BaseModel
     {
-
+        public int No { get; set; }
+        public int SPKId { get; set; }
+        public string Additional { get; set; }
     }
 }
