@@ -147,5 +147,28 @@ namespace TDM.WEB.Controllers
             JsonResult.MaxJsonLength = Int32.MaxValue;
             return JsonResult;
         }
+
+        public JsonResult GetAction(string type, string currlevel)
+        {
+            List<string> lsActions = new List<string>();
+            List<Select2DropDownModel> actionddl = new List<Select2DropDownModel>();
+            if (Session["UserLogon"] != null)
+            {
+                string _usr = Utilities.GetUserNameLogon((UserAppsModel)Session["UserLogon"]);
+                lsActions = new WorkflowSettingBLL().GetActionList(_usr, Convert.ToInt32( type), Convert.ToInt32( currlevel));
+                foreach (string s in lsActions)
+                {
+                    actionddl.Add(new Select2DropDownModel
+                    {
+                        id=s.ToString(),
+                        text=s.ToString()
+                    });
+                }
+            }
+
+            var JsonResult = Json(new { Data = actionddl }, JsonRequestBehavior.AllowGet);
+            JsonResult.MaxJsonLength = Int32.MaxValue;
+            return JsonResult;
+        }
     }
 }

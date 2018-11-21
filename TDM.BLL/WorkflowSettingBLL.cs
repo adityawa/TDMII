@@ -264,5 +264,47 @@ namespace TDM.BLL
             return result_affected;
         }
 
+        public string GetNextActorId(int doctype, int level)
+        {
+            string _actorId = string.Empty;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var _qryHdrId = context.tb_workflowSettingHdr.SingleOrDefault(x => x.TypeID == doctype && x.IsActive == true);
+                if (_qryHdrId != null)
+                {
+                    int _hdrId=_qryHdrId.Id;
+                    var _qryActor = context.tb_workflowSetting.SingleOrDefault(x => x.HeaderID == _hdrId && x.ApprovalLevel == level);
+                    if (_qryActor != null)
+                        _actorId = _qryActor.ActorID;
+                }
+            }
+            return _actorId;
+        }
+
+        public List<string> GetActionList(string _usrName, int typeId, int level)
+        {
+            List<string> actions = new List<string>();
+            level=level+1;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var _empId = context.tb_userApps.SingleOrDefault(x => x.UserName == _usrName).EmployeeId;
+                var _qryWFHdr = context.tb_workflowSettingHdr.SingleOrDefault(x => x.TypeID == typeId && x.IsActive == true).Id;
+                var _qryUsrRole = context.tb_userRole.Where(x => x.EmployeeId == _empId).Select(x=>x.RoleId);
+                var _qry = context.tb_workflowSetting.SingleOrDefault(x => x.ApprovalLevel == level && x.HeaderID == _qryWFHdr);
+                if (_qry != null)
+                {
+                    var _role = _qry.ActorID;
+                    var _isRoleExist = _qryUsrRole.Where(x => x.ToString() == _role.ToString()) ;
+                    if (_isRoleExist != null)
+                    {
+                        actions = _qry.action_desc.Split(';').ToList();
+                    }
+                    
+                    
+                }
+            }
+            return actions;
+        }
+
     }
 }

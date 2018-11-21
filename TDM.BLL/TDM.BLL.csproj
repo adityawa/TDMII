@@ -82,6 +82,7 @@
     <Compile Include="UserMgmtBLL.cs" />
     <Compile Include="UserRoleBLL.cs" />
     <Compile Include="WorkflowSettingBLL.cs" />
+    <Compile Include="WorklistBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

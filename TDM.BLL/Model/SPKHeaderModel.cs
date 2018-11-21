@@ -52,7 +52,7 @@ namespace TDM.BLL.Model
         [DisplayName("Nomor Rangka")]
         public string RangkaNo { get; set; }
         [Required]
-        public int Pembiayaan { get; set; }
+        public string Pembiayaan { get; set; }
 
         public string Via { get; set; }
 
@@ -83,17 +83,22 @@ namespace TDM.BLL.Model
         public string AlamatKirim { get; set; }
         [DisplayName("Kota")]
         public int City { get; set; }
+
+        public bool IsKaroseri { get; set; }
+        public string KaroseriDesc { get; set; }
+        public bool IsOnTR { get; set; }
+        public bool IsOffTR { get; set; }
+        public bool IsChooseNo { get; set; }
+        public string ChooseNo { get; set; }
+       // public SPKEquipmentModel spkequipment { get; set; }
+        public List<SPKAttachmentModel> lsspkattachment { get; set; }
+        public List<SPKAdditionalModel> lsadditional { get; set; }
     }
 
     public class SPKEquipmentModel :BaseModel
     {
         public int SPKId{get;set;}
-        public bool IsKaroseri { get; set; }
-        public string Karoseri { get; set; }
-        public bool IsOnTheRoad { get; set; }
-        public bool IsOffTheRoad { get; set; }
-        public bool IsChooseNo { get; set; }
-        public string PlatNo { get; set; }
+       
     }
 
     public class SPKAttachmentModel :BaseModel

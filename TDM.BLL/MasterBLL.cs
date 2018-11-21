@@ -16,7 +16,17 @@ namespace TDM.BLL
             string sSql = "select Id, Category, Value from tb_Master where Category='"+category+"'";
             return GetDataByDapper<MasterModel>(sSql).ToList();
         }
-
+        public int FindByValue(string _val, string _category)
+        {
+            int _retId = 0;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var _qry = context.tb_Master.Where(x => x.Value == _val && x.Category==_category).SingleOrDefault();
+                if (_qry != null)
+                    _retId = _qry.Id;
+            }
+            return _retId;
+        }
         public MasterModel FindById(int Id)
         {
             throw new NotImplementedException();

@@ -37,7 +37,7 @@ namespace TDM.DAL
         public string Karoseri { get; set; }
         public string MachineNo { get; set; }
         public string RangkaNo { get; set; }
-        public int Pembiayaan { get; set; }
+        public string Pembiayaan { get; set; }
         public string Via { get; set; }
         public Nullable<double> PercentageBunga { get; set; }
         public Nullable<double> OTRPrice { get; set; }
@@ -47,7 +47,7 @@ namespace TDM.DAL
         public Nullable<double> DP { get; set; }
         public string TandaJadi { get; set; }
         public string Pembayaran { get; set; }
-        public string TransverVia { get; set; }
+        public string TransferVia { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public string ModifiedBy { get; set; }
@@ -61,8 +61,8 @@ namespace TDM.DAL
         public Nullable<bool> IsChooseNo { get; set; }
         public string ChooseNo { get; set; }
     
-        public virtual tb_Master tb_Master { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_KetTambahan> tb_KetTambahan { get; set; }
+        public virtual tb_Master tb_Master { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace TDM.WEB.Controllers
                 Session["UserLogOn"] = usr;
                 Session["UserProps"] = "admin;admin";
                 FormsAuthentication.SetAuthCookie(usr.UserName, true);
-                return RedirectToAction("Index", "SPK");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -53,7 +53,7 @@ namespace TDM.WEB.Controllers
                         Session["UserLogOn"] = usr;
                         Session["UserProps"] = usr.EmployeeName + ";" + Common.GetRoleAppsName(usr.Role);
                         FormsAuthentication.SetAuthCookie(usr.UserName, true);
-                        return RedirectToAction("Index", "SPK");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {

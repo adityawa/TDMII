@@ -1,0 +1,850 @@
+﻿@model TDM.BLL.Model.SPKHeaderModel
+
+@{
+    ViewBag.Title = "SPKApproval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+<div class="page-title">
+    <div>
+        <h1><i class="fa fa-users"></i> Surat Pemesanan Kendaraan</h1>
+        <p>Create SPK</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> Document </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Tanggal SPK</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" id="tbTglSPK" name="tbTglSPK" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Janji Penyerahan</label>
+                                            <div class="col-sm-8">
+                                                <input type="date" id="tbTglSerah" name="tbTglSerah" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmployeeName" class="col-sm-4 control-label">Branch</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control col-md-7" id="selBranch" style="width:50%" name="selBranch"></select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">No SPK</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbSPKId" name="tbSPKId" value="@ViewBag.IDSpk" readonly class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">No LOT</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbLOT" name="tbLOT" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Data Pembeli</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseTwo" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Nama Pembeli</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbBuyerName" name="tbBuyerName" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="inputEmployeeName" class="col-sm-4 control-label">Alamat</label>
+                                            <div class="col-sm-8">
+                                                <textarea id="tbAlamat" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">KTP</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbKTPNo" name="tbKTPNo" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Telp/HP</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbPhone" name="tbPhone" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Nama di STNK (Sesuai KTP)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbSTNKName" name="tbSTNKName" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Alamat</label>
+                                            <div class="col-sm-8">
+                                                <textarea id="tbAlamatSTNK" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Email</label>
+                                            <div class="col-sm-8">
+                                                <input type="email" id="tbEmail" name="tbEmail" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Data Kendaraan</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseThree" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Merk/Type</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbMerk" name="tbMerk" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Warna</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbWarna" name="tbWarna" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Tahun</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbTahun" name="tbTahun" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Karoseri</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbKaroseri" name="tbKaroseri" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">No Mesin</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbMachineNo" name="tbMachineNo" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">No Rangka</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbRangkaNo" name="tbRangkaNo" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="NoRef">Perl Tambahan</label>
+                                            <div class="col-sm-8">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="tbAdditional" name="tbAdditional" type="text"><span class="input-group-btn">
+                                                        <button class="btn btn-sm btn-info" type="button" id="btnAddAdditional"><i class="fa fa-plus"></i></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-10 pull-right">
+                                                <table class="table table-hover table-bordered" id="tblAdditional">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Item</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Rencana Pembelian & Pembiayaan</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFour" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <div style="margin-left:100px" class="col-sm-6">
+                                                <label class="radio-inline"><input type="radio" name="optradio" value="Kredit" checked>Kredit</label>
+                                                <label class="radio-inline"><input type="radio" name="optradio" value="Tunai">Tunai</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Via</label>
+                                            <div class="col-sm-8">
+                                                <input type="Text" id="tbVia" name="tbVia" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Bunga</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbBunga" name="tbBunga" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Harga On The Road</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbHargaOnTheRoad" name="tbKatbHargaOnTheRoadroseri" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Harga Karoseri</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbHargaKaroseri" name="tbHargaKaroseri" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Total</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbTotal" name="tbTotal" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">DP/Uang Muka</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbDP" name="tbDP" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Tanda Jadi</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbTandaJadi" name="tbTandaJadi" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Pembayaran</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbPembayaran" name="tbPembayaran" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Transfer Via</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" id="tbTransferVia" name="tbTransferVia" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Keterangan Tambahan</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseFive" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div>
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+
+                                        <div class="form-group col-lg-12">
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsKaroseri" value="Karoseri">Karoseri <input type="text" id="tbKaroseriDesc" value=""></label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsOnTheRoad" value="On The Road"> On The Road</label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsOffTheRoad" value="Off The Road">Off The Road</label>
+                                            <label class="checkbox-inline"><input type="checkbox" id="chkIsNoPilihan" value="No Pilihan">No.Pilihan <input type="text" id="tbNoPilihan" value=""></label>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Alamat Kirim</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseSix" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Alamat</label>
+                                            <div class="col-sm-8">
+                                                <textarea id="taAlamatKirim" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Kota</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control col-md-7" id="selCity" style="width:50%" name="selCity"></select>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Document Attachment</a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseSeven" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label" for="NoRef">Attachment</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" id="fuAttachment" type="file" multiple="multiple" placeholder="Attachment.." required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-10 pull-right">
+                                                <table class="table table-hover table-bordered" id="tblAttachment">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Id</th>
+                                                            <th>DocId</th>
+                                                            <th>File Name</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight"> Approval </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapseEight" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="col-lg-5">
+                                <div class="bs-component">
+                                    <form class="form-horizontal" id="frm_hdr_left" method="post">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputPassword">Action</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control col-md-7" id="selAction" style="width:50%" name="selAction"></select>
+                                            </div>
+                                           
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSave" class="btn btn-primary pull-left">Submit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="mdlProgress" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Processing...</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var tbPerl;
+    var tbAttach;
+    var arr_per = [];
+    var arr_city = [];
+    var arr_action = [];
+    var arr_branch = [];
+    var ctr = '0';
+    var arr_attachment = [];
+
+    $(document).ready(function () {
+        BindBranch();
+        BindCity();
+        BindForm();
+        BindAction();
+        $('#tbHargaOnTheRoad').change(function () {
+            var x = $('#tbHargaOnTheRoad').val();
+            $('#tbHargaOnTheRoad').val(CommaFormattedN(x));
+        });
+
+        $('#tbHargaKaroseri').change(function () {
+            var x = $('#tbHargaKaroseri').val();
+            $('#tbHargaKaroseri').val(CommaFormattedN(x));
+        });
+
+        $('#tbTotal').change(function () {
+            var x = $('#tbTotal').val();
+            $('#tbTotal').val(CommaFormattedN(x));
+        });
+
+        $('#tbDP').change(function () {
+            var x = $('#tbDP').val();
+            $('#tbDP').val(CommaFormattedN(x));
+        });
+    });
+
+    function BindBranch() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetBranch")',
+
+            success: function (response) {
+                arr_branch = response.Data;
+
+                $('#selBranch').select2({
+                    data: arr_branch,
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindCity() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/AjaxData/GetCity")',
+
+            success: function (response) {
+                arr_city = response.Data;
+
+                $('#selCity').select2({
+                    data: arr_city,
+
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindAction() {
+        var _type = @ViewBag.TypeID;
+        var _level = @ViewBag.Level;
+        $.ajax({
+            type: 'GET',
+            url: '/AjaxData/GetAction?type='+_type+'&currlevel='+_level,
+
+            success: function (response) {
+                arr_action = response.Data;
+                $('#selAction').select2({
+                    data: arr_action,
+                });
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+        });
+
+    }
+
+    function BindForm() {
+        $.ajax({
+            url: '/SPK/Detail?id=@ViewBag.IDSpk',
+            type: 'GET',
+            success: function (result) {
+                $('#tbTglSPK').val(result.SPKDate);
+                $('#tbTglSerah').val(result.JanjiSerah);
+                $('#selBranch').val(result.Branch).trigger('change');
+                // $('#tbSPKId').val(result.Id);
+                $('#tbLOT').val(result.LOTNo);
+                $('#tbBuyerName').val(result.Buyer);
+                $('#tbAlamat').val(result.BuyerAddress);
+                $('#tbKTPNo').val(result.KTP);
+                $('#tbPhone').val(result.Phone);
+                $('#tbSTNKName').val(result.STNKName);
+                $('#tbAlamatSTNK').val(result.STNKAddress);
+                $('#tbEmail').val(result.Email);
+                $('#tbMerk').val(result.Merk);
+                $('#tbWarna').val(result.Warna);
+                $('#tbTahun').val(result.Year);
+                $('#tbKaroseri').val(result.Karoseri);
+                $('#tbMachineNo').val(result.MachineNo);
+                $('#tbRangkaNo').val(result.RangkaNo);
+                $("input[name='optradio'][value=" + result.Pembiayaan + "]").prop('checked', true);
+                $('#tbVia').val(result.Via);
+                $('#tbBunga').val(result.PercentageBunga);
+                $('#tbHargaOnTheRoad').val(CommaFormattedN(result.OTRPrice.toString()));
+                $('#tbHargaKaroseri').val(CommaFormattedN(result.KaroseriPrice.toString()));
+                $('#tbTotal').val(CommaFormattedN( result.TotalPrice.toString()));
+                $('#tbDP').val(CommaFormattedN( result.DP.toString()));
+                $('#tbTandaJadi').val(result.TandaJadi);
+                $('#tbPembayaran').val(result.Pembayaran);
+                $('#tbTransferVia').val(result.TransferVia);
+                if (result.IsKaroseri == true) {
+                    $('#chkIsKaroseri').attr('checked', true);
+                    $('#tbKaroseriDesc').val(result.KaroseriDesc);
+                }
+                else {
+                    $('#chkIsKaroseri').removeAttr('checked');
+                }
+
+                if (result.IsOnTR == true) {
+                    $('#chkIsOnTheRoad').attr('checked', true);
+                }
+                else {
+                    $('#chkIsOnTheRoad').removeAttr('checked');
+                }
+
+                if (result.IsOffTR == true) {
+                    $('#chkIsOffTheRoad').attr('checked', true);
+                }
+                else {
+                    $('#chkIsOffTheRoad').removeAttr('checked');
+                }
+
+                if (result.IsChooseNo == true) {
+                    $('#chkIsNoPilihan').attr('checked', true);
+                    $('#tbNoPilihan').val(result.PlatNo);
+                }
+                else {
+                    $('#chkIsNoPilihan').removeAttr('checked');
+                }
+
+                $('#taAlamatKirim').val(result.AlamatKirim);
+                $('#selCity').val(result.City).trigger('change');
+                arr_per = result.Additional;
+                arr_attachment = result.Attachment;
+
+                LoadTableAdditional();
+                LoadTableAttach();
+            }
+        });
+    }
+
+    function LoadTableAdditional() {
+        tbPerl = $('#tblAdditional').DataTable({
+            data: arr_per,
+            select: 'true',
+            destroy: true,
+            columns: [
+
+            { data: "No" },
+            { data: "Additional" },
+             {
+                 "data": null,
+                 "targets": -1,
+                 "render": function (data, type, full) {
+                     return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='DeletePerl(" + full['No'] + ")' ><i class='fa fa-trash'></i></button>";
+                 },
+                 "bSearchable": false,
+                 "sortable": false
+             }
+            ],
+            processing: true,
+            searching: false,
+            lengthChange: false,
+            paging:false
+        });
+    }
+
+    function LoadTableAttach() {
+        att_table = $('#tblAttachment').DataTable({
+            data: arr_attachment,
+            select: 'true',
+            destroy: true,
+            columns: [
+                 { data: "Id", "visible": false },
+                { data: "DocId", "visible": false },
+            { data: "AttachmentName" },
+              {
+                  "data": null,
+                  "targets": -1,
+                  "render": function (data, type, full) {
+                      return "<button data-toggle='tooltip' data-placement='right' title='download' onclick='Download(" + full['Id'] + ")' ><i class='fa fa-file'></i></button>"+
+                      " | <button onclick='Delete(" + full['Id'] + ")' ><i class='fa fa-trash'></i></button>";
+                  },
+                  "bSearchable": false,
+                  "sortable": false
+              }
+            ],
+            processing: true,
+            searching: false,
+            lengthChange: false,
+            paging:false
+        });
+    }
+
+    function dateConvFromJSON(data) {
+        if (data == null) return '';
+        var r = /\/Date\(([0-9]+)\)\//gi
+        var matches = data.match(r);
+        if (matches == null) return '';
+        var result = matches.toString().substring(6, 19);
+        var epochMilliseconds = result.replace(
+        /^\/Date\(([0-9]+)([+-][0-9]{4})?\)\/$/,
+        '$1');
+        var b = new Date(parseInt(epochMilliseconds));
+        var c = new Date(b.toString());
+        var curr_date = c.getDate();
+        var curr_month = c.getMonth() + 1;
+        var curr_year = c.getFullYear();
+        var curr_h = c.getHours();
+        var curr_m = c.getMinutes();
+        var curr_s = c.getSeconds();
+        var curr_offset = c.getTimezoneOffset() / 60
+        var d = curr_date + '/' + curr_month.toString() + '/' + curr_year;
+        return d;
+    }
+
+    var Download = function (ID) {
+        window.location = '/SPK/DownloadAttachment?id=' + ID;
+    }
+
+    function DeleteAttachment(ID){
+        $.ajax({
+            url: '/SPK/DeleteAttachment?id=' + ID,
+           
+            success: function (result) {
+                if (result.Status == "SUCCESS" || result.Status=="") {
+                    $("label[for = lblScs_outModal]").text("Document Removed Successfull");
+                    $('#notifSuccess_outModal').show();
+                    location.reload();
+                }
+                else {
+                    $("label[for = lblErr_outModal]").text(result.Status);
+                    $('#notifErr_outModal').show();
+                }
+            }
+        });
+    }
+
+    var Delete = function (ID) {
+
+        $.confirm({
+            title: 'Delete Confirmation!',
+            theme:'Modern',
+            content: 'Are You sure to delete this document ?',
+            buttons: {
+                confirm: function () {
+                    DeleteAttachment(ID);
+                },
+                cancel: function () {
+                    
+                },
+            }
+        });
+
+        return false;
+    }
+
+    function CommaFormattedN(amount) {
+        var commadec = "";
+        amount = amount.replace(/,/g, "");
+        if (amount.indexOf(".") > -1) {
+            commadec = "." + amount.split(".")[1];
+            amount = amount.split(".")[0];
+        }
+        var delimiter = ",";
+        var i = parseInt(amount);
+
+        if (isNaN(i)) { return ''; }
+
+        var origi = i;  // store original to check sign
+        i = Math.abs(i);
+
+        var minus = '';
+        if (origi < 0) { minus = '-'; } // sign based on original
+
+        var n = new String(i);
+        var a = [];
+
+        while (n.length > 3) {
+            var nn = n.substr(n.length - 3);
+            a.unshift(nn);
+            n = n.substr(0, n.length - 3);
+        }
+
+        if (n.length > 0) { a.unshift(n); }
+
+        n = a.join(delimiter);
+
+        amount = minus + n;
+
+        return amount;
+    }
+</script>
+

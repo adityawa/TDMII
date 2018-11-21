@@ -14,14 +14,14 @@
 <script src="~/Scripts/jquery-confirm.js"></script>
 
 <div style="margin-top:0px; width:100%">
-    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
-        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+    <div id="notifSuccess" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs"></label>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
-        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+    <div id="notifErr" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr"></label>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -179,7 +179,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" for="inputPassword">Merk/Type</label>
                                             <div class="col-sm-8">
-                                                <input type="Text" id="tbBuyerName" name="tbBuyerName" class="form-control" />
+                                                <input type="Text" id="tbMerk" name="tbMerk" class="form-control" />
                                             </div>
                                         </div>
 
@@ -278,7 +278,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label" for="inputPassword">Bunga</label>
+                                            <label class="col-sm-4 control-label" for="inputPassword">Bunga(%)</label>
                                             <div class="col-sm-8">
                                                 <input type="number" id="tbBunga" name="tbBunga" class="form-control" />
                                             </div>
@@ -286,13 +286,13 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" >Harga On The Road</label>
                                             <div class="col-sm-8">
-                                                <input type="number" id="tbHargaOnTheRoad" name="tbKatbHargaOnTheRoadroseri" class="form-control" />
+                                                <input type="text" id="tbHargaOnTheRoad" name="tbKatbHargaOnTheRoadroseri" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">Harga Karoseri</label>
                                             <div class="col-sm-8">
-                                                <input type="number" id="tbHargaKaroseri" name="tbHargaKaroseri" class="form-control" />
+                                                <input type="text" id="tbHargaKaroseri" name="tbHargaKaroseri" class="form-control" />
                                             </div>
                                         </div>
                                     </form>
@@ -304,13 +304,13 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" for="inputPassword">Total</label>
                                             <div class="col-sm-8">
-                                                <input type="number" id="tbTotal" name="tbTotal" class="form-control" />
+                                                <input type="text" id="tbTotal" name="tbTotal" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label" for="inputPassword">DP/Uang Muka</label>
                                             <div class="col-sm-8">
-                                                <input type="number" id="tbDP" name="tbDP" class="form-control" />
+                                                <input type="text" id="tbDP" name="tbDP" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -445,6 +445,28 @@
     </div>
 </div>
 
+<div id="mdlProgress" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Processing...</h4>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar"
+                         aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     var tbPerl;
     var arr_per = [];
@@ -454,6 +476,28 @@
     $(document).ready(function (e) {
         BindBranch();
         BindCity();
+       
+
+        $('#tbHargaOnTheRoad').change(function () {
+            var x = $('#tbHargaOnTheRoad').val();
+            $('#tbHargaOnTheRoad').val(CommaFormattedN(x));
+        });
+
+        $('#tbHargaKaroseri').change(function () {
+            var x = $('#tbHargaKaroseri').val();
+            $('#tbHargaKaroseri').val(CommaFormattedN(x));
+        });
+
+        $('#tbTotal').change(function () {
+            var x = $('#tbTotal').val();
+            $('#tbTotal').val(CommaFormattedN(x));
+        });
+
+        $('#tbDP').change(function () {
+            var x = $('#tbDP').val();
+            $('#tbDP').val(CommaFormattedN(x));
+        });
+
         $('#btnAddAdditional').click(function () {
 
             var adds = new Object();
@@ -475,7 +519,7 @@
                     columns: [
 
                         { data: "No" },
-                        { data: "Additional" },
+                        { data: "additional" },
                         {
                             "data": null,
                             "targets": -1,
@@ -497,6 +541,10 @@
                 alert('Data cannot be blank');
             }
 
+        });
+
+        $('#btnSave').click(function (e) {
+            SubmitSPK();
         });
 
     });
@@ -579,5 +627,141 @@
 
         });
 
+    }
+
+    function SubmitSPK() {
+        $('#mdlProgress').modal({
+            backdrop: 'static'
+        });
+
+        if (window.FormData != undefined) {
+            var file_upload = $('#fuAttachment').get(0);
+            var files = file_upload.files;
+
+            var form_data = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                form_data.append(files[i].name, files[i]);
+            }
+
+            form_data.append("TglSPK", $('#tbTglSPK').val());
+            form_data.append("JanjiSerah", $('#tbTglSerah').val());
+            form_data.append("Branch", $('#selBranch').val());
+            form_data.append("SPKID", $('#tbSPKId').val());
+            form_data.append("Lot", $('#tbLOT').val());
+            form_data.append("BuyerName", $('#tbBuyerName').val());
+            form_data.append("BuyerAddress", $('#tbAlamat').val());
+            form_data.append("KTP", $('#tbKTPNo').val());
+            form_data.append("Phone", $('#tbPhone').val());
+            form_data.append("STNKName", $('#tbSTNKName').val());
+            form_data.append("AlamatSTNK", $('#tbAlamatSTNK').val());
+            form_data.append("Email", $('#tbEmail').val());
+            form_data.append("Merk", $('#tbMerk').val());
+            form_data.append("Warna", $('#tbWarna').val());
+            form_data.append("Tahun", $('#tbTahun').val());
+            form_data.append("Karoseri", $('#tbKaroseri').val());
+            form_data.append("MachineNo", $('#tbMachineNo').val());
+            form_data.append("RangkaNo", $('#tbRangkaNo').val());
+            form_data.append("Pembiayaan", $('input[name=optradio]:checked').val());
+            form_data.append("Via", $('#tbVia').val());
+            form_data.append("Bunga", $('#tbBunga').val());
+            form_data.append("HargaOnTheRoad", $('#tbHargaOnTheRoad').val());
+            form_data.append("HargaKaroseri", $('#tbHargaKaroseri').val());
+            form_data.append("Total", $('#tbTotal').val());
+            form_data.append("DP", $('#tbDP').val());
+            form_data.append("TandaJadi", $('#tbTandaJadi').val());
+            form_data.append("Pembayaran", $('#tbPembayaran').val());
+            form_data.append("TransferVia", $('#tbTransferVia').val());
+            form_data.append("IsKaroseri", $('#chkIsKaroseri').is(':checked'));
+            form_data.append("IsOntheRoad", $('#chkIsOnTheRoad').is(':checked'));
+            form_data.append("IsOffTheRoad", $('#chkIsOffTheRoad').is(':checked'));
+            form_data.append("IsNoPilihan", $('#chkIsNoPilihan').is(':checked'));
+            form_data.append("KaroseriDesc", $('#tbKaroseriDesc').val());
+            form_data.append("NoPilihan", $('#tbNoPilihan').val());
+            form_data.append("AlamatKirim", $('#taAlamatKirim').val());
+            form_data.append("City", $('#selCity').val());
+            form_data.append("Additional", JSON.stringify(arr_per));
+
+            $.ajax({
+                type: 'POST',
+                url: '/SPK/SubmitSPK',
+                contentType: false,
+                processData: false,
+                data: form_data,
+                async: "true",
+                success: function (result) {
+                    if (result.Status == "SUCCESS" || result.Status == "") {
+                        $('#mdlProgress').modal('hide');
+                        $("label[for = lblScs]").text(result.MsgOk);
+                        $('#notifSuccess').show();
+
+                    }
+                    else {
+                        $('#mdlProgress').modal('hide');
+                        $("label[for = lblErr]").text(result.ErrMsg);
+                        $('#notifErr').show();
+                    }
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).Message;
+                    console.log(err);
+                }
+            });
+        }
+        else {
+
+        }
+    }
+    function reposition() {
+        var modal = $(this),
+            dialog = modal.find('.modal-dialog');
+        modal.css('display', 'block');
+
+        // Dividing by two centers the modal exactly, but dividing by three
+        // or four works better for larger screens.
+        dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+    }
+    // Reposition when a modal is shown
+    $('.modal').on('show.bs.modal', reposition);
+    // Reposition when the window is resized
+    $(window).on('resize', function () {
+        $('.modal:visible').each(reposition);
+    });
+
+    function CommaFormattedN(amount) {
+        var commadec = "";
+        amount = amount.replace(/,/g, "");
+        if (amount.indexOf(".") > -1) {
+            commadec = "." + amount.split(".")[1];
+            amount = amount.split(".")[0];
+        }
+        var delimiter = ",";
+        var i = parseInt(amount);
+
+        if (isNaN(i)) { return ''; }
+
+        var origi = i;  // store original to check sign
+        i = Math.abs(i);
+
+        var minus = '';
+        if (origi < 0) { minus = '-'; } // sign based on original
+
+        var n = new String(i);
+        var a = [];
+
+        while (n.length > 3) {
+            var nn = n.substr(n.length - 3);
+            a.unshift(nn);
+            n = n.substr(0, n.length - 3);
+        }
+
+        if (n.length > 0) { a.unshift(n); }
+
+        n = a.join(delimiter);
+
+        amount = minus + n;
+
+        return amount;
     }
 </script>

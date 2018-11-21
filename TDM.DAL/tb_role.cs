@@ -18,6 +18,7 @@ namespace TDM.DAL
         public tb_role()
         {
             this.tb_userRole = new HashSet<tb_userRole>();
+            this.tb_Worklist = new HashSet<tb_Worklist>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace TDM.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_userRole> tb_userRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Worklist> tb_Worklist { get; set; }
     }
 }

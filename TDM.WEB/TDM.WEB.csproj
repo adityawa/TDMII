@@ -124,6 +124,7 @@
     <Compile Include="Controllers\AjaxDataController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SPKController.cs" />
     <Compile Include="Controllers\UserAppsController.cs" />
@@ -133,6 +134,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Select2DropDownModel.cs" />
+    <Compile Include="Models\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -541,7 +543,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\SPK\Index.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
@@ -550,6 +551,8 @@
     <Content Include="Views\UserRole\Index.cshtml" />
     <Content Include="Views\WorkflowSetting\Create.cshtml" />
     <Content Include="Views\SPK\CreateSPK.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SPK\SPKApproval.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

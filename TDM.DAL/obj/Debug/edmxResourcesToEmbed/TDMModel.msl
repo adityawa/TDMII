@@ -14,65 +14,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_Master">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_Master">
-        <MappingFragment StoreEntitySet="tb_Master">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Category" ColumnName="Category" />
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_spkHdr">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
-        <MappingFragment StoreEntitySet="tb_spkHdr">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="SPKDate" ColumnName="SPKDate" />
-          <ScalarProperty Name="JanjiPenyerahan" ColumnName="JanjiPenyerahan" />
-          <ScalarProperty Name="LOTNo" ColumnName="LOTNo" />
-          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
-          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
-          <ScalarProperty Name="KTP" ColumnName="KTP" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="STNKName" ColumnName="STNKName" />
-          <ScalarProperty Name="STNKAddress" ColumnName="STNKAddress" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Branch" ColumnName="Branch" />
-          <ScalarProperty Name="Merk" ColumnName="Merk" />
-          <ScalarProperty Name="Warna" ColumnName="Warna" />
-          <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
-          <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
-          <ScalarProperty Name="RangkaNo" ColumnName="RangkaNo" />
-          <ScalarProperty Name="Pembiayaan" ColumnName="Pembiayaan" />
-          <ScalarProperty Name="Via" ColumnName="Via" />
-          <ScalarProperty Name="PercentageBunga" ColumnName="PercentageBunga" />
-          <ScalarProperty Name="OTRPrice" ColumnName="OTRPrice" />
-          <ScalarProperty Name="KaroseriPrice" ColumnName="KaroseriPrice" />
-          <ScalarProperty Name="Year" ColumnName="Year" />
-          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-          <ScalarProperty Name="DP" ColumnName="DP" />
-          <ScalarProperty Name="TandaJadi" ColumnName="TandaJadi" />
-          <ScalarProperty Name="Pembayaran" ColumnName="Pembayaran" />
-          <ScalarProperty Name="TransverVia" ColumnName="TransverVia" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="AlamatKirim" ColumnName="AlamatKirim" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
-          <ScalarProperty Name="KaroseriDesc" ColumnName="KaroseriDesc" />
-          <ScalarProperty Name="IsOnTR" ColumnName="IsOnTR" />
-          <ScalarProperty Name="IsOffTR" ColumnName="IsOffTR" />
-          <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
-          <ScalarProperty Name="ChooseNo" ColumnName="ChooseNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_userApps">
       <EntityTypeMapping TypeName="TDMDBModel.tb_userApps">
         <MappingFragment StoreEntitySet="tb_userApps">
@@ -85,25 +26,6 @@
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_Worklist">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
-        <MappingFragment StoreEntitySet="tb_Worklist">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DocType" ColumnName="DocType" />
-          <ScalarProperty Name="DocId" ColumnName="DocId" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
-          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
-          <ScalarProperty Name="CurrLevel" ColumnName="CurrLevel" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -122,18 +44,6 @@
           <ScalarProperty Name="EmpName" ColumnName="EmpName" />
           <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
           <ScalarProperty Name="EmpID" ColumnName="EmpID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tb_role">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_role">
-        <MappingFragment StoreEntitySet="tb_role">
-          <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -201,13 +111,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tb_PerlTambahan">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlTambahan">
+        <MappingFragment StoreEntitySet="tb_PerlTambahan">
+          <ScalarProperty Name="AdditionalItem" ColumnName="AdditionalItem" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tb_KetTambahan">
       <EntityTypeMapping TypeName="TDMDBModel.tb_KetTambahan">
         <MappingFragment StoreEntitySet="tb_KetTambahan">
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="PlatNo" ColumnName="PlatNo" />
           <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
           <ScalarProperty Name="IsOffTheRoad" ColumnName="IsOffTheRoad" />
@@ -219,12 +135,92 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_PerlTambahan">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_PerlTambahan">
-        <MappingFragment StoreEntitySet="tb_PerlTambahan">
-          <ScalarProperty Name="AdditionalItem" ColumnName="AdditionalItem" />
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="SPKId" ColumnName="SPKId" />
+    <EntitySetMapping Name="tb_Master">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Master">
+        <MappingFragment StoreEntitySet="tb_Master">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_role">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_role">
+        <MappingFragment StoreEntitySet="tb_role">
+          <ScalarProperty Name="ModofiedDate" ColumnName="ModofiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Worklist">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
+        <MappingFragment StoreEntitySet="tb_Worklist">
+          <ScalarProperty Name="CurrLevel" ColumnName="CurrLevel" />
+          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_spkHdr">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
+        <MappingFragment StoreEntitySet="tb_spkHdr">
+          <ScalarProperty Name="ChooseNo" ColumnName="ChooseNo" />
+          <ScalarProperty Name="IsChooseNo" ColumnName="IsChooseNo" />
+          <ScalarProperty Name="IsOffTR" ColumnName="IsOffTR" />
+          <ScalarProperty Name="IsOnTR" ColumnName="IsOnTR" />
+          <ScalarProperty Name="KaroseriDesc" ColumnName="KaroseriDesc" />
+          <ScalarProperty Name="IsKaroseri" ColumnName="IsKaroseri" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="AlamatKirim" ColumnName="AlamatKirim" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="TransferVia" ColumnName="TransferVia" />
+          <ScalarProperty Name="Pembayaran" ColumnName="Pembayaran" />
+          <ScalarProperty Name="TandaJadi" ColumnName="TandaJadi" />
+          <ScalarProperty Name="DP" ColumnName="DP" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="KaroseriPrice" ColumnName="KaroseriPrice" />
+          <ScalarProperty Name="OTRPrice" ColumnName="OTRPrice" />
+          <ScalarProperty Name="PercentageBunga" ColumnName="PercentageBunga" />
+          <ScalarProperty Name="Via" ColumnName="Via" />
+          <ScalarProperty Name="Pembiayaan" ColumnName="Pembiayaan" />
+          <ScalarProperty Name="RangkaNo" ColumnName="RangkaNo" />
+          <ScalarProperty Name="MachineNo" ColumnName="MachineNo" />
+          <ScalarProperty Name="Karoseri" ColumnName="Karoseri" />
+          <ScalarProperty Name="Warna" ColumnName="Warna" />
+          <ScalarProperty Name="Merk" ColumnName="Merk" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="STNKAddress" ColumnName="STNKAddress" />
+          <ScalarProperty Name="STNKName" ColumnName="STNKName" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="KTP" ColumnName="KTP" />
+          <ScalarProperty Name="BuyerAddress" ColumnName="BuyerAddress" />
+          <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+          <ScalarProperty Name="LOTNo" ColumnName="LOTNo" />
+          <ScalarProperty Name="JanjiPenyerahan" ColumnName="JanjiPenyerahan" />
+          <ScalarProperty Name="SPKDate" ColumnName="SPKDate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

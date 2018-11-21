@@ -22,10 +22,6 @@ namespace TDM.DAL
         public bool IsOffTheRoad { get; set; }
         public bool IsChooseNo { get; set; }
         public string PlatNo { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
     
         public virtual tb_spkHdr tb_spkHdr { get; set; }
     }

@@ -1,91 +1,150 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model TDM.BLL.Model.WorklistModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="text-center text-info">
-    <h4>SURAT PEMESANAN KENDARAAN</h4>
-   
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 </div>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th class="text-center">PASSANGER CAR - COMMERCIAL VEHICLE</th>
-        </tr>
-    </thead>
-</table>
 
-<div class="wrapper center-block">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading active" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        DATA PEMBELI
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body">
-                    D
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        DATA KENDARAAN DAN RENCANA PEMBIAYAAN
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        KETERANGAN TAMBAHAN
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
+<div class="page-title">
 
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingFour">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        ALAMAT KIRIM
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </div>
-            </div>
-        </div>
+    <div>
+        <h1><i class="fa fa-users"></i>My Worklist</h1>
+        <p>Need your Approval</p>
+    </div>
+</div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingApproval">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseApproval" aria-expanded="false" aria-controls="collapseApproval">
-                        Approval
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseApproval" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingApproval">
-                <div class="panel-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" width="100%" id="tblWorklist">
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
+                            <tr>
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">DocType</th>
+                                <th style="text-align:center">Document</th>
+                                <th style="text-align:center">Doc ID</th>
+                                <th style="text-align:center">Status</th>
+                                <th style="text-align:center">Start Date</th>
+                                <th style="text-align:center">Next Approver</th>
+                                <th style="text-align:center">Current Level</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var arr_worklist = [];
+    var tblWorklist;
+    $(document).ready(function () {
+        BindGrid();
+    });
+
+    function BindGrid() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/Home/GetWorklist")',
+            success: function (response) {
+
+                arr_worklist = response.Data;
+                tblWorklist = $('#tblWorklist').DataTable({
+                    data: arr_worklist,
+                    destroy: true,
+                    columns: [
+                        { data: "Id", "visible": false },
+                        { data: "DocType", "visible": false },
+                        { data: "DocTypeDesc" },
+                        { data: "DocId" },
+                        { data: "Status" },
+                        { data: "StartDate", "mRender": function (data, type, full) { return dateConvFromJSON(data); } },
+                        { data: "NextApproverDesc" },
+                        { data: "CurrLevel", "visible": false },
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<a  onclick='View(" + full['DocId'] + "," + full['CurrLevel'] + "," + full['DocType'] + ")' id='btnEdit" + full['DocId', 'CurrLevel'] + "'><i class='fa fa-envelope'></i></a>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: '<"top"f>rt<"bottom"p and i><"clear">',
+                    buttons: [
+                            'print', 'excel'
+                    ]
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+
+    var View = function (ID, Level, TypeId) {
+        window.location = '/SPK/SPKApproval?DocId=' + ID+'&Level='+Level+'&Type='+TypeId;
+    }
+
+    function dateConvFromJSON(data) {
+        if (data == null) return '';
+        var r = /\/Date\(([0-9]+)\)\//gi
+        var matches = data.match(r);
+        if (matches == null) return '';
+        var result = matches.toString().substring(6, 19);
+        var epochMilliseconds = result.replace(
+        /^\/Date\(([0-9]+)([+-][0-9]{4})?\)\/$/,
+        '$1');
+        var b = new Date(parseInt(epochMilliseconds));
+        var c = new Date(b.toString());
+        var curr_date = c.getDate();
+        var curr_month = c.getMonth() + 1;
+        var curr_year = c.getFullYear();
+        var curr_h = c.getHours();
+        var curr_m = c.getMinutes();
+        var curr_s = c.getSeconds();
+        var curr_offset = c.getTimezoneOffset() / 60
+        var d = curr_date + '/' + curr_month.toString() + '/' + curr_year;
+        return d;
+    }
+</script>

@@ -41,10 +41,6 @@
     <Property Name="IsOffTheRoad" Type="bit" Nullable="false" />
     <Property Name="IsChooseNo" Type="bit" Nullable="false" />
     <Property Name="PlatNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ModifiedDate" Type="nvarchar" MaxLength="50" />
-    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="tb_Master">
     <Key>
@@ -62,7 +58,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SPKId" Type="int" Nullable="false" />
     <Property Name="No" Type="int" />
     <Property Name="AdditionalItem" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -86,20 +82,20 @@
     <Property Name="SPKDate" Type="datetime" Nullable="false" />
     <Property Name="JanjiPenyerahan" Type="datetime" />
     <Property Name="LOTNo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Buyer" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="BuyerAddress" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="KTP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Buyer" Type="nvarchar" MaxLength="50" />
+    <Property Name="BuyerAddress" Type="nvarchar(max)" />
+    <Property Name="KTP" Type="nvarchar" MaxLength="50" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="STNKName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="STNKAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="STNKName" Type="varchar" MaxLength="50" />
+    <Property Name="STNKAddress" Type="nvarchar(max)" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Branch" Type="nvarchar" MaxLength="50" />
-    <Property Name="Merk" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Warna" Type="nvarchar" MaxLength="20" Nullable="false" />
-    <Property Name="Karoseri" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="MachineNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="RangkaNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Pembiayaan" Type="int" Nullable="false" />
+    <Property Name="Merk" Type="nvarchar" MaxLength="50" />
+    <Property Name="Warna" Type="nvarchar" MaxLength="20" />
+    <Property Name="Karoseri" Type="nvarchar" MaxLength="50" />
+    <Property Name="MachineNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RangkaNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Pembiayaan" Type="nvarchar" MaxLength="50" />
     <Property Name="Via" Type="nvarchar" MaxLength="50" />
     <Property Name="PercentageBunga" Type="float" />
     <Property Name="OTRPrice" Type="float" />
@@ -109,12 +105,12 @@
     <Property Name="DP" Type="float" />
     <Property Name="TandaJadi" Type="nvarchar" MaxLength="50" />
     <Property Name="Pembayaran" Type="nvarchar" MaxLength="50" />
-    <Property Name="TransverVia" Type="nvarchar" MaxLength="50" />
+    <Property Name="TransferVia" Type="nvarchar" MaxLength="50" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="AlamatKirim" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AlamatKirim" Type="nvarchar(max)" />
     <Property Name="City" Type="int" />
     <Property Name="IsKaroseri" Type="bit" />
     <Property Name="KaroseriDesc" Type="varchar" MaxLength="50" />
@@ -195,7 +191,7 @@
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
     <Property Name="Actioner" Type="int" />
-    <Property Name="CurrLevel" Type="int" />
+    <Property Name="CurrLevel" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tb_Worklist_Archive">
     <Key>
@@ -299,6 +295,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tb_Worklist_tb_Master">
+    <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="1" />
+    <End Role="tb_Worklist" Type="Self.tb_Worklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist">
+        <PropertyRef Name="DocType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_Worklist_tb_role">
+    <End Role="tb_role" Type="Self.tb_role" Multiplicity="0..1" />
+    <End Role="tb_Worklist" Type="Self.tb_Worklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist">
+        <PropertyRef Name="NextApprover" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TDMDBModelStoreContainer">
     <EntitySet Name="tb_Attachment" EntityType="Self.tb_Attachment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tb_employee" EntityType="Self.tb_employee" Schema="dbo" store:Type="Tables" />
@@ -340,6 +360,14 @@
     <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="Self.FK_tb_workflowSetting_tb_workflowSettingHdr">
       <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
       <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_tb_Master" Association="Self.FK_tb_Worklist_tb_Master">
+      <End Role="tb_Master" EntitySet="tb_Master" />
+      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_tb_role" Association="Self.FK_tb_Worklist_tb_role">
+      <End Role="tb_role" EntitySet="tb_role" />
+      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

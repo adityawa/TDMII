@@ -26,6 +26,9 @@ namespace TDM.DAL
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> Actioner { get; set; }
-        public Nullable<int> CurrLevel { get; set; }
+        public int CurrLevel { get; set; }
+    
+        public virtual tb_Master tb_Master { get; set; }
+        public virtual tb_role tb_role { get; set; }
     }
 }
