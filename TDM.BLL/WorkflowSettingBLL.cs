@@ -281,6 +281,23 @@ namespace TDM.BLL
             return _actorId;
         }
 
+        public bool CheckIsWorkflowCompleted(int doctype, int level)
+        {
+            bool _IsCompleted = false;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var _qryHdrId = context.tb_workflowSettingHdr.SingleOrDefault(x => x.TypeID == doctype && x.IsActive == true);
+                if (_qryHdrId != null)
+                {
+                    int _hdrId = _qryHdrId.Id;
+                    var _qryActor = context.tb_workflowSetting.SingleOrDefault(x => x.HeaderID == _hdrId && x.ApprovalLevel == level);
+                    if (_qryActor == null)
+                        _IsCompleted = true;
+                }
+            }
+            return _IsCompleted;
+        }
+
         public List<string> GetActionList(string _usrName, int typeId, int level)
         {
             List<string> actions = new List<string>();

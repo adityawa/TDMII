@@ -25,7 +25,8 @@ namespace TDM.DAL
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public Nullable<int> Actioner { get; set; }
+        public string Actioner { get; set; }
         public Nullable<int> LastLevel { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

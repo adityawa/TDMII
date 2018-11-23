@@ -60,25 +60,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_Worklist_Archive">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist_Archive">
-        <MappingFragment StoreEntitySet="tb_Worklist_Archive">
-          <ScalarProperty Name="LastLevel" ColumnName="LastLevel" />
-          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="LastActor" ColumnName="LastActor" />
-          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="DocId" ColumnName="DocId" />
-          <ScalarProperty Name="DocType" ColumnName="DocType" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_workflowSettingHdr">
       <EntityTypeMapping TypeName="TDMDBModel.tb_workflowSettingHdr">
         <MappingFragment StoreEntitySet="tb_workflowSettingHdr">
@@ -160,25 +141,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tb_Worklist">
-      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
-        <MappingFragment StoreEntitySet="tb_Worklist">
-          <ScalarProperty Name="CurrLevel" ColumnName="CurrLevel" />
-          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
-          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="DocId" ColumnName="DocId" />
-          <ScalarProperty Name="DocType" ColumnName="DocType" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tb_spkHdr">
       <EntityTypeMapping TypeName="TDMDBModel.tb_spkHdr">
         <MappingFragment StoreEntitySet="tb_spkHdr">
@@ -221,6 +183,45 @@
           <ScalarProperty Name="LOTNo" ColumnName="LOTNo" />
           <ScalarProperty Name="JanjiPenyerahan" ColumnName="JanjiPenyerahan" />
           <ScalarProperty Name="SPKDate" ColumnName="SPKDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Worklist">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist">
+        <MappingFragment StoreEntitySet="tb_Worklist">
+          <ScalarProperty Name="CurrLevel" ColumnName="CurrLevel" />
+          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="NextApprover" ColumnName="NextApprover" />
+          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tb_Worklist_Archive">
+      <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist_Archive">
+        <MappingFragment StoreEntitySet="tb_Worklist_Archive">
+          <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+          <ScalarProperty Name="LastLevel" ColumnName="LastLevel" />
+          <ScalarProperty Name="Actioner" ColumnName="Actioner" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastActor" ColumnName="LastActor" />
+          <ScalarProperty Name="RespondDate" ColumnName="RespondDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DocId" ColumnName="DocId" />
+          <ScalarProperty Name="DocType" ColumnName="DocType" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

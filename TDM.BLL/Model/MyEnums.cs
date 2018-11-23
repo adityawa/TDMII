@@ -25,7 +25,8 @@ namespace TDM.BLL.Model
         {
             PENDING,
             APPROVED,
-            REJECTED
+            REJECTED,
+            ACKNOWLEDGE
         }
     }
 }

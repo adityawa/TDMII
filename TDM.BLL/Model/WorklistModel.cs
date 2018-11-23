@@ -16,8 +16,9 @@ namespace TDM.BLL.Model
         public DateTime? RespondDate { get; set; }
         public int NextApprover { get; set; }
         public string NextApproverDesc { get; set; }
-        public int Actioner { get; set; }
+        public string Actioner { get; set; }
         public string ActionerDesc { get; set; }
         public int CurrLevel { get; set; }
+        public int Actor { get; set; }
     }
 }

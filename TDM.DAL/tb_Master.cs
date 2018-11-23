@@ -18,8 +18,8 @@ namespace TDM.DAL
         public tb_Master()
         {
             this.tb_Attachment = new HashSet<tb_Attachment>();
-            this.tb_Worklist = new HashSet<tb_Worklist>();
             this.tb_spkHdr = new HashSet<tb_spkHdr>();
+            this.tb_Worklist = new HashSet<tb_Worklist>();
         }
     
         public int Id { get; set; }
@@ -33,8 +33,8 @@ namespace TDM.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_Attachment> tb_Attachment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_Worklist> tb_Worklist { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_spkHdr> tb_spkHdr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Worklist> tb_Worklist { get; set; }
     }
 }

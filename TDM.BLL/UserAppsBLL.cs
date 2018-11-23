@@ -11,7 +11,7 @@ namespace TDM.BLL
     public class UserAppsBLL : IBLL<UserAppsModel, tb_userApps>
     {
         private int result_affected = 0;
-
+        private const string TDM_KEY = "TDM2018";
         public UserAppsBLL() { }
         public IEnumerable<UserAppsModel> List()
         {
@@ -144,7 +144,8 @@ namespace TDM.BLL
             return result_affected;
         }
 
-      
+        public 
+       
 
         public UserAppsModel MapToModel(tb_userApps fromEntity)
         {
@@ -171,7 +172,7 @@ namespace TDM.BLL
             tb_userApps entity = new tb_userApps();
             entity.Id = fromModel.Id;
             entity.UserName = fromModel.UserName;
-            entity.Password =new Common().Encrypt( fromModel.Password, ;
+            entity.Password = new Common().Encrypt(fromModel.Password, TDM_KEY);
             entity.IsExpired = fromModel.IsExpired;
             entity.EmployeeId = fromModel.EmployeeId;
             entity.CreatedBy = fromModel.CreatedBy;

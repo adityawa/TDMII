@@ -190,7 +190,7 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="Actioner" Type="int" />
+    <Property Name="Actioner" Type="nvarchar" MaxLength="30" />
     <Property Name="CurrLevel" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tb_Worklist_Archive">
@@ -208,8 +208,9 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="datetime" />
-    <Property Name="Actioner" Type="int" />
+    <Property Name="Actioner" Type="nvarchar" MaxLength="30" />
     <Property Name="LastLevel" Type="int" />
+    <Property Name="IsCompleted" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_tb_Attachment_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />

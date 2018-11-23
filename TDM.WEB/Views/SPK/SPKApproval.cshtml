@@ -621,6 +621,92 @@
 
     }
 
+    function SubmitSPK() {
+        $('#mdlProgress').modal({
+            backdrop: 'static'
+        });
+
+        if (window.FormData != undefined) {
+            var file_upload = $('#fuAttachment').get(0);
+            var files = file_upload.files;
+
+            var form_data = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                form_data.append(files[i].name, files[i]);
+            }
+
+            form_data.append("TglSPK", $('#tbTglSPK').val());
+            form_data.append("JanjiSerah", $('#tbTglSerah').val());
+            form_data.append("Branch", $('#selBranch').val());
+            form_data.append("SPKID", $('#tbSPKId').val());
+            form_data.append("Lot", $('#tbLOT').val());
+            form_data.append("BuyerName", $('#tbBuyerName').val());
+            form_data.append("BuyerAddress", $('#tbAlamat').val());
+            form_data.append("KTP", $('#tbKTPNo').val());
+            form_data.append("Phone", $('#tbPhone').val());
+            form_data.append("STNKName", $('#tbSTNKName').val());
+            form_data.append("AlamatSTNK", $('#tbAlamatSTNK').val());
+            form_data.append("Email", $('#tbEmail').val());
+            form_data.append("Merk", $('#tbMerk').val());
+            form_data.append("Warna", $('#tbWarna').val());
+            form_data.append("Tahun", $('#tbTahun').val());
+            form_data.append("Karoseri", $('#tbKaroseri').val());
+            form_data.append("MachineNo", $('#tbMachineNo').val());
+            form_data.append("RangkaNo", $('#tbRangkaNo').val());
+            form_data.append("Pembiayaan", $('input[name=optradio]:checked').val());
+            form_data.append("Via", $('#tbVia').val());
+            form_data.append("Bunga", $('#tbBunga').val());
+            form_data.append("HargaOnTheRoad", $('#tbHargaOnTheRoad').val());
+            form_data.append("HargaKaroseri", $('#tbHargaKaroseri').val());
+            form_data.append("Total", $('#tbTotal').val());
+            form_data.append("DP", $('#tbDP').val());
+            form_data.append("TandaJadi", $('#tbTandaJadi').val());
+            form_data.append("Pembayaran", $('#tbPembayaran').val());
+            form_data.append("TransferVia", $('#tbTransferVia').val());
+            form_data.append("IsKaroseri", $('#chkIsKaroseri').is(':checked'));
+            form_data.append("IsOntheRoad", $('#chkIsOnTheRoad').is(':checked'));
+            form_data.append("IsOffTheRoad", $('#chkIsOffTheRoad').is(':checked'));
+            form_data.append("IsNoPilihan", $('#chkIsNoPilihan').is(':checked'));
+            form_data.append("KaroseriDesc", $('#tbKaroseriDesc').val());
+            form_data.append("NoPilihan", $('#tbNoPilihan').val());
+            form_data.append("AlamatKirim", $('#taAlamatKirim').val());
+            form_data.append("City", $('#selCity').val());
+            form_data.append("Additional", JSON.stringify(arr_per));
+            form_data.append("Action", $('#selAction').val());
+
+            $.ajax({
+                type: 'POST',
+                url: '/SPK/UpdateSPK',
+                contentType: false,
+                processData: false,
+                data: form_data,
+                async: "true",
+                success: function (result) {
+                    if (result.Status == "SUCCESS" || result.Status == "") {
+                        $('#mdlProgress').modal('hide');
+                        $("label[for = lblScs]").text(result.MsgOk);
+                        $('#notifSuccess').show();
+
+                    }
+                    else {
+                        $('#mdlProgress').modal('hide');
+                        $("label[for = lblErr]").text(result.ErrMsg);
+                        $('#notifErr').show();
+                    }
+                },
+                error: function (xhr, status, p3, p4) {
+                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+                    if (xhr.responseText && xhr.responseText[0] == "{")
+                        err = JSON.parse(xhr.responseText).Message;
+                    console.log(err);
+                }
+            });
+        }
+        else {
+
+        }
+    }
+
     function BindForm() {
         $.ajax({
             url: '/SPK/Detail?id=@ViewBag.IDSpk',

@@ -41,7 +41,6 @@
       <End Role="tb_employee" EntitySet="tb_employee" />
       <End Role="tb_userRole" EntitySet="tb_userRole" />
     </AssociationSet>
-    <EntitySet Name="tb_Worklist_Archive" EntityType="TDMDBModel.tb_Worklist_Archive" />
     <EntitySet Name="tb_workflowSettingHdr" EntityType="TDMDBModel.tb_workflowSettingHdr" />
     <EntitySet Name="tb_workflowSetting" EntityType="TDMDBModel.tb_workflowSetting" />
     <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="TDMDBModel.FK_tb_workflowSetting_tb_workflowSettingHdr">
@@ -52,22 +51,13 @@
     <EntitySet Name="tb_KetTambahan" EntityType="TDMDBModel.tb_KetTambahan" />
     <EntitySet Name="tb_Master" EntityType="TDMDBModel.tb_Master" />
     <EntitySet Name="tb_role" EntityType="TDMDBModel.tb_role" />
-    <EntitySet Name="tb_Worklist" EntityType="TDMDBModel.tb_Worklist" />
     <AssociationSet Name="FK_tb_Attachment_tb_Master" Association="TDMDBModel.FK_tb_Attachment_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />
       <End Role="tb_Attachment" EntitySet="tb_Attachment" />
     </AssociationSet>
-    <AssociationSet Name="FK_tb_Worklist_tb_Master" Association="TDMDBModel.FK_tb_Worklist_tb_Master">
-      <End Role="tb_Master" EntitySet="tb_Master" />
-      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
-    </AssociationSet>
     <AssociationSet Name="FK_tb_userRole_tb_role" Association="TDMDBModel.FK_tb_userRole_tb_role">
       <End Role="tb_role" EntitySet="tb_role" />
       <End Role="tb_userRole" EntitySet="tb_userRole" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tb_Worklist_tb_role" Association="TDMDBModel.FK_tb_Worklist_tb_role">
-      <End Role="tb_role" EntitySet="tb_role" />
-      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
     </AssociationSet>
     <EntitySet Name="tb_spkHdr" EntityType="TDMDBModel.tb_spkHdr" />
     <AssociationSet Name="FK_tb_PerlengkapanTambahan_tb_spkHdr" Association="TDMDBModel.FK_tb_PerlengkapanTambahan_tb_spkHdr">
@@ -78,6 +68,16 @@
       <End Role="tb_Master" EntitySet="tb_Master" />
       <End Role="tb_spkHdr" EntitySet="tb_spkHdr" />
     </AssociationSet>
+    <EntitySet Name="tb_Worklist" EntityType="TDMDBModel.tb_Worklist" />
+    <AssociationSet Name="FK_tb_Worklist_tb_Master" Association="TDMDBModel.FK_tb_Worklist_tb_Master">
+      <End Role="tb_Master" EntitySet="tb_Master" />
+      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_tb_role" Association="TDMDBModel.FK_tb_Worklist_tb_role">
+      <End Role="tb_role" EntitySet="tb_role" />
+      <End Role="tb_Worklist" EntitySet="tb_Worklist" />
+    </AssociationSet>
+    <EntitySet Name="tb_Worklist_Archive" EntityType="TDMDBModel.tb_Worklist_Archive" />
   </EntityContainer>
   <EntityType Name="tb_employee">
     <Key>
@@ -136,24 +136,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="tb_Worklist_Archive">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DocType" Type="Int32" Nullable="false" />
-    <Property Name="DocId" Type="Int32" Nullable="false" />
-    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="RespondDate" Type="DateTime" Precision="3" />
-    <Property Name="LastActor" Type="Int32" Nullable="false" />
-    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="Actioner" Type="Int32" />
-    <Property Name="LastLevel" Type="Int32" />
-  </EntityType>
   <EntityType Name="tb_workflowSettingHdr">
     <Key>
       <PropertyRef Name="Id" />
@@ -233,8 +215,8 @@
     <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="tb_Attachment" Relationship="TDMDBModel.FK_tb_Attachment_tb_Master" FromRole="tb_Master" ToRole="tb_Attachment" />
-    <NavigationProperty Name="tb_Worklist" Relationship="TDMDBModel.FK_tb_Worklist_tb_Master" FromRole="tb_Master" ToRole="tb_Worklist" />
     <NavigationProperty Name="tb_spkHdr" Relationship="TDMDBModel.FK_tb_spkHdr_tb_Master" FromRole="tb_Master" ToRole="tb_spkHdr" />
+    <NavigationProperty Name="tb_Worklist" Relationship="TDMDBModel.FK_tb_Worklist_tb_Master" FromRole="tb_Master" ToRole="tb_Worklist" />
   </EntityType>
   <EntityType Name="tb_role">
     <Key>
@@ -249,26 +231,6 @@
     <NavigationProperty Name="tb_userRole" Relationship="TDMDBModel.FK_tb_userRole_tb_role" FromRole="tb_role" ToRole="tb_userRole" />
     <NavigationProperty Name="tb_Worklist" Relationship="TDMDBModel.FK_tb_Worklist_tb_role" FromRole="tb_role" ToRole="tb_Worklist" />
   </EntityType>
-  <EntityType Name="tb_Worklist">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DocType" Type="Int32" Nullable="false" />
-    <Property Name="DocId" Type="Int32" Nullable="false" />
-    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="RespondDate" Type="DateTime" Precision="3" />
-    <Property Name="NextApprover" Type="Int32" />
-    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-    <Property Name="Actioner" Type="Int32" />
-    <Property Name="CurrLevel" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="tb_Master" Relationship="TDMDBModel.FK_tb_Worklist_tb_Master" FromRole="tb_Worklist" ToRole="tb_Master" />
-    <NavigationProperty Name="tb_role" Relationship="TDMDBModel.FK_tb_Worklist_tb_role" FromRole="tb_Worklist" ToRole="tb_role" />
-  </EntityType>
   <Association Name="FK_tb_Attachment_tb_Master">
     <End Type="TDMDBModel.tb_Master" Role="tb_Master" Multiplicity="0..1" />
     <End Type="TDMDBModel.tb_Attachment" Role="tb_Attachment" Multiplicity="*" />
@@ -277,18 +239,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="tb_Attachment">
-        <PropertyRef Name="DocType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_Worklist_tb_Master">
-    <End Type="TDMDBModel.tb_Master" Role="tb_Master" Multiplicity="1" />
-    <End Type="TDMDBModel.tb_Worklist" Role="tb_Worklist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_Master">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tb_Worklist">
         <PropertyRef Name="DocType" />
       </Dependent>
     </ReferentialConstraint>
@@ -302,18 +252,6 @@
       </Principal>
       <Dependent Role="tb_userRole">
         <PropertyRef Name="RoleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tb_Worklist_tb_role">
-    <End Type="TDMDBModel.tb_role" Role="tb_role" Multiplicity="0..1" />
-    <End Type="TDMDBModel.tb_Worklist" Role="tb_Worklist" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tb_role">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="tb_Worklist">
-        <PropertyRef Name="NextApprover" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -388,4 +326,67 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tb_Worklist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocType" Type="Int32" Nullable="false" />
+    <Property Name="DocId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RespondDate" Type="DateTime" Precision="3" />
+    <Property Name="NextApprover" Type="Int32" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Actioner" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CurrLevel" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tb_Master" Relationship="TDMDBModel.FK_tb_Worklist_tb_Master" FromRole="tb_Worklist" ToRole="tb_Master" />
+    <NavigationProperty Name="tb_role" Relationship="TDMDBModel.FK_tb_Worklist_tb_role" FromRole="tb_Worklist" ToRole="tb_role" />
+  </EntityType>
+  <Association Name="FK_tb_Worklist_tb_Master">
+    <End Type="TDMDBModel.tb_Master" Role="tb_Master" Multiplicity="1" />
+    <End Type="TDMDBModel.tb_Worklist" Role="tb_Worklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist">
+        <PropertyRef Name="DocType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_Worklist_tb_role">
+    <End Type="TDMDBModel.tb_role" Role="tb_role" Multiplicity="0..1" />
+    <End Type="TDMDBModel.tb_Worklist" Role="tb_Worklist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist">
+        <PropertyRef Name="NextApprover" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tb_Worklist_Archive">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocType" Type="Int32" Nullable="false" />
+    <Property Name="DocId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RespondDate" Type="DateTime" Precision="3" />
+    <Property Name="LastActor" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="Actioner" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LastLevel" Type="Int32" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

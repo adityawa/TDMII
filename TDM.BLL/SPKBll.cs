@@ -32,6 +32,7 @@ namespace TDM.BLL
 
                     cfg.CreateMap<WorklistModel, tb_Worklist>();
                     cfg.CreateMap<tb_Worklist, WorklistModel>();
+                    cfg.CreateMap<tb_Worklist, tb_Worklist_Archive>();
                 });
             }
         }
@@ -40,7 +41,7 @@ namespace TDM.BLL
             errMsg = string.Empty;
             imap = config.CreateMapper();
             int _spkId = 0;
-           
+
             tb_spkHdr hdrEnt = new tb_spkHdr();
             tb_KetTambahan miscEnt = new tb_KetTambahan();
             tb_PerlTambahan additionalEnt = new tb_PerlTambahan();
@@ -57,7 +58,6 @@ namespace TDM.BLL
                         result_affected = context.SaveChanges();
                         _spkId = hdrEnt.Id;
 
-                    
                         foreach (var item in lsAdditional)
                         {
                             additionalEnt.No = item.No;
@@ -67,10 +67,10 @@ namespace TDM.BLL
                             result_affected += context.SaveChanges();
                         }
 
-                        miscEnt = imap.Map<SPKEquipmentModel, tb_KetTambahan>(misc);
-                        miscEnt.SPKId = _spkId;
-                        context.tb_KetTambahan.Add(miscEnt);
-                        result_affected += context.SaveChanges();
+                        //miscEnt = imap.Map<SPKEquipmentModel, tb_KetTambahan>(misc);
+                        //miscEnt.SPKId = _spkId;
+                        //context.tb_KetTambahan.Add(miscEnt);
+                        //result_affected += context.SaveChanges();
 
                         foreach (var item in attchs)
                         {
@@ -92,7 +92,7 @@ namespace TDM.BLL
                         _entWorklist.Status = MyEnums.workflowStatus.PENDING.ToString();
                         _entWorklist.StartDate = DateTime.Now;
                         _entWorklist.CurrLevel = 0;
-                        _entWorklist.NextApprover = Convert.ToInt32(new WorkflowSettingBLL().GetNextActorId(docType, _entWorklist.CurrLevel+1));
+                        _entWorklist.NextApprover = Convert.ToInt32(new WorkflowSettingBLL().GetNextActorId(docType, _entWorklist.CurrLevel + 1));
                         _entWorklist.CreatedBy = hdr.CreatedBy;
                         _entWorklist.CreatedDate = DateTime.Now;
                         context.tb_Worklist.Add(_entWorklist);
@@ -108,7 +108,6 @@ namespace TDM.BLL
                 }
             }
 
-
             return _spkId;
         }
         public SPKHeaderModel Detail(int SPKId)
@@ -122,7 +121,7 @@ namespace TDM.BLL
                     imap = config.CreateMapper();
                     _spk = imap.Map<tb_spkHdr, SPKHeaderModel>(_qrySPK);
 
-                  //  var _qryEquipment = context.tb_KetTambahan.Where(x => x.SPKId == SPKId).FirstOrDefault();
+                    //  var _qryEquipment = context.tb_KetTambahan.Where(x => x.SPKId == SPKId).FirstOrDefault();
                     var _qryAdditional = context.tb_PerlTambahan.Where(x => x.SPKId == SPKId);
                     var _qryAttachment = context.tb_Attachment.Where(x => x.DocId == SPKId);
                     //if (_qryEquipment!=null)
@@ -142,10 +141,13 @@ namespace TDM.BLL
                     {
                         _spk.lsadditional.Add(new SPKAdditionalModel
                         {
-                            Id=item.Id
-                            ,SPKId=item.SPKId
-                            ,No=(int)item.No
-                            ,Additional=item.AdditionalItem
+                            Id = item.Id
+                            ,
+                            SPKId = item.SPKId
+                            ,
+                            No = (int)item.No
+                            ,
+                            Additional = item.AdditionalItem
                         });
                     }
                     _spk.lsspkattachment = new List<SPKAttachmentModel>();
@@ -153,10 +155,10 @@ namespace TDM.BLL
                     {
                         _spk.lsspkattachment.Add(new SPKAttachmentModel
                         {
-                            Id=(Int32)att.Id,
-                            DocId=att.DocId,
-                            AttachmentName=att.AttachmentName,
-                            DocType=(int)att.DocType
+                            Id = (Int32)att.Id,
+                            DocId = att.DocId,
+                            AttachmentName = att.AttachmentName,
+                            DocType = (int)att.DocType
                         });
                     }
                 }
@@ -171,14 +173,14 @@ namespace TDM.BLL
                 var _qry = context.tb_Attachment.SingleOrDefault(x => x.Id == id);
                 if (_qry != null)
                 {
-                    att.Id =(Int32) _qry.Id;
+                    att.Id = (Int32)_qry.Id;
                     att.AttachmentName = _qry.AttachmentName;
                     att.Attachment = _qry.Attachment;
                     att.DocId = _qry.DocId;
-                    att.DocType = _qry.DocType==null?0:(int)_qry.DocType;
+                    att.DocType = _qry.DocType == null ? 0 : (int)_qry.DocType;
                 }
             }
-            
+
             return att;
         }
         public int DeleteAttachment(int id)
@@ -199,14 +201,15 @@ namespace TDM.BLL
             }
             return result_affected;
         }
-        public int Update(SPKHeaderModel hdr, List<SPKAdditionalModel> lsAdditional, SPKEquipmentModel misc, List<SPKAttachmentModel> attchs, int docType, string action, out string errMsg)
+        public int Update(SPKHeaderModel hdr, List<SPKAdditionalModel> lsAdditional, SPKEquipmentModel misc, List<SPKAttachmentModel> attchs, int docType, WorklistModel wrkl, out string errMsg)
         {
             errMsg = string.Empty;
             imap = config.CreateMapper();
-            
+            result_affected = 0;
             tb_spkHdr hdrEnt = new tb_spkHdr();
             tb_KetTambahan miscEnt = new tb_KetTambahan();
             tb_PerlTambahan additionalEnt = new tb_PerlTambahan();
+            tb_Worklist_Archive worklistArchive = new tb_Worklist_Archive();
             using (TDMDBEntities context = new TDMDBEntities())
             {
                 using (var transaction = context.Database.BeginTransaction())
@@ -255,18 +258,104 @@ namespace TDM.BLL
                             update.ModifiedDate = DateTime.Now;
                             context.SaveChanges();
 
+                            #region ::ADDITIONAL ITEMS::
+                            //remove additional items
+                            var _qryAdditional = context.tb_PerlTambahan.Where(x => x.SPKId == hdr.Id);
+                            context.tb_PerlTambahan.RemoveRange(_qryAdditional);
+                            context.SaveChanges();
 
+                            //add additional items
+                            foreach (var item in lsAdditional)
+                            {
+                                additionalEnt.No = item.No;
+                                additionalEnt.SPKId = hdr.Id;
+                                additionalEnt.AdditionalItem = item.Additional;
+                                context.tb_PerlTambahan.Add(additionalEnt);
+                                result_affected += context.SaveChanges();
+                            }
+                            #endregion
+
+                            #region ::ATTACHMENTS::
+                            var _qryAttachment = context.tb_Attachment.Where(x => x.DocId == hdr.Id);
+                            context.tb_Attachment.RemoveRange(_qryAttachment);
+                            context.SaveChanges();
+
+                            foreach (var item in attchs)
+                            {
+                                tb_Attachment attchEnt = new tb_Attachment();
+                                attchEnt.Attachment = item.Attachment;
+                                attchEnt.AttachmentName = item.AttachmentName;
+                                attchEnt.DocType = item.DocType;
+                                attchEnt.DocId = hdr.Id;
+                                attchEnt.CreatedBy = "SYSTEM";
+                                attchEnt.CreatedDate = DateTime.Now;
+                                context.tb_Attachment.Add(attchEnt);
+                                result_affected += context.SaveChanges();
+                            }
+                            #endregion
+
+                            #region ::WORKFLOW APPROVAL::
+                            var _updWorklist = context.tb_Worklist.SingleOrDefault(x => x.DocId == hdr.Id && x.DocType == docType);
+                            if (wrkl.Actioner.ToLower() == MyEnums.workflowStatus.APPROVED.ToString().ToLower() || wrkl.Actioner.ToLower() == MyEnums.workflowStatus.ACKNOWLEDGE.ToString().ToLower())
+                            {
+                                if (_updWorklist!=null)
+                                {
+                                    worklistArchive = imap.Map<tb_Worklist, tb_Worklist_Archive>(_updWorklist);
+                                    worklistArchive.RespondDate = DateTime.Now;
+                                    worklistArchive.Actioner = wrkl.Actioner;
+                                    worklistArchive.LastActor = wrkl.Actor;
+                                    worklistArchive.CreatedBy = hdr.CreatedBy;
+                                    worklistArchive.CreatedDate = DateTime.Now;
+                                    worklistArchive.LastLevel = _updWorklist.CurrLevel + 1;
+                                    worklistArchive.IsCompleted = new WorkflowSettingBLL().CheckIsWorkflowCompleted(docType, (int)worklistArchive.LastLevel);
+                                    context.tb_Worklist_Archive.Add(worklistArchive);
+                                    context.SaveChanges();
+                                    if (!worklistArchive.IsCompleted)
+                                    {
+                                        //update status worklist
+                                        _updWorklist.CurrLevel = _updWorklist.CurrLevel + 1;
+                                        _updWorklist.ModifiedBy = hdr.ModifiedBy;
+                                        _updWorklist.ModifiedDate = DateTime.Now;
+                                        _updWorklist.NextApprover = Convert.ToInt32(new WorkflowSettingBLL().GetNextActorId(docType, _updWorklist.CurrLevel + 1));
+                                        context.SaveChanges();
+                                    }
+                                    else
+                                    {
+                                        var removeDocId = context.tb_Worklist.Where(x => x.DocId == hdr.Id);
+                                        context.tb_Worklist.RemoveRange(removeDocId);
+                                        context.SaveChanges();
+                                    }
+                                  
+                                }
+                            }
+                            else if (wrkl.Actioner.ToLower() == MyEnums.workflowStatus.REJECTED.ToString().ToLower())
+                            {
+                                worklistArchive = imap.Map<tb_Worklist, tb_Worklist_Archive>(_updWorklist);
+                                worklistArchive.RespondDate = DateTime.Now;
+                                worklistArchive.Actioner = wrkl.Actioner;
+                                worklistArchive.LastActor = wrkl.Actor;
+                                worklistArchive.CreatedBy = hdr.CreatedBy;
+                                worklistArchive.CreatedDate = DateTime.Now;
+                                worklistArchive.LastLevel = _updWorklist.CurrLevel + 1;
+                                worklistArchive.IsCompleted = true;
+                                context.tb_Worklist_Archive.Add(worklistArchive);
+                                context.SaveChanges();
+
+                                var removeDocId = context.tb_Worklist.Where(x => x.DocId == hdr.Id);
+                                context.tb_Worklist.RemoveRange(removeDocId);
+                                context.SaveChanges();
+                            }
+                            #endregion
 
                         }
                     }
                     catch (Exception ex)
                     {
-
+                        throw new Exception(ex.Message);
                     }
                 }
-                
-               
             }
+            return result_affected;
         }
     }
 }
