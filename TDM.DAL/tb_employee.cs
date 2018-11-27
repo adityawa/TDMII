@@ -19,6 +19,7 @@ namespace TDM.DAL
         {
             this.tb_userApps = new HashSet<tb_userApps>();
             this.tb_userRole = new HashSet<tb_userRole>();
+            this.tb_Worklist_Archive = new HashSet<tb_Worklist_Archive>();
         }
     
         public int EmpID { get; set; }
@@ -38,5 +39,7 @@ namespace TDM.DAL
         public virtual ICollection<tb_userApps> tb_userApps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_userRole> tb_userRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_Worklist_Archive> tb_Worklist_Archive { get; set; }
     }
 }

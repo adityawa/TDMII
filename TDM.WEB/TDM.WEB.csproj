@@ -553,6 +553,8 @@
     <Content Include="Views\SPK\CreateSPK.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SPK\SPKApproval.cshtml" />
+    <Content Include="Views\SPK\TrackingSPK.cshtml" />
+    <Content Include="Views\SPK\ListCompleteSPK.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

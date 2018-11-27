@@ -26,7 +26,10 @@
         <EntityTypeShape EntityType="TDMDBModel.tb_Worklist" Width="1.5" PointX="5.625" PointY="7.125" />
         <AssociationConnector Association="TDMDBModel.FK_tb_Worklist_tb_Master" />
         <AssociationConnector Association="TDMDBModel.FK_tb_Worklist_tb_role" />
-        <EntityTypeShape EntityType="TDMDBModel.tb_Worklist_Archive" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TDMDBModel.tb_Worklist_Archive" Width="1.5" PointX="8.625" PointY="6.875" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_Worklist_Archive_tb_employee" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_Worklist_Archive_tb_Master" />
+        <AssociationConnector Association="TDMDBModel.FK_tb_Worklist_Archive_tb_role" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

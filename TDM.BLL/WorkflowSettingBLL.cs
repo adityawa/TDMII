@@ -284,6 +284,7 @@ namespace TDM.BLL
         public bool CheckIsWorkflowCompleted(int doctype, int level)
         {
             bool _IsCompleted = false;
+            level = level + 1;
             using (TDMDBEntities context = new TDMDBEntities())
             {
                 var _qryHdrId = context.tb_workflowSettingHdr.SingleOrDefault(x => x.TypeID == doctype && x.IsActive == true);

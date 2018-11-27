@@ -19,5 +19,17 @@ namespace TDM.WEB.Models
                 return " ";
             }
         }
+
+        public static int GetEmployeeID(UserAppsModel _user)
+        {
+            if (_user != null)
+            {
+                return new UserMgmtBLL().GetEmployeeIDByUserName(_user.UserName);
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }

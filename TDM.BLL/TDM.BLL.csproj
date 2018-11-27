@@ -75,6 +75,7 @@
     <Compile Include="Model\UserAppsModel.cs" />
     <Compile Include="Model\UserRoleModel.cs" />
     <Compile Include="Model\WorkflowSettingModel.cs" />
+    <Compile Include="Model\WorklistArchiveModel.cs" />
     <Compile Include="Model\WorklistModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleBLL.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="UserMgmtBLL.cs" />
     <Compile Include="UserRoleBLL.cs" />
     <Compile Include="WorkflowSettingBLL.cs" />
+    <Compile Include="WorklistArchiveBll.cs" />
     <Compile Include="WorklistBLL.cs" />
   </ItemGroup>
   <ItemGroup>

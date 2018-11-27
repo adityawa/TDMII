@@ -28,5 +28,10 @@ namespace TDM.DAL
         public string Actioner { get; set; }
         public Nullable<int> LastLevel { get; set; }
         public bool IsCompleted { get; set; }
+        public Nullable<int> LastRole { get; set; }
+    
+        public virtual tb_employee tb_employee { get; set; }
+        public virtual tb_Master tb_Master { get; set; }
+        public virtual tb_role tb_role { get; set; }
     }
 }

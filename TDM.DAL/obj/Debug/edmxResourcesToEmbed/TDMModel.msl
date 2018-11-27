@@ -209,6 +209,7 @@
     <EntitySetMapping Name="tb_Worklist_Archive">
       <EntityTypeMapping TypeName="TDMDBModel.tb_Worklist_Archive">
         <MappingFragment StoreEntitySet="tb_Worklist_Archive">
+          <ScalarProperty Name="LastRole" ColumnName="LastRole" />
           <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
           <ScalarProperty Name="LastLevel" ColumnName="LastLevel" />
           <ScalarProperty Name="Actioner" ColumnName="Actioner" />

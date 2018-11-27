@@ -546,6 +546,55 @@
             var x = $('#tbDP').val();
             $('#tbDP').val(CommaFormattedN(x));
         });
+
+        $('#btnAddAdditional').click(function () {
+
+            var adds = new Object();
+            if (ctr != '0')
+            {
+                adds.No = parseInt(ctr) + 1;
+            }
+            else {
+                adds.No = parseInt(arr_per.length) + 1;
+            }
+            adds.Additional = $('#tbAdditional').val();
+            if (adds.additional != '') {
+                arr_per.push(adds);
+                $('#tbAdditional').val('');
+                ctr = adds.No;
+                tbPerl = $('#tblAdditional').DataTable({
+                    data: arr_per,
+                    destroy: true,
+                    columns: [
+
+                        { data: "No" },
+                        { data: "Additional" },
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='DeletePerl(" + full['No'] + ")' ><i class='fa fa-trash'></i></button>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+                        }
+
+                    ],
+                    processing: true,
+                    searching: false,
+                    lengthChange: false,
+                    paging: false,
+                });
+            }
+            else {
+                alert('Data cannot be blank');
+            }
+
+        });
+
+        $('#btnSave').click(function(){
+            SubmitSPK();
+        });
     });
 
     function BindBranch() {
@@ -894,6 +943,38 @@
             }
         });
 
+        return false;
+    }
+
+
+
+    var DeletePerl = function (ID) {
+
+        var index = arr_per.map(function (x) { return x.No }).indexOf(ID);
+        arr_per.splice(index, 1);
+        tbPerl = $('#tblAdditional').DataTable({
+            data: arr_per,
+            destroy: true,
+            columns: [
+
+                { data: "No" },
+                { data: "Additional" },
+                {
+                    "data": null,
+                    "targets": -1,
+                    "render": function (data, type, full) {
+                        return "<button data-toggle='tooltip' data-placement='right' title='remove' onclick='DeletePerl(" + full['No'] + ")' ><i class='fa fa-trash'></i></button>";
+                    },
+                    "bSearchable": true,
+                    "sortable": false
+                }
+
+            ],
+            processing: true,
+            searching: false,
+            lengthChange: false,
+            paging: false,
+        });
         return false;
     }
 

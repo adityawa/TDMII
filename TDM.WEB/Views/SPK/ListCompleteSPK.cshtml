@@ -1,0 +1,154 @@
+﻿@model TDM.BLL.Model.WorklistArchiveModel
+
+@{
+    ViewBag.Title = "ListCompleteSPK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<link href="~/Content/jquery-confirm.css" rel="stylesheet" />
+
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.bootstrap.js"></script>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/jquery-confirm.js"></script>
+
+<div style="margin-top:0px; width:100%">
+    <div id="notifSuccess_outModal" class="alert alert-success" style="display:none" role="alert">
+        <strong>Success!</strong> <label for="lblScs_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div id="notifErr_outModal" class="alert alert-danger" style="display:none" role="alert">
+        <strong>Error!</strong> <label for="lblErr_outModal"></label>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+<div class="page-title">
+
+    <div>
+        <h1><i class="fa fa-users"></i>SPK Complete</h1>
+        <p>List SPK Approved Or Rejected</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="row">
+                <div>
+                    <table class="table table-responsive table-bordered" width="100%" id="tblWorklist">
+                        <thead style="text-align:center; background-color:#000000; color:#ffffff">
+                            <tr>
+                                <th style="text-align:center">Id</th>
+                                <th style="text-align:center">DocType</th>
+                                <th style="text-align:center">Document</th>
+                                <th style="text-align:center">Doc ID</th>
+                                <th style="text-align:center">Status</th>
+                                <th style="text-align:center">Start Date</th>
+                                <th style="text-align:center">Respond Date</th>
+                                <th style="text-align:center">Last Approver</th>
+                                <th style="text-align:center">Role</th>
+                                <th style="text-align:center">Approval Action</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var arr_worklist = [];
+    var tblWorklist;
+    $(document).ready(function () {
+        BindGrid();
+    });
+
+    function BindGrid() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Content("/SPK/GetSPKComplete")',
+            success: function (response) {
+
+                arr_worklist = response.Data;
+                tblWorklist = $('#tblWorklist').DataTable({
+                    data: arr_worklist,
+                    destroy: true,
+                    columns: [
+                        { data: "Id", "visible": false },
+                        { data: "DocType", "visible": false },
+                        { data: "DocTypeDesc" },
+                        { data: "DocId" },
+                        { data: "Status" },
+                        { data: "StartDate", "mRender": function (data, type, full) { return dateConvFromJSON(data); } },
+                        { data: "RespondDate", "mRender": function (data, type, full) { return dateConvFromJSON(data); } },
+                        { data: "LastActorDesc" },
+                        { data: "LastRoleDesc" },
+                        { data: "Actioner" },
+                        {
+                            "data": null,
+                            "targets": -1,
+                            "render": function (data, type, full) {
+                                return "<a  onclick='View(" + full['DocId'] + "," + full['CurrLevel'] + "," + full['DocType'] + ")' id='btnEdit" + full['DocId', 'CurrLevel'] + "'><i class='fa fa-envelope'></i></a>";
+                            },
+                            "bSearchable": true,
+                            "sortable": false
+
+                        }
+
+                    ],
+                    processing: true,
+                    dom: '<"top"f>rt<"bottom"p and i><"clear">',
+                    buttons: [
+                            'print', 'excel'
+                    ]
+                });
+
+            },
+            error: function (xhr, status, p3, p4) {
+                var err = "Error " + " " + status + " " + p3 + " " + p4;
+                if (xhr.responseText && xhr.responseText[0] == "{")
+                    err = JSON.parse(xhr.responseText).Message;
+                console.log(err);
+            }
+
+
+        });
+    }
+
+    var View = function (ID, Level, TypeId) {
+        window.location = '/SPK/SPKApproval?DocId=' + ID+'&Level='+Level+'&Type='+TypeId;
+    }
+
+    function dateConvFromJSON(data) {
+        if (data == null) return '';
+        var r = /\/Date\(([0-9]+)\)\//gi
+        var matches = data.match(r);
+        if (matches == null) return '';
+        var result = matches.toString().substring(6, 19);
+        var epochMilliseconds = result.replace(
+        /^\/Date\(([0-9]+)([+-][0-9]{4})?\)\/$/,
+        '$1');
+        var b = new Date(parseInt(epochMilliseconds));
+        var c = new Date(b.toString());
+        var curr_date = c.getDate();
+        var curr_month = c.getMonth() + 1;
+        var curr_year = c.getFullYear();
+        var curr_h = c.getHours();
+        var curr_m = c.getMinutes();
+        var curr_s = c.getSeconds();
+        var curr_offset = c.getTimezoneOffset() / 60
+        var d = curr_date + '/' + curr_month.toString() + '/' + curr_year;
+        return d;
+    }
+</script>

@@ -30,8 +30,7 @@ namespace TDM.BLL
                             s.u.Id,
                             s.u.EmployeeId,
                             s.e.EmpName,
-                            s.e.RoleApps,
-                            
+                            s.e.RoleApps,       
                         })
                         .SingleOrDefault(x=>x.UserName==username);
 
@@ -264,6 +263,16 @@ namespace TDM.BLL
             }
 
             return usr;
+        }
+        public int GetEmployeeIDByUserName(string userName)
+        {
+            int _empId = 0;
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                var qry = context.tb_userApps.Single(x => x.UserName == userName);
+                _empId = qry.EmployeeId;
+            }
+            return _empId;
         }
     }
 }

@@ -211,6 +211,7 @@
     <Property Name="Actioner" Type="nvarchar" MaxLength="30" />
     <Property Name="LastLevel" Type="int" />
     <Property Name="IsCompleted" Type="bit" Nullable="false" />
+    <Property Name="LastRole" Type="int" />
   </EntityType>
   <Association Name="FK_tb_Attachment_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="0..1" />
@@ -296,6 +297,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tb_Worklist_Archive_tb_employee">
+    <End Role="tb_employee" Type="Self.tb_employee" Multiplicity="1" />
+    <End Role="tb_Worklist_Archive" Type="Self.tb_Worklist_Archive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_employee">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="tb_Worklist_Archive">
+        <PropertyRef Name="LastActor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_Worklist_Archive_tb_Master">
+    <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="1" />
+    <End Role="tb_Worklist_Archive" Type="Self.tb_Worklist_Archive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_Master">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist_Archive">
+        <PropertyRef Name="DocType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_Worklist_Archive_tb_role">
+    <End Role="tb_role" Type="Self.tb_role" Multiplicity="0..1" />
+    <End Role="tb_Worklist_Archive" Type="Self.tb_Worklist_Archive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_Worklist_Archive">
+        <PropertyRef Name="LastRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tb_Worklist_tb_Master">
     <End Role="tb_Master" Type="Self.tb_Master" Multiplicity="1" />
     <End Role="tb_Worklist" Type="Self.tb_Worklist" Multiplicity="*" />
@@ -361,6 +398,18 @@
     <AssociationSet Name="FK_tb_workflowSetting_tb_workflowSettingHdr" Association="Self.FK_tb_workflowSetting_tb_workflowSettingHdr">
       <End Role="tb_workflowSettingHdr" EntitySet="tb_workflowSettingHdr" />
       <End Role="tb_workflowSetting" EntitySet="tb_workflowSetting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_Archive_tb_employee" Association="Self.FK_tb_Worklist_Archive_tb_employee">
+      <End Role="tb_employee" EntitySet="tb_employee" />
+      <End Role="tb_Worklist_Archive" EntitySet="tb_Worklist_Archive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_Archive_tb_Master" Association="Self.FK_tb_Worklist_Archive_tb_Master">
+      <End Role="tb_Master" EntitySet="tb_Master" />
+      <End Role="tb_Worklist_Archive" EntitySet="tb_Worklist_Archive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_Worklist_Archive_tb_role" Association="Self.FK_tb_Worklist_Archive_tb_role">
+      <End Role="tb_role" EntitySet="tb_role" />
+      <End Role="tb_Worklist_Archive" EntitySet="tb_Worklist_Archive" />
     </AssociationSet>
     <AssociationSet Name="FK_tb_Worklist_tb_Master" Association="Self.FK_tb_Worklist_tb_Master">
       <End Role="tb_Master" EntitySet="tb_Master" />

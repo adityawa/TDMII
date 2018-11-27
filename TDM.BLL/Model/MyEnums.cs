@@ -21,12 +21,19 @@ namespace TDM.BLL.Model
             ERROR
         }
 
+        public enum actionStatus
+        {
+            
+            APPROVE,
+            REJECT,
+            ACKNOWLEDGE,
+        }
+
         public enum workflowStatus
         {
             PENDING,
-            APPROVED,
-            REJECTED,
-            ACKNOWLEDGE
+            COMPLETED
         }
+
     }
 }

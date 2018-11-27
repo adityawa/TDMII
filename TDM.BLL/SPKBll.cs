@@ -256,7 +256,7 @@ namespace TDM.BLL
                             update.ChooseNo = hdr.ChooseNo;
                             update.ModifiedBy = hdr.ModifiedBy;
                             update.ModifiedDate = DateTime.Now;
-                            context.SaveChanges();
+                          result_affected=  context.SaveChanges();
 
                             #region ::ADDITIONAL ITEMS::
                             //remove additional items
@@ -276,10 +276,7 @@ namespace TDM.BLL
                             #endregion
 
                             #region ::ATTACHMENTS::
-                            var _qryAttachment = context.tb_Attachment.Where(x => x.DocId == hdr.Id);
-                            context.tb_Attachment.RemoveRange(_qryAttachment);
-                            context.SaveChanges();
-
+                           
                             foreach (var item in attchs)
                             {
                                 tb_Attachment attchEnt = new tb_Attachment();
@@ -296,7 +293,7 @@ namespace TDM.BLL
 
                             #region ::WORKFLOW APPROVAL::
                             var _updWorklist = context.tb_Worklist.SingleOrDefault(x => x.DocId == hdr.Id && x.DocType == docType);
-                            if (wrkl.Actioner.ToLower() == MyEnums.workflowStatus.APPROVED.ToString().ToLower() || wrkl.Actioner.ToLower() == MyEnums.workflowStatus.ACKNOWLEDGE.ToString().ToLower())
+                            if (wrkl.Actioner.ToLower() == MyEnums.actionStatus.APPROVE.ToString().ToLower() || wrkl.Actioner.ToLower() == MyEnums.actionStatus.ACKNOWLEDGE.ToString().ToLower())
                             {
                                 if (_updWorklist!=null)
                                 {
@@ -304,10 +301,14 @@ namespace TDM.BLL
                                     worklistArchive.RespondDate = DateTime.Now;
                                     worklistArchive.Actioner = wrkl.Actioner;
                                     worklistArchive.LastActor = wrkl.Actor;
-                                    worklistArchive.CreatedBy = hdr.CreatedBy;
-                                    worklistArchive.CreatedDate = DateTime.Now;
+                                    worklistArchive.CreatedBy = _updWorklist.CreatedBy;
+                                    worklistArchive.CreatedDate = _updWorklist.CreatedDate;
+                                    worklistArchive.ModifiedBy = hdr.CreatedBy;
+                                    worklistArchive.ModifiedDate = DateTime.Now;
                                     worklistArchive.LastLevel = _updWorklist.CurrLevel + 1;
                                     worklistArchive.IsCompleted = new WorkflowSettingBLL().CheckIsWorkflowCompleted(docType, (int)worklistArchive.LastLevel);
+                                    if (worklistArchive.IsCompleted)
+                                        worklistArchive.Status = MyEnums.workflowStatus.COMPLETED.ToString();
                                     context.tb_Worklist_Archive.Add(worklistArchive);
                                     context.SaveChanges();
                                     if (!worklistArchive.IsCompleted)
@@ -317,25 +318,27 @@ namespace TDM.BLL
                                         _updWorklist.ModifiedBy = hdr.ModifiedBy;
                                         _updWorklist.ModifiedDate = DateTime.Now;
                                         _updWorklist.NextApprover = Convert.ToInt32(new WorkflowSettingBLL().GetNextActorId(docType, _updWorklist.CurrLevel + 1));
-                                        context.SaveChanges();
+                                      result_affected+=  context.SaveChanges();
                                     }
                                     else
                                     {
                                         var removeDocId = context.tb_Worklist.Where(x => x.DocId == hdr.Id);
                                         context.tb_Worklist.RemoveRange(removeDocId);
-                                        context.SaveChanges();
+                                      result_affected+=  context.SaveChanges();
                                     }
                                   
                                 }
                             }
-                            else if (wrkl.Actioner.ToLower() == MyEnums.workflowStatus.REJECTED.ToString().ToLower())
+                            else if (wrkl.Actioner.ToLower() == MyEnums.actionStatus.REJECT.ToString().ToLower())
                             {
                                 worklistArchive = imap.Map<tb_Worklist, tb_Worklist_Archive>(_updWorklist);
                                 worklistArchive.RespondDate = DateTime.Now;
                                 worklistArchive.Actioner = wrkl.Actioner;
                                 worklistArchive.LastActor = wrkl.Actor;
-                                worklistArchive.CreatedBy = hdr.CreatedBy;
-                                worklistArchive.CreatedDate = DateTime.Now;
+                                worklistArchive.CreatedBy = _updWorklist.CreatedBy;
+                                worklistArchive.CreatedDate = _updWorklist.CreatedDate;
+                                worklistArchive.ModifiedBy = hdr.CreatedBy;
+                                worklistArchive.ModifiedDate = DateTime.Now;
                                 worklistArchive.LastLevel = _updWorklist.CurrLevel + 1;
                                 worklistArchive.IsCompleted = true;
                                 context.tb_Worklist_Archive.Add(worklistArchive);
@@ -347,11 +350,13 @@ namespace TDM.BLL
                             }
                             #endregion
 
+                            transaction.Commit();
                         }
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(ex.Message);
+                        transaction.Rollback();
+                        errMsg = ex.Message == null ? ex.InnerException.Message : ex.Message;
                     }
                 }
             }

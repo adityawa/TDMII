@@ -46,5 +46,39 @@ namespace TDM.BLL
             }
             return colls;
         }
+
+        public List<WorklistModel> GetSPKStatus(string creator)
+        {
+            List<WorklistModel> colls = new List<WorklistModel>();
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                    var _qryPending = context.tb_Worklist
+                        .Include("tb_role")
+                        .Include("tb_Master")
+                        .Where(x => x.CreatedBy==creator && x.tb_Master.Category == MyEnums.enumMaster.DocumentType.ToString());
+
+                    foreach (var item in _qryPending)
+                    {
+                        colls.Add(new WorklistModel
+                        {
+                            Id = (Int32)item.Id,
+                            DocType = item.DocType,
+                            DocTypeDesc = item.tb_Master.Value,
+                            Status = item.Status,
+                            StartDate = item.StartDate,
+                            RespondDate = item.RespondDate,
+                            NextApprover = item.NextApprover == null ? 0 : (int)item.NextApprover,
+                            NextApproverDesc = item.tb_role.RoleName,
+                            CurrLevel = item.CurrLevel,
+                            DocId = item.DocId
+                        });
+                    }
+                
+
+            }
+            return colls;
+        }
+
+       
     }
 }
