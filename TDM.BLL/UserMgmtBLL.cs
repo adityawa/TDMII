@@ -274,5 +274,34 @@ namespace TDM.BLL
             }
             return _empId;
         }
+
+        public int UpdateUserPassword(string username, string oldPassword, string newpassword, out string mesg)
+        {
+            mesg = string.Empty;
+            result_affected = 0;
+            string encrypted_password = new Common().Encrypt(oldPassword, TDM_KEY);
+            using (TDMDBEntities context = new TDMDBEntities())
+            {
+                try
+                {
+                    var qry = context.tb_userApps.SingleOrDefault(x => x.UserName == username && x.Password == encrypted_password);
+                    if (qry != null)
+                    {
+                        qry.Password =new Common().Encrypt( newpassword, TDM_KEY);
+                        result_affected = context.SaveChanges();
+                    }
+                    else
+                    {
+                        mesg = "username and oldpassword not found";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+               
+            }
+            return result_affected;
+        }
     }
 }

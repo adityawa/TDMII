@@ -7,38 +7,47 @@
     <title>::Login Online Sales App::</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    
+
+
     <link rel="icon" type="image/png" href="~/Content/images/favicon.ico" />
-    
-   
+
+
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
-   
-    
+
+
     <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
-       
+
     <link rel="stylesheet" type="text/css" href="~/Content/Linearicons-Free-v1.0.0/icon-font.min.css">
-    
+
     <link rel="stylesheet" type="text/css" href="~/Content/util.css">
-   
+
     <link rel="stylesheet" type="text/css" href="~/Content/main.css">
-    
+
+    @*<script src="~/Scripts/jquery-1.12.4.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
 </head>
 <body style="background-color: #666666;">
     <div>
         @if (@ViewBag.ErrMsg != null)
         {
-            <div class="alert alert-danger alert-dismissable">
+            @*<div class="alert alert-danger alert-dismissable">
                 <a href="#" id="btn_close" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Ooppss!</strong> @ViewBag.ErrMsg
+            </div>*@
+            <div id="notifErr" class="alert alert-danger" role="alert">
+                <strong>Ooppss!</strong> @ViewBag.ErrMsg
+                <button type="button" id="btn_close" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         }
 
     </div>
-    <div class="limiter">  
+    <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-            <form class="login100-form validate-form" method="post" action="/Account/Authenticate">
+                <form class="login100-form validate-form" method="post" action="/Account/Authenticate">
 
                     <span class="login100-form-title p-b-43">
                         ONLINE SALES APPLICATION
@@ -61,7 +70,7 @@
                         <button type="submit" class="login100-form-btn">
                             Login
                         </button>
-                    </div> 
+                    </div>
 
                 </form>
 
@@ -70,13 +79,15 @@
             </div>
 
         </div>
-        
+
     </div>
 
-
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    
-
 </body>
-</html>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn_close').click(function (e) {
+            $('#notifErr').hide();
+        });
+    });
+</script>*@

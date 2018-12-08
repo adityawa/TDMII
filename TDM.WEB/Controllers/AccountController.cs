@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TDM.BLL;
 using TDM.BLL.Model;
 using System.Web.Security;
+using TDM.WEB.Models;
 namespace TDM.WEB.Controllers
 {
     public class AccountController : BaseController
@@ -140,6 +141,31 @@ namespace TDM.WEB.Controllers
                 _status = ex.Message;
             }
             return Json(new { Status = _status, Result = result_affected }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return CheckSession();
+        }
+
+        [HttpPost]
+        public JsonResult ChangeUserPassword()
+        {
+            string _status = MyEnums.enumStatus.SUCCESS.ToString();
+            string _message = string.Empty;
+            int result = 0;
+            string _oldPassword = Request.Form["OldPassword"];
+            string _newPassword = Request.Form["NewPassword"];
+            if (Session["UserLogOn"] != null)
+            {
+                result = new UserMgmtBLL().UpdateUserPassword(Utilities.GetUserNameLogon((UserAppsModel)Session["UserLogOn"]), _oldPassword, _newPassword, out _message);
+                if (result <= 0 || _message != string.Empty)
+                {
+                    _status = MyEnums.enumStatus.ERROR.ToString();
+                }
+            }
+         
+            return Json(new { Status = _status, Mesg = _message }, JsonRequestBehavior.AllowGet);
         }
     }
 }
